@@ -487,111 +487,75 @@ html.qa { scroll-behavior: auto; }
 html.qa *, html.qa *::before, html.qa *::after { transition: none !important; animation: none !important; }
 html.qa .reveal { opacity: 1; transform: none; }
 
+
 /* ============================================================
-   NEO-BRUTALIST LAYER — chunky borders, hard offset shadows,
-   sticker tags. Combined with the terminal/graph theme.
+   CINEMATIC LAYER — film framing, atmospheric scrim, refined grade.
+   The graph is a living background; copy reads like film title cards.
+   No split, no hard borders. Combined with the terminal theme.
    ============================================================ */
 
-/* panels, cards, terminal, modal: thick border + hard shadow */
-.panel, .card, .term, .modal {
-  border: 2px solid rgba(233, 230, 220, 0.9);
-  border-radius: 4px;
-  box-shadow: 7px 7px 0 rgba(108, 99, 255, 0.55);
-}
-.panel::before, .panel::after { display: none; }
-.module[data-cat] { box-shadow: 7px 7px 0 var(--cat); }
-.term { box-shadow: 9px 9px 0 rgba(255, 159, 28, 0.75); }
-.card { transition: transform 0.16s var(--ease), box-shadow 0.16s var(--ease), border-color 0.16s var(--ease); }
-.card:hover {
-  transform: translate(-3px, -3px);
-  border-color: var(--text-primary);
-  box-shadow: 11px 11px 0 var(--accent-phosphor);
-}
-.modal { border-width: 3px; box-shadow: 12px 12px 0 var(--accent-phosphor); }
+/* calmer background: fainter grid, wider cells */
+body { background-size: 92px 92px; }
 
-/* sticker stage tags */
-.stage-tag {
-  display: inline-block;
-  background: var(--accent-phosphor); color: #0A0B10;
-  border: 2px solid var(--text-primary);
-  box-shadow: 4px 4px 0 rgba(108, 99, 255, 1);
-  padding: 6px 12px; font-weight: 700;
-  transform: rotate(-1.2deg);
-  margin-bottom: 20px;
+/* atmospheric scrim ABOVE the graph, BELOW content.
+   Vertical falloff keeps copy legible while the graph glows through as depth.
+   Horizontally symmetric so it is safe for left- and right-aligned stages. */
+#scrim {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(120% 85% at 72% 26%, rgba(255, 159, 28, 0.05), transparent 55%),
+    radial-gradient(115% 90% at 18% 92%, rgba(108, 99, 255, 0.06), transparent 55%),
+    linear-gradient(180deg,
+      rgba(6, 7, 12, 0.9) 0%,
+      rgba(6, 7, 12, 0.34) 19%,
+      rgba(6, 7, 12, 0.30) 72%,
+      rgba(6, 7, 12, 0.92) 100%);
 }
 
-/* buttons: brutalist press */
-.btn {
-  border-radius: 4px;
-  border: 2px solid var(--text-primary);
-  box-shadow: 5px 5px 0 rgba(108, 99, 255, 0.9);
-}
-.btn:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 rgba(108, 99, 255, 1); }
-.btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 rgba(108, 99, 255, 1); }
-.btn-ghost { background: var(--surface); }
-
-/* chips */
-.chip { border-radius: 6px; box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.55); }
-button.chip:hover, button.chip:focus-visible {
-  transform: translate(-2px, -2px);
-  box-shadow: 5px 5px 0 var(--cat, var(--accent-phosphor));
+/* deeper cinematic edge vignette */
+#vignette {
+  background: radial-gradient(ellipse 80% 72% at 50% 46%, transparent 38%, rgba(3, 4, 8, 0.74) 100%);
 }
 
-/* heading underline block */
-h2::after {
-  content: ""; display: block; width: 78px; height: 8px; margin-top: 14px;
-  background: var(--accent-phosphor);
-  box-shadow: 5px 5px 0 rgba(108, 99, 255, 0.9);
+/* letterbox-style film framing: top hairline + bottom dissolve */
+#bars { position: fixed; inset: 0; z-index: 35; pointer-events: none; }
+#bars i { position: absolute; left: 0; right: 0; display: block; }
+#bars .bar-top {
+  top: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 159, 28, 0.55) 22%, rgba(108, 99, 255, 0.4) 78%, transparent);
+  opacity: 0.7;
+}
+#bars .bar-bot {
+  bottom: 0; height: 64px;
+  background: linear-gradient(180deg, transparent, rgba(4, 5, 9, 0.9));
 }
 
-/* nav */
-#topnav { border-bottom: 2px solid rgba(233, 230, 220, 0.85); }
-.deploy-link {
-  background: var(--accent-phosphor); color: #0A0B10 !important;
-  border: 2px solid var(--text-primary); border-radius: 4px;
-  box-shadow: 3px 3px 0 rgba(108, 99, 255, 1);
+/* cinematic type: tighter, luminous headings */
+h1 {
+  letter-spacing: -0.045em;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.7), 0 0 42px rgba(255, 159, 28, 0.06);
 }
-.deploy-link:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 rgba(108, 99, 255, 1); }
+h2 { letter-spacing: -0.025em; }
+.hero-sub, .stage-sub { color: #B9BDC7; }
 
-/* tighter hero */
-.hero-grid { gap: 32px; }
-.term { max-width: 640px; }
+/* refined stage tag: small cinematic marker */
+.stage-tag { display: inline-flex; align-items: center; gap: 9px; opacity: 0.92; }
+.stage-tag::before {
+  content: ""; width: 22px; height: 1px; background: var(--accent-phosphor);
+  display: inline-block; box-shadow: 0 0 8px rgba(255, 159, 28, 0.6);
+}
 
-/* graph viewer frame (desktop only) */
-#graph-frame { display: none; }
+/* softer, filmic surfaces (no chunky borders) */
+.panel, .term, .card {
+  border-color: rgba(233, 230, 220, 0.09);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(3px);
+}
+.card:hover { border-color: rgba(255, 159, 28, 0.45); box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6); }
+
+/* keep hero copy and terminal comfortably narrow & centered-left for reading */
+.hero-grid { gap: 30px; }
+.term { max-width: 560px; }
 @media (min-width: 900px) {
-  #vignette { display: none; }
-  #graph { left: calc(46% + 26px); right: 26px; top: 122px; bottom: 36px; width: auto; }
-  #graph-frame {
-    display: block; position: fixed; z-index: 1;
-    left: calc(46% + 24px); right: 24px; top: 82px; bottom: 34px;
-    border: 2px solid rgba(233, 230, 220, 0.9); border-radius: 4px;
-    box-shadow: 10px 10px 0 rgba(108, 99, 255, 0.5);
-    pointer-events: none;
-  }
-  .gf-bar {
-    height: 38px; display: flex; align-items: center; gap: 7px; padding: 0 14px;
-    border-bottom: 2px solid rgba(233, 230, 220, 0.9);
-    background: var(--surface);
-    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em;
-    color: var(--text-soft);
-  }
-  .gf-bar i { width: 10px; height: 10px; border: 1.5px solid #0A0B10; display: inline-block; }
-  .gf-bar i:nth-of-type(1) { background: var(--accent-phosphor); }
-  .gf-bar i:nth-of-type(2) { background: var(--accent-signal); }
-  .gf-bar i:nth-of-type(3) { background: var(--accent-ember); }
-  .gf-bar em { font-style: normal; color: var(--accent-phosphor); }
-}
-
-/* desktop split: text column must end before the graph frame (46% + margin) */
-@media (min-width: 900px) {
-  .stage-inner { width: 100%; padding: 0 32px 0 48px; }
-  .col, .col.wide, .hero-copy, .hero-grid .term { max-width: calc(46vw - 88px); }
-  .hero-grid .term { margin-left: 0; margin-right: auto; justify-self: start; }
-}
-
-/* desktop split: h1 sized to fit the left column in 2 lines */
-@media (min-width: 900px) {
-  .hero-copy h1 { font-size: clamp(34px, 3.8vw, 56px); }
-  .hero-grid .term { margin-top: 8px; }
+  .hero-copy { max-width: 680px; }
 }

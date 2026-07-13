@@ -258,6 +258,7 @@
     // ---- nodes (far to near) ----
     drawList.sort(function (p, q) { return q.z - p.z; });
     this.picks = [];
+    var labelCands = [];
     for (var k = 0; k < drawList.length; k++) {
       var p = drawList[k];
       var n2 = p.n;
@@ -321,21 +322,48 @@
         }
       }
 
-      // labels
+      // labels — collected for a collision-resolved second pass
       var showLabel =
         n2.type === "center" || n2.type === "hub" || n2.type === "project" ||
         (hlset && hlset[n2.id]);
       if (showLabel && r > 2 && form > 0.9) {
-        var fs = n2.type === "center" ? 13 : clamp(r * 3.2, 10, 14);
-        var lAlpha = clamp(1.7 - p.z / 200, 0.35, 1) * nodeAlpha;
-        ctx.globalAlpha = lAlpha;
-        ctx.font = "500 " + fs + "px 'JetBrains Mono', Menlo, monospace";
-        ctx.textAlign = "center";
-        ctx.fillStyle = isHov ? COL.phosphor : (n2.type === "skill" ? COL.phosphor : (inSet ? COL.text : COL.muted));
-        ctx.fillText(n2.label, p.x, p.y - r - 8);
+        labelCands.push({ p: p, n: n2, r: r, isHov: isHov, inSet: inSet, nodeAlpha: nodeAlpha });
       }
 
       this.picks.push({ x: p.x, y: p.y, r: r, n: n2 });
+    }
+
+    // ---- labels: second pass, priority + collision avoidance so text never stacks ----
+    var prio = { center: 3, project: 2, hub: 1, skill: 0 };
+    labelCands.sort(function (a, b) {
+      var pa = (a.isHov ? 100 : 0) + (hlset && hlset[a.n.id] ? 50 : 0) + (prio[a.n.type] || 0);
+      var pb = (b.isHov ? 100 : 0) + (hlset && hlset[b.n.id] ? 50 : 0) + (prio[b.n.type] || 0);
+      if (pb !== pa) return pb - pa;
+      return a.p.z - b.p.z;
+    });
+    var drawnBoxes = [];
+    ctx.textAlign = "center";
+    for (var li = 0; li < labelCands.length; li++) {
+      var lc = labelCands[li], lp = lc.p, ln = lc.n, lr = lc.r;
+      var fs = ln.type === "center" ? 13 : clamp(lr * 3.2, 10, 14);
+      ctx.font = "500 " + fs + "px 'JetBrains Mono', Menlo, monospace";
+      var tw = ctx.measureText(ln.label).width;
+      var lx = lp.x, ly = lp.y - lr - 8;
+      var box = { l: lx - tw / 2 - 5, r: lx + tw / 2 + 5, t: ly - fs - 2, b: ly + 5 };
+      var forced = lc.isHov || (hlset && hlset[ln.id]);
+      var collide = false;
+      if (!forced) {
+        for (var bi = 0; bi < drawnBoxes.length; bi++) {
+          var db = drawnBoxes[bi];
+          if (box.l < db.r && box.r > db.l && box.t < db.b && box.b > db.t) { collide = true; break; }
+        }
+      }
+      if (collide) continue;
+      drawnBoxes.push(box);
+      var lAlpha = clamp(1.7 - lp.z / 200, 0.35, 1) * lc.nodeAlpha;
+      ctx.globalAlpha = lAlpha;
+      ctx.fillStyle = lc.isHov ? COL.phosphor : (ln.type === "skill" ? COL.phosphor : (lc.inSet ? COL.text : COL.muted));
+      ctx.fillText(ln.label, lx, ly);
     }
     ctx.globalAlpha = 1;
 
