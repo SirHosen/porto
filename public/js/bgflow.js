@@ -99,6 +99,7 @@
   }
 
   function step(t, dt) {
+    if (W < 2 || H < 2) return; // canvas not sized yet — skip to avoid NaN gradients
     ctx.clearRect(0, 0, W, H);
     ctx.globalCompositeOperation = "lighter";
 

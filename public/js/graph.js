@@ -178,6 +178,7 @@
 
   GraphScene.prototype.render = function () {
     var ctx = this.ctx, w = this.w, h = this.h;
+    if (w < 2 || h < 2) return; // canvas not sized yet — skip to avoid NaN gradients
     ctx.clearRect(0, 0, w, h);
 
     var cp = [
