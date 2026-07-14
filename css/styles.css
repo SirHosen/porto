@@ -559,3 +559,15 @@ h2 { letter-spacing: -0.025em; }
 @media (min-width: 900px) {
   .hero-copy { max-width: 680px; }
 }
+
+/* ============================================================
+   BACKGROUND FLOW LAYER — procedural data/network flow (js/bgflow.js)
+   renders BEHIND the 3D graph; optional real video sits behind that.
+   ============================================================ */
+#bg-video {
+  position: fixed; inset: 0; z-index: 0;
+  width: 100%; height: 100%; object-fit: cover;
+  pointer-events: none; opacity: 0.45;
+}
+#bg-flow { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+@media (max-width: 720px) { #bg-flow { opacity: 0.7; } }
