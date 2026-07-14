@@ -1,11 +1,12 @@
-import ScriptLoader from './ScriptLoader'
+import type { Metadata } from 'next';
+import type { ReactNode } from 'react';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Hosea Oktarivanes — The Dependency Graph',
   description: 'Portfolio of Hosea Oktarivanes Ferdinan Sinaga — explore the dependency graph of a web developer & network engineer: skills, builds, and the network underneath.',
-}
+};
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
@@ -16,8 +17,13 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         {children}
-        <ScriptLoader />
+        <script src="/js/bgflow.js" defer></script>
+        <script src="/js/data.js" defer></script>
+        <script src="/js/icons.js" defer></script>
+        <script src="/js/anime-lite.js" defer></script>
+        <script src="/js/graph.js" defer></script>
+        <script src="/js/main.js" defer></script>
       </body>
     </html>
-  )
+  );
 }
