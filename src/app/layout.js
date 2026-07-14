@@ -1,3 +1,5 @@
+import ScriptLoader from './ScriptLoader'
+
 export const metadata = {
   title: 'Hosea Oktarivanes — The Dependency Graph',
   description: 'Portfolio of Hosea Oktarivanes Ferdinan Sinaga — explore the dependency graph of a web developer & network engineer: skills, builds, and the network underneath.',
@@ -14,12 +16,7 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         {children}
-        <script src="/js/bgflow.js" defer></script>
-        <script src="/js/data.js" defer></script>
-        <script src="/js/icons.js" defer></script>
-        <script src="/js/anime-lite.js" defer></script>
-        <script src="/js/graph.js" defer></script>
-        <script src="/js/main.js" defer></script>
+        <ScriptLoader />
       </body>
     </html>
   )
