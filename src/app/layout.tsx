@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
+import ScriptLoader from './ScriptLoader';
 
 export const metadata: Metadata = {
   title: 'Hosea Oktarivanes — The Dependency Graph',
@@ -17,12 +18,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
       <body>
         {children}
-        <script src="/js/bgflow.js" defer></script>
-        <script src="/js/data.js" defer></script>
-        <script src="/js/icons.js" defer></script>
-        <script src="/js/anime-lite.js" defer></script>
-        <script src="/js/graph.js" defer></script>
-        <script src="/js/main.js" defer></script>
+        <ScriptLoader />
       </body>
     </html>
   );
