@@ -191,6 +191,10 @@ export default function SkillConstellation() {
             const s = stateRef.current;
             const w = canvas.width;
             const h = canvas.height;
+            if (w < 2 || h < 2) {
+                animRef.current = requestAnimationFrame(draw);
+                return;
+            }
 
             // Smooth interpolation
             s.rotX += (s.targetRotX - s.rotX) * 0.08;
@@ -251,8 +255,10 @@ export default function SkillConstellation() {
                 const cg = (hex >> 8) & 255;
                 const cb = hex & 255;
 
-                // Glow
-                if ((isHovered || isSelected) && isCatActive) {
+                // Glow (finite-value guard prevents canvas gradient runtime errors)
+                if ((isHovered || isSelected) && isCatActive &&
+                    Number.isFinite(proj.x) && Number.isFinite(proj.y) &&
+                    Number.isFinite(r) && r > 0) {
                     const grd = ctx.createRadialGradient(proj.x, proj.y, 0, proj.x, proj.y, r * 4);
                     grd.addColorStop(0, `rgba(${cr},${cg},${cb},0.4)`);
                     grd.addColorStop(1, `rgba(${cr},${cg},${cb},0)`);
@@ -384,12 +390,6 @@ export default function SkillConstellation() {
         [getNodeAtPoint]
     );
 
-    const onWheel = useCallback((e: React.WheelEvent<HTMLCanvasElement>) => {
-        e.preventDefault();
-        const s = stateRef.current;
-        s.targetZoom = Math.max(0.4, Math.min(3, s.targetZoom - e.deltaY * 0.001));
-    }, []);
-
     const onMouseLeave = useCallback(() => {
         const s = stateRef.current;
         s.isDragging = false;
@@ -413,29 +413,51 @@ export default function SkillConstellation() {
         }
     }, []);
 
-    const onTouchMove = useCallback((e: React.TouchEvent<HTMLCanvasElement>) => {
-        e.preventDefault();
-        const s = stateRef.current;
-        if (e.touches.length === 1 && s.isDragging) {
-            const dx = e.touches[0].clientX - s.lastX;
-            const dy = e.touches[0].clientY - s.lastY;
-            s.targetRotY += dx * 0.008;
-            s.targetRotX += dy * 0.008;
-            s.targetRotX = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, s.targetRotX));
-            s.lastX = e.touches[0].clientX;
-            s.lastY = e.touches[0].clientY;
-        } else if (e.touches.length === 2) {
-            const dx = e.touches[0].clientX - e.touches[1].clientX;
-            const dy = e.touches[0].clientY - e.touches[1].clientY;
-            const dist = Math.hypot(dx, dy);
-            const delta = dist - touchRef.current.lastDist;
-            s.targetZoom = Math.max(0.4, Math.min(3, s.targetZoom + delta * 0.005));
-            touchRef.current.lastDist = dist;
-        }
-    }, []);
-
     const onTouchEnd = useCallback(() => {
         stateRef.current.isDragging = false;
+    }, []);
+
+    // ---------------------------------------------
+    // Add passive: false listeners for wheel & touchmove
+    // ---------------------------------------------
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+
+        const handleWheel = (e: WheelEvent) => {
+            e.preventDefault();
+            const s = stateRef.current;
+            s.targetZoom = Math.max(0.4, Math.min(3, s.targetZoom - e.deltaY * 0.001));
+        };
+
+        const handleTouchMove = (e: TouchEvent) => {
+            e.preventDefault();
+            const s = stateRef.current;
+            if (e.touches.length === 1 && s.isDragging) {
+                const dx = e.touches[0].clientX - s.lastX;
+                const dy = e.touches[0].clientY - s.lastY;
+                s.targetRotY += dx * 0.008;
+                s.targetRotX += dy * 0.008;
+                s.targetRotX = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, s.targetRotX));
+                s.lastX = e.touches[0].clientX;
+                s.lastY = e.touches[0].clientY;
+            } else if (e.touches.length === 2) {
+                const dx = e.touches[0].clientX - e.touches[1].clientX;
+                const dy = e.touches[0].clientY - e.touches[1].clientY;
+                const dist = Math.hypot(dx, dy);
+                const delta = dist - touchRef.current.lastDist;
+                s.targetZoom = Math.max(0.4, Math.min(3, s.targetZoom + delta * 0.005));
+                touchRef.current.lastDist = dist;
+            }
+        };
+
+        canvas.addEventListener("wheel", handleWheel, { passive: false });
+        canvas.addEventListener("touchmove", handleTouchMove, { passive: false });
+
+        return () => {
+            canvas.removeEventListener("wheel", handleWheel);
+            canvas.removeEventListener("touchmove", handleTouchMove);
+        };
     }, []);
 
     const resetView = useCallback(() => {
@@ -457,9 +479,7 @@ export default function SkillConstellation() {
                 onMouseDown={onMouseDown}
                 onMouseUp={onMouseUp}
                 onMouseLeave={onMouseLeave}
-                onWheel={onWheel}
                 onTouchStart={onTouchStart}
-                onTouchMove={onTouchMove}
                 onTouchEnd={onTouchEnd}
             />
 

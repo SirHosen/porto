@@ -7,7 +7,8 @@ export default function PremiumEffects() {
 
     useEffect(() => {
         let lenis: any = null;
-        let rafId: number;
+        let rafId: number | undefined;
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         let mouseX = window.innerWidth / 2;
         let mouseY = window.innerHeight / 2;
         let curDotX = mouseX, curDotY = mouseY;
@@ -204,7 +205,7 @@ export default function PremiumEffects() {
                     // Subtle mouse attraction
                     const dx = mx - p.x, dy = my - p.y;
                     const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 150) {
+                    if (dist > 0.001 && dist < 150) {
                         p.vx += (dx / dist) * 0.008;
                         p.vy += (dy / dist) * 0.008;
                     }
@@ -557,19 +558,18 @@ export default function PremiumEffects() {
         // ============================================================
         const cleanups: Array<(() => void) | undefined> = [];
 
-        initLenis();
+        if (!reduceMotion) initLenis();
         initAurora();
         window.addEventListener('mousemove', handleMouseMove, { passive: true });
 
         // Delay non-critical inits
         let timer = setTimeout(() => {
-            cleanups.push(initCursor());
-            cleanups.push(initParticles());
+            // Cursor, card tilt and panel tilt already live in the legacy interaction
+            // layer (main.js). Do not initialize duplicate transform loops here.
+            if (!reduceMotion) cleanups.push(initParticles());
             cleanups.push(initScrollProgress());
             cleanups.push(initNavScroll());
-            cleanups.push(initMagneticButtons());
-            cleanups.push(initCardTilt());
-            cleanups.push(initPanelTilt());
+            if (!reduceMotion) cleanups.push(initMagneticButtons());
             cleanups.push(initKonami());
             cleanups.push(initLogoEgg());
             cleanups.push(initChipRipple());
@@ -579,7 +579,7 @@ export default function PremiumEffects() {
 
         return () => {
             clearTimeout(timer);
-            cancelAnimationFrame(rafId);
+            if (rafId !== undefined) cancelAnimationFrame(rafId);
             if (lenis) lenis.destroy();
             window.removeEventListener('mousemove', handleMouseMove);
             cleanups.forEach((fn) => fn?.());

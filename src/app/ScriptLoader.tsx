@@ -2,45 +2,61 @@
 
 import { useEffect } from 'react';
 
+const SCRIPT_CHAIN = [
+  '/js/bgflow.js',
+  '/js/data.js',
+  '/js/icons.js',
+  '/js/anime-lite.js',
+  '/js/graph.js',
+  '/js/main.js',
+] as const;
+
 export default function ScriptLoader() {
   useEffect(() => {
-    let active = true;
+    let cancelled = false;
+    let timer: ReturnType<typeof setTimeout> | undefined;
 
-    const loadScript = (src: string) => {
-      return new Promise((resolve, reject) => {
-        const script = document.createElement('script');
-        script.src = src;
-        script.async = false; // Maintain execution order
-        script.onload = resolve;
-        script.onerror = reject;
-        document.body.appendChild(script);
-      });
-    };
+    const loadScript = (src: string) => new Promise<void>((resolve, reject) => {
+      const existing = document.querySelector<HTMLScriptElement>(`script[data-portfolio-src="${src}"]`);
+      if (existing) {
+        if (existing.dataset.loaded === 'true') resolve();
+        else {
+          existing.addEventListener('load', () => resolve(), { once: true });
+          existing.addEventListener('error', reject, { once: true });
+        }
+        return;
+      }
+
+      const script = document.createElement('script');
+      script.src = src;
+      script.async = false;
+      script.dataset.portfolioSrc = src;
+      script.addEventListener('load', () => {
+        script.dataset.loaded = 'true';
+        resolve();
+      }, { once: true });
+      script.addEventListener('error', reject, { once: true });
+      document.body.appendChild(script);
+    });
 
     const loadAll = async () => {
       try {
-        await loadScript('/js/bgflow.js');
-        if (!active) return;
-        await loadScript('/js/data.js');
-        if (!active) return;
-        await loadScript('/js/icons.js');
-        if (!active) return;
-        await loadScript('/js/anime-lite.js');
-        if (!active) return;
-        await loadScript('/js/graph.js');
-        if (!active) return;
-        await loadScript('/js/main.js');
-      } catch (err) {
-        console.error('Failed to load portfolio scripts', err);
+        for (const src of SCRIPT_CHAIN) {
+          if (cancelled) return;
+          await loadScript(src);
+        }
+      } catch (error) {
+        console.error('Failed to load portfolio runtime', error);
       }
     };
 
-    // Small delay to ensure hydration is totally complete
-    // and styles are fully applied before canvas calculations run.
-    setTimeout(loadAll, 50);
+    // Run after React hydration and layout calculation. The timeout is cleared
+    // during the development StrictMode probe, preventing double execution.
+    timer = setTimeout(loadAll, 60);
 
     return () => {
-      active = false;
+      cancelled = true;
+      if (timer) clearTimeout(timer);
     };
   }, []);
 

@@ -31,6 +31,7 @@ export default function HeroAnimated() {
             const term = termRef.current;
 
             if (!hero || !title || !roles || !sub || !actions || !scrollHint || !term) return;
+            if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
             // ── Split title into lines for reveal ──
             const lines = title.querySelectorAll<HTMLElement>(".hero-line");
@@ -185,7 +186,7 @@ export default function HeroAnimated() {
 
     return (
         <div ref={heroRef} className="hero-animated-wrapper">
-            <div className="hero-copy reveal">
+            <div className="hero-copy">
                 <div className="stage-tag">[ stage 0/5 : boot ] — system power-on</div>
                 <h1 ref={titleRef} id="hero-title" className="hero-title-animated" aria-label="Hosea Oktarivanes Ferdinan Sinaga">
                     <span className="hero-line-wrap"><span className="hero-line">Hosea Oktarivanes</span></span>

@@ -67,6 +67,16 @@ export default function LoadingScreen() {
 
 function LoaderParticles() {
     const count = 20;
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) {
+        return <div className="loader-particles" />;
+    }
+
     return (
         <div className="loader-particles">
             {Array.from({ length: count }).map((_, i) => (

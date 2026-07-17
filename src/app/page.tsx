@@ -1,9 +1,25 @@
 "use client";
 
+import HeroAnimated from "@/components/HeroAnimated";
+import LoadingScreen from "@/components/LoadingScreen";
+import PremiumEffects from "@/components/PremiumEffects";
+import SkillConstellation from "@/components/SkillConstellation";
+
 export default function Page() {
   return (
     <>
       <a className="skip-link" href="#index">Skip to content</a>
+      <LoadingScreen />
+      <PremiumEffects />
+
+      {/* Premium atmospheric layers — inert, accessibility-safe, behind content */}
+      <div id="aurora-bg" aria-hidden="true">
+        <span className="aurora-blob" /><span className="aurora-blob" />
+        <span className="aurora-blob" /><span className="aurora-blob" />
+      </div>
+      <div id="aurora-mouse" aria-hidden="true" />
+      <canvas id="particles-canvas" aria-hidden="true" />
+      <div id="scroll-progress" aria-hidden="true" />
 
       {/* OPTIONAL real video backdrop (sits behind everything).
            To use your own footage: add a <source> below, then remove the `hidden`
@@ -22,7 +38,7 @@ export default function Page() {
       <div id="cur-dot" aria-hidden="true"></div>
       <div id="cur-ring" aria-hidden="true"></div>
 
-      <div id="boot" aria-hidden="true">
+      <div id="boot" aria-hidden="true" hidden>
         <pre id="boot-log"></pre>
         <div className="boot-skip">press any key / tap to skip</div>
       </div>
@@ -45,30 +61,7 @@ export default function Page() {
       {/* ============ STAGE 0 : BOOT ============ */}
       <section className="stage" id="boot-sec" data-cam='{"pos":[0,12,130],"alpha":1}'>
         <div className="stage-inner hero-grid">
-          <div className="hero-copy reveal">
-            <div className="stage-tag">[ stage 0/5 : boot ] — system power-on</div>
-            <h1 id="hero-title">Hosea Oktarivanes<br />Ferdinan Sinaga<span className="caret">_</span></h1>
-            <p className="roles mono">Informatics Engineering Student · Web Developer · Network Engineer</p>
-            <p className="hero-sub">This page is a system. Every skill is a node, every project is a build linked to the modules it actually uses. Scroll to fly through the dependency graph.</p>
-            <div className="hero-actions">
-              <a className="btn btn-primary" href="#builds">Explore the builds</a>
-              <a className="btn btn-ghost" href="https://github.com/SirHosen" target="_blank" rel="noopener noreferrer">github.com/SirHosen ↗</a>
-            </div>
-            <p className="scroll-hint mono">scroll ↓ to boot the system</p>
-          </div>
-          <div className="term reveal" aria-label="whoami terminal">
-            <div className="term-bar"><i></i><i></i><i></i><em>hosea@system:~$</em></div>
-            <div className="term-body">
-      <div><span className="pr">$</span> ./whoami --verbose</div>
-      <div><span className="k">name     :</span> "Hosea Oktarivanes Ferdinan Sinaga"</div>
-      <div><span className="k">roles    :</span> [ web_developer, network_engineer ]</div>
-      <div><span className="k">stack    :</span> [ laravel, next.js, vue, python ]</div>
-      <div><span className="k">network  :</span> [ mikrotik:MTCNA, cisco ]</div>
-      <div><span className="k">location :</span> "Kota Bekasi, Jawa Barat, ID"</div>
-      <div><span className="k">status   :</span> open_to_work → internship | freelance</div>
-      <div><span className="pr">$</span> <span className="cursor"></span></div>
-            </div>
-          </div>
+          <HeroAnimated />
         </div>
       </section>
 
@@ -106,7 +99,8 @@ export default function Page() {
               <h2>Modules</h2>
               <p className="stage-sub">Hover a module to trace it through the graph — which hub it belongs to, and which builds depend on it.</p>
             </div>
-            <div className="module-grid">
+            <SkillConstellation />
+            <div className="module-grid module-grid-fallback" aria-label="Skill directory">
               <div className="panel module reveal" data-cat="cat-lang">
                 <h3><span className="m-ico" data-ico="cat-lang"></span>Languages <code>7 nodes</code></h3>
                 <div className="chips">
@@ -353,6 +347,15 @@ export default function Page() {
           <span className="mono">no build step — deploys anywhere</span>
         </div>
       </footer>
+
+      <div id="konami-overlay" role="dialog" aria-modal="true" aria-labelledby="konami-title">
+        <div className="konami-content">
+          <div className="mono">// hidden achievement unlocked</div>
+          <h2 id="konami-title">Developer mode activated.</h2>
+          <p>Dependency graph overclocked. Keep building impossible things.</p>
+          <button id="konami-close" type="button">close sequence</button>
+        </div>
+      </div>
 
       <div className="modal-backdrop" id="modal-backdrop" hidden>
         <div className="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
