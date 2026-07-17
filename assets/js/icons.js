@@ -25,12 +25,20 @@ export const MONO = {
   prompt: ">_", aiworkflow: "AI", docs: "DOC",
 };
 
-// Optional: skill id -> SVG path 'd' (24x24 viewBox). Empty by default.
+// Real brand logos (Simple Icons, CC0) extracted into logos.js.
+import { LOGOS } from "./logos.js";
+
+// Optional manual overrides: skill id -> SVG path 'd' (24x24 viewBox).
+// Anything set here WINS over the generated LOGOS map.
 export const SVG_PATHS = {};
 const _path2d = {};
+function srcFor(id) {
+  return SVG_PATHS[id] || LOGOS[id] || null;
+}
 function pathFor(id) {
-  if (!SVG_PATHS[id]) return null;
-  if (!_path2d[id]) _path2d[id] = new Path2D(SVG_PATHS[id]);
+  const d = srcFor(id);
+  if (!d) return null;
+  if (!_path2d[id]) _path2d[id] = new Path2D(d);
   return _path2d[id];
 }
 
@@ -134,7 +142,7 @@ export function drawGlyph(ctx, n, x, y, r, color, alpha) {
 
   // skill
   const p = pathFor(n.id);
-  if (p && r > 5) {
+  if (p && r > 4) {
     const sc = (r * 1.7) / 24;
     ctx.translate(-12 * sc, -12 * sc);
     ctx.scale(sc, sc);

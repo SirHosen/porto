@@ -1,10 +1,13 @@
 // Interactive dependency graph - canvas 2D with 3D projection. No libraries.
-// Exposes a camera API so the page can drive a parallax zoom-in on scroll.
+// Camera API drives the parallax zoom-in on scroll; user gestures (wheel,
+// drag-orbit, shift/right-drag pan, pinch, double-click, +/- buttons) drive a
+// separate user zoom/pan layer that sits on top of the parallax entrance.
 
 import { GRAPH } from "./data.js";
 import { drawGlyph } from "./icons.js";
 
 const R = { center: 6.2, hub: 4.4, project: 4.0, skill: 3.0 };
+const Z_MIN = 0.45, Z_MAX = 4.5;
 
 function colorFor(n) {
   if (n.type === "center") return "#ffffff";
@@ -26,15 +29,21 @@ export function initGraph(canvas, opts = {}) {
   const onHover = opts.onHover || (() => {});
   const onSelect = opts.onSelect || (() => {});
   const onNodeEnter = opts.onNodeEnter || (() => {});
+  // Events land on a transparent hit layer so they reach the graph even though
+  // the canvas itself lives on a fixed layer behind the page content.
+  const hit = opts.hitTarget || canvas;
 
   const cam = { zoom: 0.72, zoomT: 0.72, interactive: false, autoRate: 0.0016, labels: 0, labelsT: 0 };
 
   const state = {
-    rotY: 0.5, rotX: 0.16, auto: !reduce, dragging: false,
+    rotY: 0.5, rotX: 0.16, auto: !reduce, mode: null,
     lastX: 0, lastY: 0, resume: 0, focal: 240,
     w: 0, h: 0, cx: 0, cy: 0, baseScale: 1,
     hovered: null, activeCat: null, lastHovered: null, t: 0,
+    userZoom: 1, userZoomT: 1, panX: 0, panY: 0, panXT: 0, panYT: 0,
+    pinchDist: 0, pinchMid: [0, 0],
   };
+  const pointers = new Map();
 
   let dpr = Math.min(window.devicePixelRatio || 1, 2);
   function resize() {
@@ -49,9 +58,18 @@ export function initGraph(canvas, opts = {}) {
     state.baseScale = Math.min(rect.width, rect.height) / 170;
   }
 
+  // Canvas is fixed full-viewport, so its rect origin is ~(0,0); the hit layer
+  // is aligned to the same viewport, so clientX/clientY map straight across.
+  function localXY(e) {
+    const rect = canvas.getBoundingClientRect();
+    return [e.clientX - rect.left, e.clientY - rect.top];
+  }
+
   const proj = new Map();
   function project() {
-    const scale = state.baseScale * cam.zoom;
+    const scale = state.baseScale * cam.zoom * state.userZoom;
+    const ecx = state.cx + state.panX;
+    const ecy = state.cy + state.panY;
     const cyr = Math.cos(state.rotY), syr = Math.sin(state.rotY);
     const cxr = Math.cos(state.rotX), sxr = Math.sin(state.rotX);
     for (const n of GRAPH.nodes) {
@@ -63,8 +81,8 @@ export function initGraph(canvas, opts = {}) {
       const persp = state.focal / (state.focal + z2);
       const sc = scale * persp;
       proj.set(n.id, {
-        sx: state.cx + x1 * sc,
-        sy: state.cy - y1 * sc,
+        sx: ecx + x1 * sc,
+        sy: ecy - y1 * sc,
         z: z2,
         r: (R[n.type] || 2.5) * sc,
       });
@@ -148,7 +166,7 @@ export function initGraph(canvas, opts = {}) {
       }
       ctx.globalAlpha = 1;
 
-      // icon / monogram inside node
+      // icon / logo / monogram inside node
       if (!dim) drawGlyph(ctx, n, pr.sx, pr.sy, rr, base, alpha);
 
       // text label (hubs/projects always; skills when zoomed/emph)
@@ -166,7 +184,7 @@ export function initGraph(canvas, opts = {}) {
     }
   }
 
-  function hit(mx, my) {
+  function hitTest(mx, my) {
     let best = null, bestD = 20 * 20;
     for (const n of GRAPH.nodes) {
       const pr = proj.get(n.id);
@@ -178,52 +196,133 @@ export function initGraph(canvas, opts = {}) {
     return best;
   }
 
+  // Zoom toward a screen point, keeping that point visually fixed.
+  function zoomAtScreen(factor, ax, ay) {
+    const nz = Math.max(Z_MIN, Math.min(Z_MAX, state.userZoomT * factor));
+    const k = nz / state.userZoomT;
+    const ex = state.cx + state.panX, ey = state.cy + state.panY;
+    state.panXT = ax - (ax - ex) * k - state.cx;
+    state.panYT = ay - (ay - ey) * k - state.cy;
+    state.userZoomT = nz;
+    state.auto = false;
+    state.resume = performance.now() + 2600;
+  }
+
+  // ---------- input ----------
   const down = (e) => {
     if (!cam.interactive) return;
-    state.dragging = true; state.auto = false;
-    state.lastX = e.clientX; state.lastY = e.clientY;
-    canvas.setPointerCapture?.(e.pointerId);
+    pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    hit.setPointerCapture?.(e.pointerId);
+    state.auto = false;
+    if (pointers.size === 2) {
+      const pts = [...pointers.values()];
+      state.mode = "pinch";
+      state.pinchDist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+      const rect = canvas.getBoundingClientRect();
+      state.pinchMid = [(pts[0].x + pts[1].x) / 2 - rect.left, (pts[0].y + pts[1].y) / 2 - rect.top];
+    } else {
+      state.mode = (e.button === 1 || e.button === 2 || e.shiftKey) ? "pan" : "rotate";
+      state.lastX = e.clientX; state.lastY = e.clientY;
+    }
   };
+
   const move = (e) => {
+    if (pointers.has(e.pointerId)) pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
     if (!cam.interactive) return;
-    const rect = canvas.getBoundingClientRect();
-    const mx = e.clientX - rect.left, my = e.clientY - rect.top;
-    if (state.dragging) {
+
+    if (state.mode === "pinch" && pointers.size >= 2) {
+      const pts = [...pointers.values()];
+      const rect = canvas.getBoundingClientRect();
+      const dist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+      const midx = (pts[0].x + pts[1].x) / 2 - rect.left;
+      const midy = (pts[0].y + pts[1].y) / 2 - rect.top;
+      if (state.pinchDist > 0) {
+        zoomAtScreen(dist / state.pinchDist, midx, midy);
+        const dx = midx - state.pinchMid[0], dy = midy - state.pinchMid[1];
+        state.panXT += dx; state.panYT += dy; state.panX += dx; state.panY += dy;
+      }
+      state.pinchDist = dist; state.pinchMid = [midx, midy];
+      return;
+    }
+    if (state.mode === "rotate" && pointers.has(e.pointerId)) {
       state.rotY += (e.clientX - state.lastX) * 0.007;
       state.rotX += (e.clientY - state.lastY) * 0.007;
       state.rotX = Math.max(-1.1, Math.min(1.1, state.rotX));
       state.lastX = e.clientX; state.lastY = e.clientY;
-    } else {
-      const n = hit(mx, my);
+      return;
+    }
+    if (state.mode === "pan" && pointers.has(e.pointerId)) {
+      const dx = e.clientX - state.lastX, dy = e.clientY - state.lastY;
+      state.panX += dx; state.panXT += dx; state.panY += dy; state.panYT += dy;
+      state.lastX = e.clientX; state.lastY = e.clientY;
+      return;
+    }
+    if (pointers.size === 0) {
+      const [mx, my] = localXY(e);
+      const n = hitTest(mx, my);
       const id = n ? n.id : null;
       if (id !== state.hovered) {
         state.hovered = id;
-        canvas.style.cursor = id ? "pointer" : "grab";
+        hit.style.cursor = id ? "pointer" : "grab";
         onHover(n);
         if (id && id !== state.lastHovered) { state.lastHovered = id; onNodeEnter(n); }
         if (!id) state.lastHovered = null;
       }
     }
   };
+
   const up = (e) => {
-    if (state.dragging) { state.dragging = false; state.resume = performance.now() + 2200; }
-    canvas.releasePointerCapture?.(e.pointerId);
+    pointers.delete(e.pointerId);
+    hit.releasePointerCapture?.(e.pointerId);
+    if (pointers.size < 2) state.pinchDist = 0;
+    if (pointers.size === 0) { state.mode = null; state.resume = performance.now() + 2600; }
+    else if (pointers.size === 1) {
+      const p = [...pointers.values()][0];
+      state.mode = "rotate"; state.lastX = p.x; state.lastY = p.y;
+    }
   };
+
+  const wheel = (e) => {
+    if (!cam.interactive) return;
+    const zoomIn = e.deltaY < 0;
+    const forced = e.ctrlKey || e.metaKey;
+    const atMax = state.userZoomT >= Z_MAX - 0.01;
+    const atMin = state.userZoomT <= Z_MIN + 0.01;
+    // Let the page scroll (escape) at the zoom extremes unless a modifier forces zoom.
+    if (!forced && ((zoomIn && atMax) || (!zoomIn && atMin))) return;
+    e.preventDefault();
+    const [mx, my] = localXY(e);
+    zoomAtScreen(zoomIn ? 1.12 : 1 / 1.12, mx, my);
+  };
+
+  const dbl = (e) => {
+    if (!cam.interactive) return;
+    const [mx, my] = localXY(e);
+    zoomAtScreen(1.6, mx, my);
+  };
+
+  const ctxmenu = (e) => { if (cam.interactive) e.preventDefault(); };
   const click = (e) => {
     if (!cam.interactive) return;
-    const rect = canvas.getBoundingClientRect();
-    const n = hit(e.clientX - rect.left, e.clientY - rect.top);
+    const [mx, my] = localXY(e);
+    const n = hitTest(mx, my);
     if (n) onSelect(n);
   };
   const leave = () => {
-    if (!state.dragging && state.hovered) { state.hovered = null; onHover(null); canvas.style.cursor = "grab"; }
+    if (pointers.size === 0 && state.hovered) {
+      state.hovered = null; onHover(null); hit.style.cursor = "grab";
+    }
   };
 
-  canvas.addEventListener("pointerdown", down);
+  hit.addEventListener("pointerdown", down);
   window.addEventListener("pointermove", move);
   window.addEventListener("pointerup", up);
-  canvas.addEventListener("click", click);
-  canvas.addEventListener("pointerleave", leave);
+  window.addEventListener("pointercancel", up);
+  hit.addEventListener("wheel", wheel, { passive: false });
+  hit.addEventListener("dblclick", dbl);
+  hit.addEventListener("contextmenu", ctxmenu);
+  hit.addEventListener("click", click);
+  hit.addEventListener("pointerleave", leave);
   window.addEventListener("resize", resize);
 
   resize();
@@ -232,7 +331,10 @@ export function initGraph(canvas, opts = {}) {
     state.t += 0.016;
     cam.zoom += (cam.zoomT - cam.zoom) * 0.08;
     cam.labels += (cam.labelsT - cam.labels) * 0.08;
-    if (state.auto && !state.dragging && performance.now() > state.resume) state.rotY += cam.autoRate;
+    state.userZoom += (state.userZoomT - state.userZoom) * 0.16;
+    state.panX += (state.panXT - state.panX) * 0.2;
+    state.panY += (state.panYT - state.panY) * 0.2;
+    if (state.auto && !state.mode && performance.now() > state.resume) state.rotY += cam.autoRate;
     project();
     draw();
     raf = requestAnimationFrame(loop);
@@ -242,24 +344,36 @@ export function initGraph(canvas, opts = {}) {
   return {
     setActiveCat(cat) { state.activeCat = cat; },
     setHovered(id) { state.hovered = id; onHover(id ? GRAPH.nodes.find((n) => n.id === id) : null); },
+    zoomBy(factor) { zoomAtScreen(factor, state.cx + state.panX, state.cy + state.panY); },
+    resetView() {
+      state.userZoomT = 1; state.panXT = 0; state.panYT = 0;
+      state.rotY = 0.5; state.rotX = 0.16; state.auto = !reduce;
+      state.resume = performance.now() + 1200;
+    },
     setCamera(c) {
       if (c.zoom != null) cam.zoomT = c.zoom;
-      if (c.interactive != null) {
+      if (c.interactive != null && c.interactive !== cam.interactive) {
         cam.interactive = c.interactive;
-        canvas.style.pointerEvents = c.interactive ? "auto" : "none";
-        canvas.style.cursor = c.interactive ? "grab" : "default";
-        state.auto = c.interactive ? state.auto : true;
+        hit.style.cursor = c.interactive ? "grab" : "default";
+        if (!c.interactive) {
+          state.userZoomT = 1; state.panXT = 0; state.panYT = 0;
+          state.mode = null; state.auto = true; pointers.clear();
+        }
       }
       if (c.autoRate != null) cam.autoRate = c.autoRate;
       if (c.labels != null) cam.labelsT = c.labels;
     },
     destroy() {
       cancelAnimationFrame(raf);
-      canvas.removeEventListener("pointerdown", down);
+      hit.removeEventListener("pointerdown", down);
       window.removeEventListener("pointermove", move);
       window.removeEventListener("pointerup", up);
-      canvas.removeEventListener("click", click);
-      canvas.removeEventListener("pointerleave", leave);
+      window.removeEventListener("pointercancel", up);
+      hit.removeEventListener("wheel", wheel);
+      hit.removeEventListener("dblclick", dbl);
+      hit.removeEventListener("contextmenu", ctxmenu);
+      hit.removeEventListener("click", click);
+      hit.removeEventListener("pointerleave", leave);
       window.removeEventListener("resize", resize);
     },
   };

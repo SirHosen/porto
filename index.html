@@ -75,20 +75,29 @@
 
       <!-- MAP: the graph zooms in and becomes interactive here -->
       <section id="map" class="map">
-        <div id="map-panel" class="map__panel">
-          <div class="map__head">
-            <span class="map__idx">01</span>
-            <h2>Neural Map</h2>
-            <p>Every skill, wired to the projects that use it. Drag to orbit &middot; hover to trace &middot; click a domain to filter &middot; click a project to open.</p>
-          </div>
-          <div class="graph__readout">
-            <span id="readout-dot" class="readout__dot"></span>
-            <div>
-              <div id="readout-label" class="readout__label">&mdash;</div>
-              <div id="readout-meta" class="readout__meta">hover a node to inspect</div>
+        <div class="map__sticky">
+          <!-- transparent interaction layer: forwards drag / wheel / pinch to the graph -->
+          <div id="map-hit" class="map__hit" aria-hidden="true"></div>
+          <div id="map-panel" class="map__panel">
+            <div class="map__head">
+              <span class="map__idx">01</span>
+              <h2>Neural Map</h2>
+              <p>Every skill wired to the projects that use it. Drag to orbit &middot; scroll or +/&minus; to zoom &middot; shift-drag (or right-drag) to pan &middot; double-click to zoom &middot; click a domain to filter.</p>
+            </div>
+            <div class="graph__readout">
+              <span id="readout-dot" class="readout__dot"></span>
+              <div>
+                <div id="readout-label" class="readout__label">&mdash;</div>
+                <div id="readout-meta" class="readout__meta">hover a node to inspect</div>
+              </div>
+            </div>
+            <div id="legend" class="legend"></div>
+            <div id="graph-controls" class="graph__controls">
+              <button type="button" class="gbtn" data-zoom="in" aria-label="Zoom in">+</button>
+              <button type="button" class="gbtn" data-zoom="out" aria-label="Zoom out">&minus;</button>
+              <button type="button" class="gbtn gbtn--reset" data-zoom="reset">RESET VIEW</button>
             </div>
           </div>
-          <div id="legend" class="legend"></div>
         </div>
       </section>
 

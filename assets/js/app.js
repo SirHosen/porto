@@ -63,7 +63,9 @@ function metaFor(n) {
   return "ROOT NODE";
 }
 
+const graphHit = $("#map-hit");
 const graph = initGraph(graphCanvas, {
+  hitTarget: graphHit,
   onHover(n) {
     readoutLabel.textContent = n ? n.label : "\u2014";
     readoutMeta.textContent = metaFor(n);
@@ -105,6 +107,20 @@ $("#legend").addEventListener("pointerover", (e) => {
 });
 $("#legend").addEventListener("pointerout", () => { if (!activeCat) graph.setActiveCat(null); });
 
+// zoom / pan controls
+const gControls = $("#graph-controls");
+if (gControls) {
+  gControls.addEventListener("click", (e) => {
+    const b = e.target.closest("button[data-zoom]");
+    if (!b) return;
+    sfx.click();
+    const a = b.dataset.zoom;
+    if (a === "in") graph.zoomBy(1.28);
+    else if (a === "out") graph.zoomBy(1 / 1.28);
+    else graph.resetView();
+  });
+}
+
 document.querySelectorAll(".card[data-node]").forEach((card) => {
   card.addEventListener("pointerenter", () => graph.setHovered(card.dataset.node));
   card.addEventListener("pointerleave", () => graph.setHovered(null));
@@ -145,6 +161,7 @@ function frameCam() {
   if (interactive !== lastInteractive) {
     lastInteractive = interactive;
     if (mapPanel) mapPanel.classList.toggle("live", interactive);
+    if (graphHit) graphHit.classList.toggle("live", interactive);
   }
 
   // hero parallax: name drifts up and fades as you scroll into the map
@@ -159,6 +176,8 @@ if (reduce) {
   graphCanvas.style.filter = "none";
   graphCanvas.style.opacity = "1";
   graph.setCamera({ zoom: 1, interactive: true, labels: 1, autoRate: 0 });
+  if (graphHit) graphHit.classList.add("live");
+  if (mapPanel) mapPanel.classList.add("live");
 } else {
   requestAnimationFrame(frameCam);
 }
