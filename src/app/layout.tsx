@@ -5,14 +5,14 @@ import './globals-premium.css';
 export const metadata: Metadata = {
   metadataBase: new URL('https://hosea.dev'),
   title: {
-    default: 'Hosea — Full Stack Developer & Network Engineer',
+    default: 'Hosea — Python Engineer & Full-stack IT Generalist',
     template: '%s | hosea.dev',
   },
   description:
-    'Portofolio Hosea — Full Stack Developer dengan keahlian Laravel, Next.js, MikroTik, dan arsitektur sistem modern. Lihat projek, skill, dan pengalaman saya.',
+    'Portfolio Hosea — Python-focused software engineer building full-stack products, automation platforms, applied AI systems, and network tooling.',
   keywords: [
-    'Hosea', 'portofolio', 'Full Stack Developer', 'Laravel', 'Next.js',
-    'TypeScript', 'MikroTik', 'Network Engineer', 'Web Developer Indonesia',
+    'Hosea', 'Python Engineer', 'Full Stack Developer', 'Automation Engineer',
+    'Next.js', 'Laravel', 'PyTorch', 'MikroTik', 'Software Developer Indonesia',
   ],
   authors: [{ name: 'Hosea', url: 'https://hosea.dev' }],
   creator: 'Hosea',
@@ -21,15 +21,15 @@ export const metadata: Metadata = {
     locale: 'id_ID',
     url: 'https://hosea.dev',
     siteName: 'hosea.dev',
-    title: 'Hosea — Full Stack Developer & Network Engineer',
+    title: 'Hosea — Python Engineer & Full-stack IT Generalist',
     description:
-      'Portofolio interaktif dengan visualisasi skill rasi bintang, smooth scroll, dan animasi premium.',
+      'Production web products, automation engines, applied AI experiments, and network systems — mapped as an interactive dependency graph.',
     // images: [{ url: '/og-image.png', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Hosea — Full Stack Developer',
-    description: 'Portofolio interaktif kelas studio.',
+    title: 'Hosea — Python Engineer & Full-stack Developer',
+    description: 'Evidence-driven interactive software engineering portfolio.',
   },
   robots: {
     index: true,
@@ -54,18 +54,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="id" suppressHydrationWarning>
-      {/* Preconnect untuk font kencang */}
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossOrigin="anonymous"
-      />
-      {/* Font premium: Space Grotesk + JetBrains Mono — ganti kalau mau */}
-      <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
-        rel="stylesheet"
-      />
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body
         style={{
           fontFamily:

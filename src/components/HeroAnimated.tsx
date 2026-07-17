@@ -192,22 +192,22 @@ export default function HeroAnimated() {
                     <span className="hero-line-wrap"><span className="hero-line">Hosea Oktarivanes</span></span>
                     <span className="hero-line-wrap"><span className="hero-line">Ferdinan Sinaga<span className="caret">_</span></span></span>
                 </h1>
-                <p ref={rolesRef} className="roles mono">Informatics Engineering Student · Web Developer · Network Engineer</p>
-                <p ref={subRef} className="hero-sub">This page is a system. Every skill is a node, every project is a build linked to the modules it actually uses. Scroll to fly through the dependency graph.</p>
+                <p ref={rolesRef} className="roles mono">Python Engineer · Full-stack Developer · Automation & Applied AI</p>
+                <p ref={subRef} className="hero-sub">I turn hard problems into inspectable systems — from production web products to automation engines, ML experiments, and network tooling.</p>
                 <div ref={actionsRef} className="hero-actions">
-                    <a className="btn btn-primary" href="#builds">Explore the builds</a>
+                    <a className="btn btn-primary" href="#builds">Inspect the evidence</a>
                     <a className="btn btn-ghost" href="https://github.com/SirHosen" target="_blank" rel="noopener noreferrer">github.com/SirHosen ↗</a>
                 </div>
-                <p ref={scrollHintRef} className="scroll-hint mono">scroll ↓ to boot the system</p>
+                <p ref={scrollHintRef} className="scroll-hint mono">scroll ↓ explore the system</p>
             </div>
             <div ref={termRef} className="term" aria-label="whoami terminal">
                 <div className="term-bar"><i></i><i></i><i></i><em>hosea@system:~$</em></div>
                 <div className="term-body">
                     <div><span className="pr">$</span> ./whoami --verbose</div>
                     <div><span className="k">name     :</span> "Hosea Oktarivanes Ferdinan Sinaga"</div>
-                    <div><span className="k">roles    :</span> [ web_developer, network_engineer ]</div>
-                    <div><span className="k">stack    :</span> [ laravel, next.js, vue, python ]</div>
-                    <div><span className="k">network  :</span> [ mikrotik:MTCNA, cisco ]</div>
+                    <div><span className="k">roles    :</span> [ python_engineer, full_stack, it_generalist ]</div>
+                    <div><span className="k">stack    :</span> [ python, next.js, laravel, pytorch ]</div>
+                    <div><span className="k">systems  :</span> [ automation, data, network, ai_assisted ]</div>
                     <div><span className="k">location :</span> "Kota Bekasi, Jawa Barat, ID"</div>
                     <div><span className="k">status   :</span> open_to_work → internship | freelance</div>
                     <div><span className="pr">$</span> <span className="cursor"></span></div>

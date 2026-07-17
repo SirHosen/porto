@@ -285,6 +285,12 @@
       html += '<span class="chip static">' + ico + escapeHtml(nodeLabel(d)) + "</span>";
     });
     html += "</div>";
+    if (pr.url || pr.live) {
+      html += '<div class="m-actions">';
+      if (pr.live) html += '<a href="' + escapeHtml(pr.live) + '" target="_blank" rel="noopener noreferrer">live deployment ↗</a>';
+      if (pr.url) html += '<a href="' + escapeHtml(pr.url) + '" target="_blank" rel="noopener noreferrer">source repository ↗</a>';
+      html += '</div>';
+    }
     modalBody.innerHTML = html;
     backdrop.hidden = false;
     void backdrop.offsetWidth; // reflow so the enter transition can play

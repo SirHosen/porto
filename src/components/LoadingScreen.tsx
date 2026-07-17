@@ -1,98 +1,72 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+
+const COLORS = ['#ff9f1c', '#7c8cff', '#00d4ff', '#ffc53d'];
 
 export default function LoadingScreen() {
-    const [pct, setPct] = useState(0);
-    const [done, setDone] = useState(false);
-    const [gone, setGone] = useState(false);
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const barRef = useRef<HTMLDivElement>(null);
+  const pctRef = useRef<HTMLDivElement>(null);
+  const [gone, setGone] = useState(false);
+  const particles = useMemo(() => Array.from({ length: 16 }, (_, i) => ({
+    left: `${(i * 37 + 11) % 97}%`, top: `${(i * 53 + 17) % 91}%`,
+    size: `${1 + (i % 3)}px`, delay: i * 34,
+  })), []);
 
-    useEffect(() => {
-        // Simulate loading progress
-        const steps = [
-            { target: 15, delay: 100 },
-            { target: 35, delay: 300 },
-            { target: 55, delay: 500 },
-            { target: 75, delay: 700 },
-            { target: 90, delay: 900 },
-            { target: 100, delay: 1100 },
-        ];
+  useEffect(() => {
+    const wrap = wrapRef.current;
+    const bar = barRef.current;
+    const pct = pctRef.current;
+    if (!wrap || !bar || !pct) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) { setGone(true); return; }
 
-        const timers: ReturnType<typeof setTimeout>[] = [];
+    const animations: Animation[] = [];
+    const counter = { value: 0 };
+    const started = performance.now();
+    let raf = 0;
 
-        steps.forEach(({ target, delay }) => {
-            timers.push(setTimeout(() => {
-                setPct(target);
-            }, delay));
-        });
-
-        // Exit
-        timers.push(setTimeout(() => {
-            setDone(true);
-            setTimeout(() => setGone(true), 900);
-        }, 1400));
-
-        return () => timers.forEach(clearTimeout);
-    }, []);
-
-    if (gone) return null;
-
-    return (
-        <div
-            id="premium-loader"
-            className={done ? 'exit' : ''}
-            style={{ display: gone ? 'none' : undefined }}
-        >
-            <div className="loader-bg" />
-            <div className="loader-grid" />
-            <LoaderParticles />
-            <div className="loader-content">
-                <div className="loader-logo">
-                    hosea<span>.dev</span>
-                </div>
-                <div className="loader-tagline">system initializing</div>
-                <div className="loader-bar-wrap">
-                    <div
-                        className="loader-bar"
-                        style={{ width: pct + '%' }}
-                    />
-                </div>
-                <div className="loader-pct">
-                    {String(pct).padStart(3, '0')}%
-                </div>
-            </div>
-        </div>
+    animations.push(bar.animate(
+      [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }],
+      { duration: 1550, easing: 'cubic-bezier(.76,0,.24,1)', fill: 'forwards' }
+    ));
+    document.querySelectorAll<HTMLElement>('.loader-particle').forEach((el, i) => {
+      animations.push(el.animate(
+        [{ opacity: 0, transform: 'scale(0) translateY(12px)' }, { opacity: .72, transform: 'scale(1) translateY(0)' }],
+        { duration: 520, delay: 120 + i * 34, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'forwards' }
+      ));
+    });
+    document.querySelector<HTMLElement>('.loader-tagline')?.animate(
+      [{ opacity: 0, letterSpacing: '.32em' }, { opacity: 1, letterSpacing: '.18em' }],
+      { duration: 700, delay: 220, easing: 'ease-out', fill: 'forwards' }
     );
-}
 
-function LoaderParticles() {
-    const count = 20;
-    const [mounted, setMounted] = useState(false);
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - started) / 1550);
+      const eased = t < .5 ? 8*t*t*t*t : 1 - Math.pow(-2*t + 2, 4)/2;
+      counter.value = Math.round(eased * 100);
+      pct.textContent = `${String(counter.value).padStart(3, '0')}%`;
+      if (t < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
 
-    useEffect(() => {
-        setMounted(true);
-    }, []);
+    const exit = window.setTimeout(() => {
+      const a = wrap.animate(
+        [{ opacity: 1, transform: 'translateY(0)' }, { opacity: 0, transform: 'translateY(-18px)' }],
+        { duration: 560, easing: 'cubic-bezier(.76,0,.24,1)', fill: 'forwards' }
+      );
+      animations.push(a);
+      a.finished.then(() => setGone(true));
+    }, 1720);
 
-    if (!mounted) {
-        return <div className="loader-particles" />;
-    }
+    return () => { cancelAnimationFrame(raf); clearTimeout(exit); animations.forEach(a => a.cancel()); };
+  }, []);
 
-    return (
-        <div className="loader-particles">
-            {Array.from({ length: count }).map((_, i) => (
-                <div
-                    key={i}
-                    className="loader-particle"
-                    style={{
-                        left: Math.random() * 100 + '%',
-                        animationDuration: (3 + Math.random() * 4) + 's',
-                        animationDelay: (Math.random() * 3) + 's',
-                        width: (1 + Math.random() * 2) + 'px',
-                        height: (1 + Math.random() * 2) + 'px',
-                        background: ['#7B6FFF', '#00D4FF', '#BF5FFF', '#00FFB3'][Math.floor(Math.random() * 4)],
-                    }}
-                />
-            ))}
-        </div>
-    );
+  if (gone) return null;
+  return <div ref={wrapRef} id="premium-loader">
+    <div className="loader-bg"/><div className="loader-grid"/>
+    <div className="loader-particles">{particles.map((p, i) => <i key={i} className="loader-particle" style={{ left:p.left, top:p.top, width:p.size, height:p.size, background:COLORS[i%COLORS.length] }}/>)}</div>
+    <div className="loader-content"><div className="loader-kicker mono">PORTFOLIO_OS / 2026</div><div className="loader-logo">hosea<span>.dev</span></div><div className="loader-tagline">mapping evidence to capability</div><div className="loader-bar-wrap"><div ref={barRef} className="loader-bar"/></div><div ref={pctRef} className="loader-pct">000%</div></div>
+  </div>;
 }
