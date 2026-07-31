@@ -44,11 +44,111 @@ function renderContent() {
   $("#stats").innerHTML = STATS
     .map((s) => `<div class="stat" data-reveal><b>${s.value}</b><span>${s.label}</span></div>`).join("");
 
-  $("#signal-links").innerHTML = `<a href="${PROFILE.github}" target="_blank" rel="noopener" data-sfx>GitHub \u2197</a>`;
+  $("#signal-links").innerHTML = `
+    <a href="${PROFILE.github}" target="_blank" rel="noopener" data-sfx>Explore GitHub \u2197</a>
+    <a href="#work" data-sfx>Review selected work \u2191</a>`;
   $("#foot-handle").textContent = PROFILE.handle;
   $("#foot-year").textContent = new Date().getFullYear();
 }
 renderContent();
+
+// ---------- Kinetic type / cinematic entrance ----------
+const heroName = $("#hero-name");
+const heroPitch = $("#hero-pitch");
+const nameText = heroName.textContent;
+const pitchText = heroPitch.textContent;
+heroName.innerHTML = [...nameText].map((c) => `<span class="glyph">${c}</span>`).join("");
+heroPitch.innerHTML = pitchText.split(" ").map((w) => `<span class="word">${w}&nbsp;</span>`).join("");
+
+function runIntro() {
+  if (reduce) return;
+  heroName.querySelectorAll(".glyph").forEach((glyph, i) => glyph.animate([
+    { opacity: 0, transform: `translateY(${70 + i * 7}px) rotate(${i % 2 ? 3 : -3}deg)`, filter: "blur(14px)" },
+    { opacity: 1, transform: "none", filter: "blur(0)" },
+  ], { duration: 1100, delay: i * 65, easing: "cubic-bezier(.16,1,.3,1)", fill: "both" }));
+
+  heroPitch.querySelectorAll(".word").forEach((word, i) => word.animate([
+    { opacity: 0, transform: "translateY(18px)", filter: "blur(7px)" },
+    { opacity: 1, transform: "none", filter: "blur(0)" },
+  ], { duration: 650, delay: 540 + i * 32, easing: "cubic-bezier(.16,1,.3,1)", fill: "both" }));
+
+  document.querySelectorAll(".hero__topline, .hero__roles, .caps, .kinetic-rail, .scroll-hint").forEach((el, i) => el.animate([
+    { opacity: 0, transform: "translateY(12px)" }, { opacity: 1, transform: "none" },
+  ], { duration: 700, delay: 260 + i * 90, easing: "cubic-bezier(.16,1,.3,1)", fill: "both" }));
+}
+
+let booted = false;
+try { booted = sessionStorage.getItem("booted") === "1"; } catch (e) {}
+setTimeout(runIntro, booted || reduce ? 80 : 3600);
+
+// ---------- Scroll-directed cinematic sequence ----------
+const sequence = $("#sequence");
+const sequenceChapters = [...document.querySelectorAll(".sequence__chapter")];
+const sequenceIndex = $("#sequence-index");
+const sequenceRail = $("#sequence-rail");
+const sequenceVisual = $(".sequence__visual");
+const sequenceCore = $(".core-pulse");
+const orbitA = $(".core-orbit--a");
+const orbitB = $(".core-orbit--b");
+const orbitC = $(".core-orbit--c");
+const codeRain = $("#code-rain");
+const codeTokens = ["async.run()", "0x8DF6C5", "POST /v1", "p95 42ms", "model.eval()", "SELECT *", "pytest -q", "git push", "await queue", "200 OK", "cron:*/5", "loss 0.031"];
+codeRain.innerHTML = codeTokens.map((token, i) => {
+  const angle = (i / codeTokens.length) * Math.PI * 2;
+  const radius = 34 + (i % 3) * 9;
+  return `<span style="left:${50 + Math.cos(angle) * radius}%;top:${50 + Math.sin(angle) * radius}%">${token}</span>`;
+}).join("");
+const rainTokens = [...codeRain.children];
+let activeScene = 0;
+
+function updateSequence() {
+  if (!sequence) return;
+  const rect = sequence.getBoundingClientRect();
+  const travel = sequence.offsetHeight - innerHeight;
+  const progress = clamp(-rect.top / Math.max(travel, 1), 0, 1);
+  const scene = Math.min(3, Math.floor(progress * 4));
+  if (scene !== activeScene) {
+    activeScene = scene;
+    sequenceChapters.forEach((chapter, i) => chapter.classList.toggle("is-active", i === scene));
+    sequenceIndex.textContent = `${String(scene + 1).padStart(2, "0")} / 04`;
+    if (!reduce) sfx.node();
+  }
+  sequenceRail.style.transform = `scaleX(${progress})`;
+  if (reduce) return;
+  orbitA.style.rotate = `${progress * 520}deg`;
+  orbitB.style.rotate = `${progress * -760}deg`;
+  orbitC.style.rotate = `${progress * 980}deg`;
+  sequenceCore.style.scale = `${1 + Math.sin(progress * Math.PI * 12) * .055}`;
+  sequenceVisual.style.translate = `${Math.sin(progress * Math.PI * 4) * 3.5}vw ${Math.cos(progress * Math.PI * 3) * 2}vh`;
+  rainTokens.forEach((token, i) => {
+    token.style.translate = `${Math.sin(progress * 15 + i) * 18}px ${Math.cos(progress * 11 + i * .7) * 18}px`;
+    token.style.opacity = String(.25 + Math.abs(Math.sin(progress * 8 + i)) * .65);
+  });
+}
+
+// Pointer light and project-card depth. Native CSS + WAAPI; no animation dependency.
+if (!reduce && matchMedia("(pointer:fine)").matches) {
+  window.addEventListener("pointermove", (e) => {
+    document.body.style.setProperty("--mx", `${(e.clientX / innerWidth) * 100}%`);
+    document.body.style.setProperty("--my", `${(e.clientY / innerHeight) * 100}%`);
+  }, { passive: true });
+
+  document.querySelectorAll(".card").forEach((card) => {
+    card.addEventListener("pointermove", (e) => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width;
+      const y = (e.clientY - r.top) / r.height;
+      card.style.setProperty("--rx", `${(0.5 - y) * 4}deg`);
+      card.style.setProperty("--ry", `${(x - 0.5) * 5}deg`);
+      card.style.setProperty("--shine-x", `${x * 100}%`);
+      card.style.setProperty("--shine-y", `${y * 100}%`);
+    });
+    card.addEventListener("pointerleave", () => {
+      card.style.setProperty("--rx", "0deg");
+      card.style.setProperty("--ry", "0deg");
+    });
+  });
+}
 
 // ---------- Graph wiring ----------
 const readoutLabel = $("#readout-label");
@@ -138,24 +238,25 @@ function frameCam() {
   const mapTop = mapSection.offsetTop;
   const mapH = mapSection.offsetHeight;
 
-  // Phase A: hero -> map (first viewport of scroll) zooms + unblurs the graph.
-  const p = clamp(y / (H * 0.85), 0, 1);
-  // Phase B: when leaving the map, fade the graph out as content covers it.
+  updateSequence();
+
+  // Graph stays quiet during cinematic sequence, then resolves into interactive atlas.
+  const mapProgress = clamp((y - mapTop + H * 0.85) / (H * 0.85), 0, 1);
   const outStart = mapTop + mapH - H * 1.1;
   const pOut = clamp((y - outStart) / (H * 0.6), 0, 1);
 
-  const blur = lerp(9, 0, p);
-  const opacity = lerp(0.4, 1, p) * (1 - pOut);
-  const zoom = lerp(0.72, 1.18, p);
+  const blur = lerp(11, 0, mapProgress);
+  const opacity = lerp(0.04, 1, mapProgress) * (1 - pOut);
+  const zoom = lerp(0.68, 1.18, mapProgress);
 
   graphCanvas.style.filter = `blur(${blur.toFixed(2)}px)`;
   graphCanvas.style.opacity = opacity.toFixed(3);
 
-  const interactive = p > 0.85 && pOut < 0.15;
+  const interactive = mapProgress > 0.85 && pOut < 0.15;
   graph.setCamera({
     zoom,
     interactive,
-    labels: p > 0.75 ? 1 : 0,
+    labels: mapProgress > 0.75 ? 1 : 0,
     autoRate: interactive ? 0.0009 : 0.0016,
   });
   if (interactive !== lastInteractive) {
@@ -164,15 +265,17 @@ function frameCam() {
     if (graphHit) graphHit.classList.toggle("live", interactive);
   }
 
-  // hero parallax: name drifts up and fades as you scroll into the map
+  // Hero leaves before cinematic chapters begin.
   if (heroCopy) {
-    heroCopy.style.transform = `translate(0, ${(-y * 0.25).toFixed(1)}px) scale(${(1 + p * 0.12).toFixed(3)})`;
-    heroCopy.style.opacity = (1 - clamp(p * 1.15, 0, 1)).toFixed(3);
+    const heroOut = clamp(y / (H * .8), 0, 1);
+    heroCopy.style.transform = `translate(0, ${(-y * 0.22).toFixed(1)}px) scale(${(1 + heroOut * 0.08).toFixed(3)})`;
+    heroCopy.style.opacity = (1 - heroOut).toFixed(3);
   }
 
   requestAnimationFrame(frameCam);
 }
 if (reduce) {
+  updateSequence();
   graphCanvas.style.filter = "none";
   graphCanvas.style.opacity = "1";
   graph.setCamera({ zoom: 1, interactive: true, labels: 1, autoRate: 0 });

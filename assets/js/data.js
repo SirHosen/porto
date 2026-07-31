@@ -8,7 +8,7 @@ export const PROFILE = {
   name: "HOSEA",
   roles: ["PYTHON ENGINEER", "FULL-STACK DEV", "AUTOMATION & APPLIED AI"],
   pitch:
-    "I build systems, not scripts \u2014 production web apps, automation engines, and applied-AI tooling.",
+    "I engineer useful digital systems at the intersection of software, automation, and applied intelligence.",
   location: "ID \u00b7 UTC+7",
   github: "https://github.com/SirHosen",
 };

@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./assets/css/system.css" />
@@ -64,13 +64,67 @@
       <!-- HERO: name centered, graph blurred + moving behind it -->
       <section id="hero" class="hero">
         <div id="hero-copy" class="hero__copy">
-          <div class="hero__tag">// APPLIED SYSTEMS ENGINEER</div>
+          <div class="hero__topline">
+            <div class="hero__tag"><span class="status-dot"></span> AVAILABLE FOR SELECT PROJECTS</div>
+            <div class="hero__loc">IDN / UTC+7</div>
+          </div>
           <h1 id="hero-name" class="glitch" data-text="HOSEA">HOSEA</h1>
-          <div id="hero-roles" class="hero__roles"></div>
-          <p id="hero-pitch" class="hero__pitch"></p>
-          <ul id="caps" class="caps"></ul>
+          <div class="hero__lower">
+            <div>
+              <div id="hero-roles" class="hero__roles"></div>
+              <ul id="caps" class="caps"></ul>
+            </div>
+            <p id="hero-pitch" class="hero__pitch"></p>
+          </div>
+          <div class="kinetic-rail" aria-hidden="true">
+            <div class="kinetic-rail__track">
+              <span>ENGINEER</span><i>◆</i><span>AUTOMATE</span><i>◆</i><span>SHIP</span><i>◆</i><span>QUESTION</span><i>◆</i>
+              <span>ENGINEER</span><i>◆</i><span>AUTOMATE</span><i>◆</i><span>SHIP</span><i>◆</i><span>QUESTION</span><i>◆</i>
+            </div>
+          </div>
         </div>
-        <a href="#map" class="scroll-hint" data-sfx>scroll to enter the map &darr;</a>
+        <div class="hero__telemetry hero__telemetry--a" aria-hidden="true">LATENCY&nbsp;&nbsp;12MS<br>STATUS&nbsp;&nbsp;&nbsp;NOMINAL</div>
+        <div class="hero__telemetry hero__telemetry--b" aria-hidden="true">FRAME / 0001<br>VECTOR / 0.84</div>
+        <a href="#map" class="scroll-hint" data-sfx><span>Explore system</span><i aria-hidden="true">↓</i></a>
+      </section>
+
+      <section id="sequence" class="sequence" aria-label="Engineering disciplines">
+        <div class="sequence__sticky">
+          <div class="sequence__top">
+            <span id="sequence-index">01 / 04</span>
+            <span>SCROLL-DRIVEN SYSTEM TRACE</span>
+          </div>
+          <div class="sequence__visual" aria-hidden="true">
+            <div class="core-orbit core-orbit--a"></div>
+            <div class="core-orbit core-orbit--b"></div>
+            <div class="core-orbit core-orbit--c"></div>
+            <div class="core-pulse"><span>H</span></div>
+            <div class="code-rain" id="code-rain"></div>
+          </div>
+          <div class="sequence__copy">
+            <article class="sequence__chapter is-active" data-scene="0">
+              <span>01 — ARCHITECT</span>
+              <h2>Systems with<br><em>structure.</em></h2>
+              <p>Architecture before abstraction. Clear boundaries, boring reliability, and software built to survive real use.</p>
+            </article>
+            <article class="sequence__chapter" data-scene="1">
+              <span>02 — AUTOMATE</span>
+              <h2>Repetition becomes<br><em>machinery.</em></h2>
+              <p>Scrapers, schedulers, browser flows, and data pipelines engineered as observable systems—not fragile scripts.</p>
+            </article>
+            <article class="sequence__chapter" data-scene="2">
+              <span>03 — INTELLIGENCE</span>
+              <h2>Models grounded in<br><em>evidence.</em></h2>
+              <p>Applied AI, computer vision, and statistical validation shaped around measurable outcomes instead of hype.</p>
+            </article>
+            <article class="sequence__chapter" data-scene="3">
+              <span>04 — SHIP</span>
+              <h2>From terminal to<br><em>production.</em></h2>
+              <p>Interfaces, APIs, infrastructure, and tests converging into useful products people can trust.</p>
+            </article>
+          </div>
+          <div class="sequence__rail" aria-hidden="true"><i id="sequence-rail"></i></div>
+        </div>
       </section>
 
       <!-- MAP: the graph zooms in and becomes interactive here -->
@@ -81,8 +135,8 @@
           <div id="map-panel" class="map__panel">
             <div class="map__head">
               <span class="map__idx">01</span>
-              <h2>Neural Map</h2>
-              <p>Every skill wired to the projects that use it. Drag to orbit &middot; scroll or +/&minus; to zoom &middot; shift-drag (or right-drag) to pan &middot; double-click to zoom &middot; click a domain to filter.</p>
+              <h2>Capability<br><em>Atlas</em></h2>
+              <p>An explorable model of how my tools, disciplines, and shipped work connect. Drag to orbit &middot; scroll to zoom &middot; click a domain to isolate.</p>
             </div>
             <div class="graph__readout">
               <span id="readout-dot" class="readout__dot"></span>
@@ -103,7 +157,7 @@
 
       <section id="work" class="block">
         <div class="block__head" data-reveal>
-          <span class="block__idx">02</span><h2>Selected Work</h2>
+          <span class="block__idx">02 / WORK</span><h2>Selected <em>systems</em></h2>
           <span class="block__note">hover a card to trace it on the map</span>
         </div>
         <div id="work-grid" class="work-grid"></div>
@@ -111,7 +165,7 @@
 
       <section id="stack" class="block">
         <div class="block__head" data-reveal>
-          <span class="block__idx">03</span><h2>Stack Index</h2>
+          <span class="block__idx">03 / INDEX</span><h2>Technical <em>range</em></h2>
           <span class="block__note">6 domains &middot; 42 skills</span>
         </div>
         <div id="stats" class="stats"></div>
@@ -119,9 +173,9 @@
 
       <section id="signal" class="block signal">
         <div class="block__head" data-reveal>
-          <span class="block__idx">04</span><h2>Open a Channel</h2>
+          <span class="block__idx">04 / CONTACT</span><h2>Start a <em>signal</em></h2>
         </div>
-        <p class="signal__lead" data-reveal>Building something that needs systems thinking? Let&rsquo;s talk.</p>
+        <p class="signal__lead" data-reveal>Have an ambitious system in mind? I&rsquo;m interested in precise problems, useful software, and ideas worth engineering properly.</p>
         <div id="signal-links" class="signal__links" data-reveal></div>
       </section>
     </main>
