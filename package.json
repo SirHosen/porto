@@ -1,0 +1,41 @@
+{
+  "name": "hosea-midnight-panel",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Midnight Panel: preserved portfolio source and an isolated scroll-driven 3D prototype.",
+  "scripts": {
+    "dev": "next dev --hostname 127.0.0.1 --port 3000",
+    "dev:legacy": "python3 -m http.server 4173 --bind 127.0.0.1",
+    "build": "next build",
+    "preview": "node scripts/preview.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "node tests/verify.mjs",
+    "test:a11y": "node tests/accessibility.mjs",
+    "test:content": "node tests/preserved-content.mjs",
+    "test:prototype": "node tests/camera-path.mjs",
+    "test:camera-benchmark": "node tests/camera-benchmark.mjs",
+    "test:camera-record": "node tests/camera-record.mjs"
+  },
+  "dependencies": {
+    "@react-three/drei": "10.7.8",
+    "@react-three/fiber": "9.7.0",
+    "gsap": "3.15.0",
+    "lenis": "1.3.26",
+    "next": "16.3.5",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "three": "0.186.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "@tailwindcss/postcss": "4.3.3",
+    "@types/node": "26.5.1",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.7",
+    "@types/three": "0.186.0",
+    "playwright": "1.58.2",
+    "tailwindcss": "4.3.3",
+    "typescript": "5.9.3"
+  }
+}
