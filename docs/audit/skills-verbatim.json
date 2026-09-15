@@ -1,0 +1,347 @@
+{
+  "snapshotVersion": 1,
+  "capturedOn": "2026-09-15",
+  "preservationRule": "Do not rewrite, trim, normalize punctuation, fix grammar, or reorder skill names. Source text is from the current working tree. Layout changes do not authorize content changes.",
+  "sources": [
+    {
+      "path": "assets/js/data.js",
+      "bytes": 15292,
+      "sha256": "4be27d47cdc234c531857a77834adac77a4f57332b5c7a00458d2617b3ff1d2a"
+    },
+    {
+      "path": "assets/js/midnight.js",
+      "bytes": 13923,
+      "sha256": "ca2e256f54a1f3d4e981ca721b8010177ad2d41973ddaba693e791ca9c884cf0"
+    },
+    {
+      "path": "index.html",
+      "bytes": 10876,
+      "sha256": "324d879f3dcd6a48d48f549a4c158d60a2fc50025ba32131fc109ba9751c2465"
+    }
+  ],
+  "CATS": [
+    {
+      "id": "cat-lang",
+      "label": "Languages",
+      "code": "LANG",
+      "color": "#f24b3e"
+    },
+    {
+      "id": "cat-web",
+      "label": "Web & Mobile",
+      "code": "WEB",
+      "color": "#d2ba85"
+    },
+    {
+      "id": "cat-ai",
+      "label": "Data & Applied AI",
+      "code": "AI",
+      "color": "#b79ac7"
+    },
+    {
+      "id": "cat-auto",
+      "label": "Automation",
+      "code": "AUTO",
+      "color": "#b8cf8c"
+    },
+    {
+      "id": "cat-sys",
+      "label": "Systems & Network",
+      "code": "SYS",
+      "color": "#83b9b4"
+    },
+    {
+      "id": "cat-prac",
+      "label": "Engineering Practice",
+      "code": "ENG",
+      "color": "#e2b2a2"
+    }
+  ],
+  "SKILLS": [
+    [
+      "python",
+      "Python",
+      "cat-lang"
+    ],
+    [
+      "jsts",
+      "TypeScript / JS",
+      "cat-lang"
+    ],
+    [
+      "php",
+      "PHP",
+      "cat-lang"
+    ],
+    [
+      "sql",
+      "SQL",
+      "cat-lang"
+    ],
+    [
+      "htmlcss",
+      "HTML / CSS",
+      "cat-lang"
+    ],
+    [
+      "shell",
+      "Shell / Batch",
+      "cat-lang"
+    ],
+    [
+      "json",
+      "JSON / Config",
+      "cat-lang"
+    ],
+    [
+      "dart",
+      "Dart",
+      "cat-lang"
+    ],
+    [
+      "nextjs",
+      "Next.js",
+      "cat-web"
+    ],
+    [
+      "react",
+      "React",
+      "cat-web"
+    ],
+    [
+      "laravel",
+      "Laravel",
+      "cat-web"
+    ],
+    [
+      "tailwind",
+      "Tailwind",
+      "cat-web"
+    ],
+    [
+      "supabase",
+      "Supabase",
+      "cat-web"
+    ],
+    [
+      "rest",
+      "REST APIs",
+      "cat-web"
+    ],
+    [
+      "a11y",
+      "A11y / SEO",
+      "cat-web"
+    ],
+    [
+      "flutter",
+      "Flutter",
+      "cat-web"
+    ],
+    [
+      "riverpod",
+      "Riverpod",
+      "cat-web"
+    ],
+    [
+      "pytorch",
+      "PyTorch",
+      "cat-ai"
+    ],
+    [
+      "opencv",
+      "OpenCV / OCR",
+      "cat-ai"
+    ],
+    [
+      "lstm",
+      "LSTM / Sequence",
+      "cat-ai"
+    ],
+    [
+      "bayes",
+      "Bayesian Inference",
+      "cat-ai"
+    ],
+    [
+      "stats",
+      "Statistical Validation",
+      "cat-ai"
+    ],
+    [
+      "numpy",
+      "NumPy",
+      "cat-ai"
+    ],
+    [
+      "signal",
+      "Signal Processing",
+      "cat-ai"
+    ],
+    [
+      "selenium",
+      "Selenium",
+      "cat-auto"
+    ],
+    [
+      "playwright",
+      "Playwright",
+      "cat-auto"
+    ],
+    [
+      "scraping",
+      "Web Scraping",
+      "cat-auto"
+    ],
+    [
+      "concurrency",
+      "Async / Concurrency",
+      "cat-auto"
+    ],
+    [
+      "scheduler",
+      "Schedulers",
+      "cat-auto"
+    ],
+    [
+      "notify",
+      "Webhooks / Notify",
+      "cat-auto"
+    ],
+    [
+      "config",
+      "Config-driven Engines",
+      "cat-auto"
+    ],
+    [
+      "linux",
+      "Linux",
+      "cat-sys"
+    ],
+    [
+      "windows",
+      "Windows",
+      "cat-sys"
+    ],
+    [
+      "git",
+      "Git / GitHub",
+      "cat-sys"
+    ],
+    [
+      "mikrotik",
+      "MikroTik / MTCNA",
+      "cat-sys"
+    ],
+    [
+      "cisco",
+      "Cisco",
+      "cat-sys"
+    ],
+    [
+      "lanwlan",
+      "LAN / WLAN",
+      "cat-sys"
+    ],
+    [
+      "http",
+      "HTTP / Proxy",
+      "cat-sys"
+    ],
+    [
+      "architecture",
+      "Modular Architecture",
+      "cat-prac"
+    ],
+    [
+      "testing",
+      "Automated Testing",
+      "cat-prac"
+    ],
+    [
+      "database",
+      "PostgreSQL / MySQL",
+      "cat-prac"
+    ],
+    [
+      "security",
+      "Auth & Secure Config",
+      "cat-prac"
+    ],
+    [
+      "prompt",
+      "Prompt Engineering",
+      "cat-prac"
+    ],
+    [
+      "aiworkflow",
+      "AI-assisted Dev",
+      "cat-prac"
+    ],
+    [
+      "docs",
+      "Technical Docs",
+      "cat-prac"
+    ]
+  ],
+  "DOMAIN_COPY": {
+    "cat-lang": "Python is my home base. TypeScript, PHP, Dart, SQL, and shell scripting let me follow a problem across the stack.",
+    "cat-web": "Interfaces backed by real systems: web products with React and Laravel, and Flutter applications connected to Supabase.",
+    "cat-ai": "Computer vision, sequence models, signal processing, and statistical evaluation. Experiments are only as useful as the evidence behind them.",
+    "cat-auto": "Browser workflows, scraping, asynchronous pipelines, retries, and schedulers. Turning repeatable tasks into configurable software.",
+    "cat-sys": "Linux is my daily environment. Git, shell workflows, networking, and MikroTik knowledge connect the application to the machine it runs on.",
+    "cat-prac": "Clear boundaries, secure configuration, tests, and useful documentation. AI-assisted development supports the workflow; verification stays part of it."
+  },
+  "sourceSkillsMarkup": "    <section id=\"arsenal\" class=\"arsenal\" aria-labelledby=\"arsenal-title\">\n      <div class=\"section-heading\"><div><p class=\"eyebrow\">CHAPTER 02 <span>/</span> THE ARSENAL</p><h2 id=\"arsenal-title\">MANY TOOLS.<br>ONE <span class=\"outline-word\">MIND.</span></h2></div><p class=\"section-aside\">Different disciplines. Connected thinking.<br>Select a domain to explore the tools behind the work.</p></div>\n      <div class=\"arsenal-layout\"><div class=\"artifact-stage\"><div class=\"artifact-corners\" aria-hidden=\"true\"></div><div class=\"artifact-top mono\"><span><i class=\"status-dot\"></i> CAPABILITY CORE</span><span id=\"core-code\">LANG / 01</span></div><div class=\"artifact-watermark\" aria-hidden=\"true\">創造</div><canvas id=\"core-canvas\" aria-label=\"Rotating three-dimensional crystal surrounded by orbital rings\"></canvas><div id=\"core-fallback\" class=\"core-fallback\" hidden aria-hidden=\"true\">✳</div><div class=\"artifact-bottom mono\"><span id=\"core-hint\">DRAG TO ORBIT · SCROLL TO CONTINUE</span><button id=\"reset-core\" type=\"button\">RESET ↺</button></div></div><div class=\"domain-browser\"><div id=\"domain-tabs\" role=\"tablist\" aria-label=\"Skill domains\" aria-orientation=\"vertical\"></div><div id=\"domain-panel\" role=\"tabpanel\" tabindex=\"0\"></div></div></div>\n      <div class=\"arsenal-foot mono\"><span>NO SKILL BARS. JUST TOOLS I BUILD WITH.</span><span id=\"skill-count\"></span></div>\n    </section>",
+  "rendererTextSources": [
+    "  $('#core-fallback').hidden=false;$('#core-canvas').hidden=true;$('#reset-core').disabled=true;$('#core-hint').textContent='STATIC VIEW · EXPLORE THE DOMAINS';",
+    "if(matchMedia('(pointer:coarse)').matches)$('#core-hint').textContent=core.available?'SELECT A DOMAIN · SCROLL TO CONTINUE':'STATIC VIEW · EXPLORE THE DOMAINS';",
+    "$('#domain-tabs').innerHTML=CATS.map((c,i)=>`<button type=\"button\" role=\"tab\" id=\"tab-${c.id}\" class=\"domain-tab\" aria-controls=\"domain-panel\" aria-selected=\"${i===0}\" tabindex=\"${i===0?'0':'-1'}\" data-domain=\"${i}\"><span class=\"domain-idx\">0${i+1}</span><strong>${escapeHTML(c.label)}</strong><span class=\"domain-count\">${String(SKILLS.filter(s=>s[2]===c.id).length).padStart(2,'0')}</span><span class=\"domain-plus\" aria-hidden=\"true\">${i===0?'−':'+'}</span></button>`).join('');",
+    "  $('#domain-panel').innerHTML=`<p>${escapeHTML(DOMAIN_COPY[c.id])}</p><ul class=\"skill-tags\">${skills.map(s=>`<li>${escapeHTML(s[1])}</li>`).join('')}</ul><p class=\"domain-projects\">IN PRACTICE → <a href=\"#work\">${connected.length} connected projects</a></p>`;",
+    "$('#skill-count').textContent=`${CATS.length} DOMAINS / ${SKILLS.length} TOOLS & PRACTICES`;"
+  ],
+  "renderedDomains": [
+    {
+      "activeId": "tab-cat-lang",
+      "sectionText": "CHAPTER 02\n/\nTHE ARSENAL\n\nMANY TOOLS.\nONE MIND.\n\nDifferent disciplines. Connected thinking.\nSelect a domain to explore the tools behind the work.\n\n CAPABILITY CORE\nLANG / 01\n創造\nDRAG TO ORBIT · SCROLL TO CONTINUE\nRESET ↺\n01\nLanguages\n08\n−\n02\nWeb & Mobile\n09\n+\n03\nData & Applied AI\n07\n+\n04\nAutomation\n07\n+\n05\nSystems & Network\n07\n+\n06\nEngineering Practice\n07\n+\n\nPython is my home base. TypeScript, PHP, Dart, SQL, and shell scripting let me follow a problem across the stack.\n\nPython\nTypeScript / JS\nPHP\nSQL\nHTML / CSS\nShell / Batch\nJSON / Config\nDart\n\nIN PRACTICE → 9 connected projects\n\nNO SKILL BARS. JUST TOOLS I BUILD WITH.\n6 DOMAINS / 45 TOOLS & PRACTICES",
+      "panelText": "Python is my home base. TypeScript, PHP, Dart, SQL, and shell scripting let me follow a problem across the stack.\n\nPython\nTypeScript / JS\nPHP\nSQL\nHTML / CSS\nShell / Batch\nJSON / Config\nDart\n\nIN PRACTICE → 9 connected projects",
+      "panelHTML": "<p>Python is my home base. TypeScript, PHP, Dart, SQL, and shell scripting let me follow a problem across the stack.</p><ul class=\"skill-tags\"><li>Python</li><li>TypeScript / JS</li><li>PHP</li><li>SQL</li><li>HTML / CSS</li><li>Shell / Batch</li><li>JSON / Config</li><li>Dart</li></ul><p class=\"domain-projects\">IN PRACTICE → <a href=\"#work\">9 connected projects</a></p>",
+      "heading": "MANY TOOLS.\nONE MIND."
+    },
+    {
+      "activeId": "tab-cat-web",
+      "sectionText": "CHAPTER 02\n/\nTHE ARSENAL\n\nMANY TOOLS.\nONE MIND.\n\nDifferent disciplines. Connected thinking.\nSelect a domain to explore the tools behind the work.\n\n CAPABILITY CORE\nWEB / 02\n創造\nDRAG TO ORBIT · SCROLL TO CONTINUE\nRESET ↺\n01\nLanguages\n08\n+\n02\nWeb & Mobile\n09\n−\n03\nData & Applied AI\n07\n+\n04\nAutomation\n07\n+\n05\nSystems & Network\n07\n+\n06\nEngineering Practice\n07\n+\n\nInterfaces backed by real systems: web products with React and Laravel, and Flutter applications connected to Supabase.\n\nNext.js\nReact\nLaravel\nTailwind\nSupabase\nREST APIs\nA11y / SEO\nFlutter\nRiverpod\n\nIN PRACTICE → 4 connected projects\n\nNO SKILL BARS. JUST TOOLS I BUILD WITH.\n6 DOMAINS / 45 TOOLS & PRACTICES",
+      "panelText": "Interfaces backed by real systems: web products with React and Laravel, and Flutter applications connected to Supabase.\n\nNext.js\nReact\nLaravel\nTailwind\nSupabase\nREST APIs\nA11y / SEO\nFlutter\nRiverpod\n\nIN PRACTICE → 4 connected projects",
+      "panelHTML": "<p>Interfaces backed by real systems: web products with React and Laravel, and Flutter applications connected to Supabase.</p><ul class=\"skill-tags\"><li>Next.js</li><li>React</li><li>Laravel</li><li>Tailwind</li><li>Supabase</li><li>REST APIs</li><li>A11y / SEO</li><li>Flutter</li><li>Riverpod</li></ul><p class=\"domain-projects\">IN PRACTICE → <a href=\"#work\">4 connected projects</a></p>",
+      "heading": "MANY TOOLS.\nONE MIND."
+    },
+    {
+      "activeId": "tab-cat-ai",
+      "sectionText": "CHAPTER 02\n/\nTHE ARSENAL\n\nMANY TOOLS.\nONE MIND.\n\nDifferent disciplines. Connected thinking.\nSelect a domain to explore the tools behind the work.\n\n CAPABILITY CORE\nAI / 03\n創造\nDRAG TO ORBIT · SCROLL TO CONTINUE\nRESET ↺\n01\nLanguages\n08\n+\n02\nWeb & Mobile\n09\n+\n03\nData & Applied AI\n07\n−\n04\nAutomation\n07\n+\n05\nSystems & Network\n07\n+\n06\nEngineering Practice\n07\n+\n\nComputer vision, sequence models, signal processing, and statistical evaluation. Experiments are only as useful as the evidence behind them.\n\nPyTorch\nOpenCV / OCR\nLSTM / Sequence\nBayesian Inference\nStatistical Validation\nNumPy\nSignal Processing\n\nIN PRACTICE → 2 connected projects\n\nNO SKILL BARS. JUST TOOLS I BUILD WITH.\n6 DOMAINS / 45 TOOLS & PRACTICES",
+      "panelText": "Computer vision, sequence models, signal processing, and statistical evaluation. Experiments are only as useful as the evidence behind them.\n\nPyTorch\nOpenCV / OCR\nLSTM / Sequence\nBayesian Inference\nStatistical Validation\nNumPy\nSignal Processing\n\nIN PRACTICE → 2 connected projects",
+      "panelHTML": "<p>Computer vision, sequence models, signal processing, and statistical evaluation. Experiments are only as useful as the evidence behind them.</p><ul class=\"skill-tags\"><li>PyTorch</li><li>OpenCV / OCR</li><li>LSTM / Sequence</li><li>Bayesian Inference</li><li>Statistical Validation</li><li>NumPy</li><li>Signal Processing</li></ul><p class=\"domain-projects\">IN PRACTICE → <a href=\"#work\">2 connected projects</a></p>",
+      "heading": "MANY TOOLS.\nONE MIND."
+    },
+    {
+      "activeId": "tab-cat-auto",
+      "sectionText": "CHAPTER 02\n/\nTHE ARSENAL\n\nMANY TOOLS.\nONE MIND.\n\nDifferent disciplines. Connected thinking.\nSelect a domain to explore the tools behind the work.\n\n CAPABILITY CORE\nAUTO / 04\n創造\nDRAG TO ORBIT · SCROLL TO CONTINUE\nRESET ↺\n01\nLanguages\n08\n+\n02\nWeb & Mobile\n09\n+\n03\nData & Applied AI\n07\n+\n04\nAutomation\n07\n−\n05\nSystems & Network\n07\n+\n06\nEngineering Practice\n07\n+\n\nBrowser workflows, scraping, asynchronous pipelines, retries, and schedulers. Turning repeatable tasks into configurable software.\n\nSelenium\nPlaywright\nWeb Scraping\nAsync / Concurrency\nSchedulers\nWebhooks / Notify\nConfig-driven Engines\n\nIN PRACTICE → 3 connected projects\n\nNO SKILL BARS. JUST TOOLS I BUILD WITH.\n6 DOMAINS / 45 TOOLS & PRACTICES",
+      "panelText": "Browser workflows, scraping, asynchronous pipelines, retries, and schedulers. Turning repeatable tasks into configurable software.\n\nSelenium\nPlaywright\nWeb Scraping\nAsync / Concurrency\nSchedulers\nWebhooks / Notify\nConfig-driven Engines\n\nIN PRACTICE → 3 connected projects",
+      "panelHTML": "<p>Browser workflows, scraping, asynchronous pipelines, retries, and schedulers. Turning repeatable tasks into configurable software.</p><ul class=\"skill-tags\"><li>Selenium</li><li>Playwright</li><li>Web Scraping</li><li>Async / Concurrency</li><li>Schedulers</li><li>Webhooks / Notify</li><li>Config-driven Engines</li></ul><p class=\"domain-projects\">IN PRACTICE → <a href=\"#work\">3 connected projects</a></p>",
+      "heading": "MANY TOOLS.\nONE MIND."
+    },
+    {
+      "activeId": "tab-cat-sys",
+      "sectionText": "CHAPTER 02\n/\nTHE ARSENAL\n\nMANY TOOLS.\nONE MIND.\n\nDifferent disciplines. Connected thinking.\nSelect a domain to explore the tools behind the work.\n\n CAPABILITY CORE\nSYS / 05\n創造\nDRAG TO ORBIT · SCROLL TO CONTINUE\nRESET ↺\n01\nLanguages\n08\n+\n02\nWeb & Mobile\n09\n+\n03\nData & Applied AI\n07\n+\n04\nAutomation\n07\n+\n05\nSystems & Network\n07\n−\n06\nEngineering Practice\n07\n+\n\nLinux is my daily environment. Git, shell workflows, networking, and MikroTik knowledge connect the application to the machine it runs on.\n\nLinux\nWindows\nGit / GitHub\nMikroTik / MTCNA\nCisco\nLAN / WLAN\nHTTP / Proxy\n\nIN PRACTICE → 1 connected projects\n\nNO SKILL BARS. JUST TOOLS I BUILD WITH.\n6 DOMAINS / 45 TOOLS & PRACTICES",
+      "panelText": "Linux is my daily environment. Git, shell workflows, networking, and MikroTik knowledge connect the application to the machine it runs on.\n\nLinux\nWindows\nGit / GitHub\nMikroTik / MTCNA\nCisco\nLAN / WLAN\nHTTP / Proxy\n\nIN PRACTICE → 1 connected projects",
+      "panelHTML": "<p>Linux is my daily environment. Git, shell workflows, networking, and MikroTik knowledge connect the application to the machine it runs on.</p><ul class=\"skill-tags\"><li>Linux</li><li>Windows</li><li>Git / GitHub</li><li>MikroTik / MTCNA</li><li>Cisco</li><li>LAN / WLAN</li><li>HTTP / Proxy</li></ul><p class=\"domain-projects\">IN PRACTICE → <a href=\"#work\">1 connected projects</a></p>",
+      "heading": "MANY TOOLS.\nONE MIND."
+    },
+    {
+      "activeId": "tab-cat-prac",
+      "sectionText": "CHAPTER 02\n/\nTHE ARSENAL\n\nMANY TOOLS.\nONE MIND.\n\nDifferent disciplines. Connected thinking.\nSelect a domain to explore the tools behind the work.\n\n CAPABILITY CORE\nENG / 06\n創造\nDRAG TO ORBIT · SCROLL TO CONTINUE\nRESET ↺\n01\nLanguages\n08\n+\n02\nWeb & Mobile\n09\n+\n03\nData & Applied AI\n07\n+\n04\nAutomation\n07\n+\n05\nSystems & Network\n07\n+\n06\nEngineering Practice\n07\n−\n\nClear boundaries, secure configuration, tests, and useful documentation. AI-assisted development supports the workflow; verification stays part of it.\n\nModular Architecture\nAutomated Testing\nPostgreSQL / MySQL\nAuth & Secure Config\nPrompt Engineering\nAI-assisted Dev\nTechnical Docs\n\nIN PRACTICE → 9 connected projects\n\nNO SKILL BARS. JUST TOOLS I BUILD WITH.\n6 DOMAINS / 45 TOOLS & PRACTICES",
+      "panelText": "Clear boundaries, secure configuration, tests, and useful documentation. AI-assisted development supports the workflow; verification stays part of it.\n\nModular Architecture\nAutomated Testing\nPostgreSQL / MySQL\nAuth & Secure Config\nPrompt Engineering\nAI-assisted Dev\nTechnical Docs\n\nIN PRACTICE → 9 connected projects",
+      "panelHTML": "<p>Clear boundaries, secure configuration, tests, and useful documentation. AI-assisted development supports the workflow; verification stays part of it.</p><ul class=\"skill-tags\"><li>Modular Architecture</li><li>Automated Testing</li><li>PostgreSQL / MySQL</li><li>Auth &amp; Secure Config</li><li>Prompt Engineering</li><li>AI-assisted Dev</li><li>Technical Docs</li></ul><p class=\"domain-projects\">IN PRACTICE → <a href=\"#work\">9 connected projects</a></p>",
+      "heading": "MANY TOOLS.\nONE MIND."
+    }
+  ]
+}

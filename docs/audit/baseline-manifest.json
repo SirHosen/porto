@@ -1,0 +1,190 @@
+{
+  "capturedOn": "2026-09-15",
+  "repository": "/home/hosea/Projects/001/porto",
+  "branch": "main",
+  "headBeforeAudit": "d013fe017731f805cc1610368b68543cf7e72d3c",
+  "sourceOfTruth": "Current working tree, including pre-existing uncommitted changes; not HEAD or the older live site.",
+  "excluded": [
+    ".git (object database; status, history and remote metadata inspected separately)",
+    "node_modules (third-party installation; manifests and lockfile inspected)",
+    "test-results (generated outputs, not source)"
+  ],
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 38,
+      "sha256": "6bd1cb166be73a808bae1d7b47d3fc25e0b76f1c721a0749a1dc33b1cc3938bc"
+    },
+    {
+      "path": "assets/css/midnight.css",
+      "bytes": 27402,
+      "sha256": "6bc7763c53931f21eb510a7c3d315101c92850929c91a7a94f37fb08e21f6c59"
+    },
+    {
+      "path": "assets/css/system.css",
+      "bytes": 25394,
+      "sha256": "3cadb7861e8a71a6c7b0616866f5af3f27ab314d34e8f9c4278bbb3b0ec9c0e2"
+    },
+    {
+      "path": "assets/fonts/bebas-neue.ttf",
+      "bytes": 56136,
+      "sha256": "939fea723dad24504f40faadc34eeffadfbbee558754f70c3c736e13786b0ab6"
+    },
+    {
+      "path": "assets/fonts/jetbrains-mono.ttf",
+      "bytes": 112172,
+      "sha256": "44ce4a84f20d60f24539bd0cef11f79c29e38609e0f8adf18551c9794a5d9dc3"
+    },
+    {
+      "path": "assets/fonts/OFL-bebas-neue.txt",
+      "bytes": 4337,
+      "sha256": "72082f6cb4d04be2ecf7cc7d9e1e7d73787f0af8a5a278a47cade70c16b78341"
+    },
+    {
+      "path": "assets/fonts/OFL-jetbrains-mono.txt",
+      "bytes": 4399,
+      "sha256": "b2fe5e8987594e9ffd1d2ca52a2f5d73eb8335243893c5d6254b5ad69269591d"
+    },
+    {
+      "path": "assets/fonts/OFL-space-grotesk.txt",
+      "bytes": 4495,
+      "sha256": "564ce565c371c5e5bbf286006565a7c9aa55a9f56e7ca58d56e05d649dd61a72"
+    },
+    {
+      "path": "assets/fonts/space-grotesk.ttf",
+      "bytes": 69360,
+      "sha256": "ec926d5065eaca49a48f96e312bbae0bbc5733c24215cf5dfabbdccee926fef7"
+    },
+    {
+      "path": "assets/images/favicon.svg",
+      "bytes": 233,
+      "sha256": "3fc8270df9520a48bb6684d6412632155e44c88b738df854e12fdbcc9615a78b"
+    },
+    {
+      "path": "assets/images/midnight-city.webp",
+      "bytes": 228068,
+      "sha256": "7018bae28002c5684e54a0633449d2096b25ed9c9f3b62ffa5de7d54aa9ca216"
+    },
+    {
+      "path": "assets/js/app.js",
+      "bytes": 15402,
+      "sha256": "2a270db734e2dc9bfff1849901eb5b851a7ca8e6f7de99f26db73fbf867fd327"
+    },
+    {
+      "path": "assets/js/background.js",
+      "bytes": 4757,
+      "sha256": "75488067486f24c56e3a5975d5f694462310fb879072c55d9fe4cdfbe2d5f399"
+    },
+    {
+      "path": "assets/js/core.js",
+      "bytes": 6916,
+      "sha256": "2975c26fec2d321efe874eeaf65975ffcc113f57afecdd1a9c0587e2fd16ca1f"
+    },
+    {
+      "path": "assets/js/data.js",
+      "bytes": 15292,
+      "sha256": "4be27d47cdc234c531857a77834adac77a4f57332b5c7a00458d2617b3ff1d2a"
+    },
+    {
+      "path": "assets/js/graph.js",
+      "bytes": 14081,
+      "sha256": "77fd12e7d86b9fe4c3f6c233d0fba1931fd87a2d470d6954ff786f3b7bc0c549"
+    },
+    {
+      "path": "assets/js/icons.js",
+      "bytes": 5837,
+      "sha256": "93c1ddd6c461d94f2520492c2bf5ba4cac64706ab87d0c366b50d0470953245a"
+    },
+    {
+      "path": "assets/js/logos.js",
+      "bytes": 40109,
+      "sha256": "f2b87501c40409ec881e9bd66b5533e32df0f113d75d5a464e94f578ef8f4028"
+    },
+    {
+      "path": "assets/js/midnight.js",
+      "bytes": 13923,
+      "sha256": "ca2e256f54a1f3d4e981ca721b8010177ad2d41973ddaba693e791ca9c884cf0"
+    },
+    {
+      "path": "assets/js/sfx.js",
+      "bytes": 4536,
+      "sha256": "2e7050474dd511bd76441d9c4a6dc4d8167446e5438894e046df49bfa0a8d56e"
+    },
+    {
+      "path": "docs/art-direction.md",
+      "bytes": 1983,
+      "sha256": "5d7857de8f9ae77d81c03e9bf45951b8d5ae9a1560a35bdc012c060bef162ed6"
+    },
+    {
+      "path": "index.html",
+      "bytes": 10876,
+      "sha256": "324d879f3dcd6a48d48f549a4c158d60a2fc50025ba32131fc109ba9751c2465"
+    },
+    {
+      "path": "package-lock.json",
+      "bytes": 3108,
+      "sha256": "9e8cead8f81c776c65ba11c7d7a4de9e49d0fdc5283c051d46bdf16cef98ca3c"
+    },
+    {
+      "path": "package.json",
+      "bytes": 463,
+      "sha256": "105e245f55bc0dee73ba1cfe151209c79a29a04254210776350150708c27c70a"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4187,
+      "sha256": "3ca76bf00ac9da476e22a1c7e4bfc8ed0e044ee0412b38b1f595a6146b88db54"
+    },
+    {
+      "path": "tests/accessibility.mjs",
+      "bytes": 1636,
+      "sha256": "a0740117a317344eb2212fcf24b1004f5976d7c6d0300a5f41ccf9bab1606c89"
+    },
+    {
+      "path": "tests/verify.mjs",
+      "bytes": 6235,
+      "sha256": "504b54cf764883472d8956e5b393f1786d5fd22b357c1466db8355f733eb95c0"
+    }
+  ],
+  "deployment": {
+    "verifiedOn": "2026-09-15",
+    "evidence": "gh api repos/SirHosen/porto/pages; HTTPS GET of the live URL",
+    "build_type": "legacy",
+    "cname": null,
+    "html_url": "https://sirhosen.github.io/porto/",
+    "source": {
+      "branch": "main",
+      "path": "/"
+    },
+    "status": "built",
+    "liveTitle": "HOSEA // System",
+    "liveSkillsCountLabel": "6 domains · 42 skills"
+  },
+  "browser": {
+    "title": "Hosea — Midnight Panel / Developer Portfolio",
+    "viewportDesktop": {
+      "width": 1440,
+      "height": 1000
+    },
+    "viewportMobile": {
+      "width": 390,
+      "height": 844
+    },
+    "reducedMotion": "reduce",
+    "pageErrors": [],
+    "mobileOverflow": false,
+    "requests": [
+      "http://127.0.0.1:4186/assets/fonts/bebas-neue.ttf",
+      "http://127.0.0.1:4186/assets/images/midnight-city.webp",
+      "http://127.0.0.1:4186/assets/css/midnight.css",
+      "http://127.0.0.1:4186/assets/js/midnight.js",
+      "http://127.0.0.1:4186/assets/fonts/space-grotesk.ttf",
+      "http://127.0.0.1:4186/assets/fonts/jetbrains-mono.ttf",
+      "http://127.0.0.1:4186/assets/js/core.js",
+      "http://127.0.0.1:4186/assets/js/data.js",
+      "http://127.0.0.1:4186/assets/js/sfx.js",
+      "http://127.0.0.1:4186/assets/images/favicon.svg"
+    ],
+    "limitations": "Reduced-motion Chrome desktop screenshots; not physical-device QA or an FPS benchmark."
+  }
+}
