@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Midnight Panel: preserved portfolio source and an isolated scroll-driven 3D prototype.",
+  "description": "Midnight Panel: a cinematic portfolio with preserved skills and scroll-driven 3D waypoints.",
   "scripts": {
     "dev": "next dev --hostname 127.0.0.1 --port 3000",
     "dev:legacy": "python3 -m http.server 4173 --bind 127.0.0.1",
@@ -14,6 +14,8 @@
     "test:a11y": "node tests/accessibility.mjs",
     "test:content": "node tests/preserved-content.mjs",
     "test:prototype": "node tests/camera-path.mjs",
+    "test:portfolio": "node tests/portfolio.mjs",
+    "test:camera-sampling": "node tests/camera-sampling.mjs",
     "test:camera-benchmark": "node tests/camera-benchmark.mjs",
     "test:camera-record": "node tests/camera-record.mjs"
   },

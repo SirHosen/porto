@@ -22,5 +22,6 @@ createServer(async (req, res) => {
     res.end(req.method === 'HEAD' ? undefined : body);
   } catch { res.writeHead(404).end('Not found'); }
 }).listen(port, '127.0.0.1', () => {
-  console.log('Static export preview: http://127.0.0.1:' + port + basePath + '/prototype/');
+  console.log('Portfolio preview: http://127.0.0.1:' + port + basePath + '/');
+  console.log('Camera prototype: http://127.0.0.1:' + port + basePath + '/prototype/');
 });

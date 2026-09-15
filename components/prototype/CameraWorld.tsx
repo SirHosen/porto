@@ -2,20 +2,24 @@
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { PerspectiveCamera } from "@react-three/drei";
-import { useEffect, useLayoutEffect, useMemo, useRef, useState, type RefObject } from "react";
-import { CatmullRomCurve3, Color, InstancedMesh, NoToneMapping, Object3D, Vector3 } from "three";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode, type RefObject } from "react";
+import { CatmullRomCurve3, Color, InstancedMesh, NoToneMapping, Object3D, Vector3, type Camera } from "three";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import type { CameraDebug, CameraReading } from "@/lib/camera-study";
+import { sampleCameraCurve } from "@/lib/sample-camera-curve";
 
-type Props = {
+export type CameraWorldProps = {
   track: RefObject<HTMLDivElement | null>;
   onReady: () => void;
   onFailure: () => void;
   onProgress: (progress: number) => void;
+  path?: CatmullRomCurve3;
+  children?: ReactNode;
+  onFrame?: (camera: Camera, width: number, height: number, progress: number) => void;
 };
-type Block = { position: [number, number, number]; scale: [number, number, number]; color: string; rotation?: number };
+export type Block = { position: [number, number, number]; scale: [number, number, number]; color: string; rotation?: number };
 
 // This is a spatial curve, not a sequence of CSS transforms or camera cuts.
 // Arc-length sampling keeps travel even through the bends.
@@ -33,7 +37,7 @@ const PATH = new CatmullRomCurve3([
 PATH.arcLengthDivisions = 480;
 PATH.updateArcLengths();
 
-function Blocks({ items }: { items: Block[] }) {
+export function Blocks({ items }: { items: Block[] }) {
   const mesh = useRef<InstancedMesh>(null);
   useLayoutEffect(() => {
     if (!mesh.current) return;
@@ -113,7 +117,7 @@ function Architecture() {
   </>;
 }
 
-function CameraRig({ track, onReady, onFailure, onProgress }: Props) {
+function CameraRig({ track, onReady, onFailure, onProgress, path = PATH, onFrame }: CameraWorldProps) {
   const { camera, gl, advance, size } = useThree();
   const needsFrame = useRef(true);
   const progress = useRef(0);
@@ -122,17 +126,18 @@ function CameraRig({ track, onReady, onFailure, onProgress }: Props) {
   const frameTimes = useRef<number[]>([]);
   const samples = useRef<CameraReading["samples"]>([]);
   const lastFrame = useRef(0);
-  const vectors = useMemo(() => ({ eye: new Vector3(), direction: new Vector3(), target: new Vector3() }), []);
+  const vectors = useMemo(() => ({ eye: new Vector3(), direction: new Vector3(), target: new Vector3(), before: new Vector3(), after: new Vector3() }), []);
 
   useEffect(() => { needsFrame.current = true; }, [size.width, size.height]);
 
   useFrame(() => {
     const p = progress.current;
-    PATH.getPointAt(p, vectors.eye);
-    PATH.getTangentAt(p, vectors.direction);
+    sampleCameraCurve(path, p, vectors);
     camera.position.copy(vectors.eye);
     vectors.target.copy(vectors.eye).addScaledVector(vectors.direction, 12);
     camera.lookAt(vectors.target);
+    camera.updateMatrixWorld();
+    onFrame?.(camera, size.width, size.height, p);
     renders.current++;
     if (capture.current) {
       const now = performance.now();
@@ -191,6 +196,7 @@ function CameraRig({ track, onReady, onFailure, onProgress }: Props) {
     const pending = new Set<() => void>();
     const debug: CameraDebug = {
       read,
+      redraw: () => { needsFrame.current = true; },
       travel: (value, seconds = 0) => new Promise<void>((resolve) => {
         const complete = () => { pending.delete(complete); resolve(); };
         pending.add(complete);
@@ -234,7 +240,7 @@ function CameraRig({ track, onReady, onFailure, onProgress }: Props) {
   return null;
 }
 
-export default function CameraWorld(props: Props) {
+export default function CameraWorld(props: CameraWorldProps) {
   const [supported, setSupported] = useState(false);
   useEffect(() => {
     // R3F configures its renderer asynchronously. Detect unsupported WebGL
@@ -256,8 +262,8 @@ export default function CameraWorld(props: Props) {
       fallback={<span>3D is unavailable. Use the static study.</span>}
       style={{ pointerEvents: "none" }}
     >
-      <PerspectiveCamera makeDefault position={[0, 3.3, 18]} fov={58} near={0.1} far={250} />
-      <Architecture />
+      <PerspectiveCamera makeDefault position={[0, 3.3, 18]} fov={58} near={0.1} far={props.path ? 950 : 250} />
+      {props.children ?? <Architecture />}
       <CameraRig {...props} />
     </Canvas>
   );

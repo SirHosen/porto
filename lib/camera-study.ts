@@ -23,6 +23,7 @@ export type CameraReading = {
 
 export type CameraDebug = {
   read: () => CameraReading;
+  redraw: () => void;
   travel: (progress: number, seconds?: number) => Promise<void>;
   startCapture: () => void;
   stopCapture: () => CameraReading;

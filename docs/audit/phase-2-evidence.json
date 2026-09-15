@@ -1,0 +1,1115 @@
+{
+  "phase": 2,
+  "status": "Gate 2 awaiting explicit confirmation; no push or deploy",
+  "sourceChecks": {
+    "originalBaseline": "unchanged except previously approved package/tooling migration",
+    "skills": "CATS, SKILLS, DOMAIN_COPY deep-equal Phase 0; all six panel texts match after whitespace normalization",
+    "cameraMath": "2002 samples match Three within 1e-10 with vector identity preserved"
+  },
+  "hardware": {
+    "cpu": "Intel Core i3-1115G4, 2 cores / 4 threads",
+    "gpu": "Mesa Intel UHD (TGL GT2)",
+    "os": "Linux",
+    "method": "WebGL render callback intervals during a 12 s linear Lenis scroll, synchronized through GSAP ScrollTrigger; capture and video run separately.",
+    "caveat": "Emulated mobile viewport and 4x CPU on the disclosed host GPU; not a physical Android/iPhone or mobile GPU certification. Intervals measure render-loop delivery, not display presentation timestamps."
+  },
+  "benchmark": {
+    "date": "2026-09-15T13:47:38.934Z",
+    "url": "http://127.0.0.1:4175/porto/",
+    "browser": "153.0.8010.36",
+    "build": "Next.js production static export",
+    "method": "WebGL render callback intervals during a 12 s linear Lenis scroll, synchronized through GSAP ScrollTrigger; capture and video run separately.",
+    "caveat": "Emulated mobile viewport and 4x CPU on the disclosed host GPU; not a physical Android/iPhone or mobile GPU certification. Intervals measure render-loop delivery, not display presentation timestamps.",
+    "target": {
+      "fps": 60,
+      "nominalMeanFloor": 59,
+      "p95FrameCeilingMs": 18.5,
+      "slowFrameFractionCeiling": 0.01
+    },
+    "profiles": [
+      {
+        "profile": "desktop",
+        "run": 1,
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "deviceScaleFactor": 1,
+        "canvasDpr": 1,
+        "cpuSlowdown": 1,
+        "renderer": "ANGLE (Intel, Mesa Intel(R) UHD Graphics (TGL GT2), OpenGL ES 3.2)",
+        "frames": 719,
+        "elapsedMs": 12014.199999999953,
+        "meanFps": 60.00617587902023,
+        "medianFrameMs": 16.699999999953434,
+        "p95FrameMs": 16.899999999906868,
+        "maxFrameMs": 17.600000000093132,
+        "over33ms": 0,
+        "drawCalls": 5,
+        "triangles": 4436,
+        "nominal60fps": true,
+        "hardwareRenderer": true
+      },
+      {
+        "profile": "mobile-4x",
+        "run": 1,
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "deviceScaleFactor": 2,
+        "canvasDpr": 1,
+        "cpuSlowdown": 4,
+        "renderer": "ANGLE (Intel, Mesa Intel(R) UHD Graphics (TGL GT2), OpenGL ES 3.2)",
+        "frames": 720,
+        "elapsedMs": 12017.5,
+        "meanFps": 60.00650070424319,
+        "medianFrameMs": 16.699999999953434,
+        "p95FrameMs": 17.399999999906868,
+        "maxFrameMs": 19,
+        "over33ms": 0,
+        "drawCalls": 5,
+        "triangles": 4436,
+        "nominal60fps": true,
+        "hardwareRenderer": true
+      },
+      {
+        "profile": "mobile-4x",
+        "run": 2,
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "deviceScaleFactor": 2,
+        "canvasDpr": 1,
+        "cpuSlowdown": 4,
+        "renderer": "ANGLE (Intel, Mesa Intel(R) UHD Graphics (TGL GT2), OpenGL ES 3.2)",
+        "frames": 719,
+        "elapsedMs": 12016.399999999907,
+        "meanFps": 60.00767831210646,
+        "medianFrameMs": 16.699999999953434,
+        "p95FrameMs": 17.300000000046566,
+        "maxFrameMs": 18.199999999953434,
+        "over33ms": 0,
+        "drawCalls": 5,
+        "triangles": 4436,
+        "nominal60fps": true,
+        "hardwareRenderer": true
+      },
+      {
+        "profile": "mobile-4x",
+        "run": 3,
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "deviceScaleFactor": 2,
+        "canvasDpr": 1,
+        "cpuSlowdown": 4,
+        "renderer": "ANGLE (Intel, Mesa Intel(R) UHD Graphics (TGL GT2), OpenGL ES 3.2)",
+        "frames": 719,
+        "elapsedMs": 12017.5,
+        "meanFps": 60.00817913985518,
+        "medianFrameMs": 16.600000000093132,
+        "p95FrameMs": 17.9000000001397,
+        "maxFrameMs": 35.5,
+        "over33ms": 1,
+        "drawCalls": 5,
+        "triangles": 4436,
+        "nominal60fps": true,
+        "hardwareRenderer": true
+      }
+    ],
+    "passed": true
+  },
+  "earlierBenchmarks": [
+    {
+      "name": "benchmark-before-frame-work",
+      "date": "2026-09-15T13:33:01.927Z",
+      "url": "http://127.0.0.1:4175/porto/",
+      "browser": "153.0.8010.36",
+      "build": "Next.js production static export",
+      "method": "WebGL render callback intervals during a 12 s linear Lenis scroll, synchronized through GSAP ScrollTrigger; capture and video run separately.",
+      "caveat": "Emulated mobile viewport and 4x CPU on the disclosed host GPU; not a physical Android/iPhone or mobile GPU certification. Intervals measure render-loop delivery, not display presentation timestamps.",
+      "target": {
+        "fps": 60,
+        "nominalMeanFloor": 59,
+        "p95FrameCeilingMs": 18.5,
+        "slowFrameFractionCeiling": 0.01
+      },
+      "profiles": [
+        {
+          "profile": "desktop",
+          "run": 1,
+          "viewport": {
+            "width": 1440,
+            "height": 900
+          },
+          "deviceScaleFactor": 1,
+          "canvasDpr": 1,
+          "cpuSlowdown": 1,
+          "renderer": "ANGLE (Intel, Mesa Intel(R) UHD Graphics (TGL GT2), OpenGL ES 3.2)",
+          "frames": 720,
+          "elapsedMs": 12013.699999999953,
+          "meanFps": 60.002500104171006,
+          "medianFrameMs": 16.699999999953434,
+          "p95FrameMs": 16.900000000023283,
+          "maxFrameMs": 18,
+          "over33ms": 0,
+          "drawCalls": 5,
+          "triangles": 4436,
+          "nominal60fps": true,
+          "hardwareRenderer": true
+        },
+        {
+          "profile": "mobile-4x",
+          "run": 1,
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "deviceScaleFactor": 2,
+          "canvasDpr": 1,
+          "cpuSlowdown": 4,
+          "renderer": "ANGLE (Intel, Mesa Intel(R) UHD Graphics (TGL GT2), OpenGL ES 3.2)",
+          "frames": 719,
+          "elapsedMs": 12015.800000000047,
+          "meanFps": 60.01569255938989,
+          "medianFrameMs": 16.699999999953434,
+          "p95FrameMs": 18.79999999993015,
+          "maxFrameMs": 20.400000000023283,
+          "over33ms": 0,
+          "drawCalls": 5,
+          "triangles": 4436,
+          "nominal60fps": false,
+          "hardwareRenderer": true
+        },
+        {
+          "profile": "mobile-4x",
+          "run": 2,
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "deviceScaleFactor": 2,
+          "canvasDpr": 1,
+          "cpuSlowdown": 4,
+          "renderer": "ANGLE (Intel, Mesa Intel(R) UHD Graphics (TGL GT2), OpenGL ES 3.2)",
+          "frames": 719,
+          "elapsedMs": 12016.70000000007,
+          "meanFps": 60.02070255108879,
+          "medianFrameMs": 16.699999999953434,
+          "p95FrameMs": 17.70000000006985,
+          "maxFrameMs": 20.400000000023283,
+          "over33ms": 0,
+          "drawCalls": 5,
+          "triangles": 4436,
+          "nominal60fps": true,
+          "hardwareRenderer": true
+        },
+        {
+          "profile": "mobile-4x",
+          "run": 3,
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "deviceScaleFactor": 2,
+          "canvasDpr": 1,
+          "cpuSlowdown": 4,
+          "renderer": "ANGLE (Intel, Mesa Intel(R) UHD Graphics (TGL GT2), OpenGL ES 3.2)",
+          "frames": 719,
+          "elapsedMs": 12019.79999999993,
+          "meanFps": 59.91267248850111,
+          "medianFrameMs": 16.699999999953434,
+          "p95FrameMs": 18.699999999953434,
+          "maxFrameMs": 41.800000000046566,
+          "over33ms": 1,
+          "drawCalls": 5,
+          "triangles": 4436,
+          "nominal60fps": false,
+          "hardwareRenderer": true
+        }
+      ],
+      "passed": false
+    },
+    {
+      "name": "benchmark-after-frame-work",
+      "date": "2026-09-15T13:36:32.991Z",
+      "url": "http://127.0.0.1:4175/porto/",
+      "browser": "153.0.8010.36",
+      "build": "Next.js production static export",
+      "method": "WebGL render callback intervals during a 12 s linear Lenis scroll, synchronized through GSAP ScrollTrigger; capture and video run separately.",
+      "caveat": "Emulated mobile viewport and 4x CPU on the disclosed host GPU; not a physical Android/iPhone or mobile GPU certification. Intervals measure render-loop delivery, not display presentation timestamps.",
+      "target": {
+        "fps": 60,
+        "nominalMeanFloor": 59,
+        "p95FrameCeilingMs": 18.5,
+        "slowFrameFractionCeiling": 0.01
+      },
+      "profiles": [
+        {
+          "profile": "desktop",
+          "run": 1,
+          "viewport": {
+            "width": 1440,
+            "height": 900
+          },
+          "deviceScaleFactor": 1,
+          "canvasDpr": 1,
+          "cpuSlowdown": 1,
+          "renderer": "ANGLE (Intel, Mesa Intel(R) UHD Graphics (TGL GT2), OpenGL ES 3.2)",
+          "frames": 720,
+          "elapsedMs": 12015.100000000093,
+          "meanFps": 60.002500104171006,
+          "medianFrameMs": 16.699999999953434,
+          "p95FrameMs": 17,
+          "maxFrameMs": 18.400000000023283,
+          "over33ms": 0,
+          "drawCalls": 5,
+          "triangles": 4436,
+          "nominal60fps": true,
+          "hardwareRenderer": true
+        },
+        {
+          "profile": "mobile-4x",
+          "run": 1,
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "deviceScaleFactor": 2,
+          "canvasDpr": 1,
+          "cpuSlowdown": 4,
+          "renderer": "ANGLE (Intel, Mesa Intel(R) UHD Graphics (TGL GT2), OpenGL ES 3.2)",
+          "frames": 719,
+          "elapsedMs": 12016.29999999993,
+          "meanFps": 60.01469066141353,
+          "medianFrameMs": 16.699999999953434,
+          "p95FrameMs": 17.5,
+          "maxFrameMs": 19.599999999976717,
+          "over33ms": 0,
+          "drawCalls": 5,
+          "triangles": 4436,
+          "nominal60fps": true,
+          "hardwareRenderer": true
+        },
+        {
+          "profile": "mobile-4x",
+          "run": 2,
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "deviceScaleFactor": 2,
+          "canvasDpr": 1,
+          "cpuSlowdown": 4,
+          "renderer": "ANGLE (Intel, Mesa Intel(R) UHD Graphics (TGL GT2), OpenGL ES 3.2)",
+          "frames": 719,
+          "elapsedMs": 12016.300000000047,
+          "meanFps": 60.00567508470921,
+          "medianFrameMs": 16.699999999953434,
+          "p95FrameMs": 17.5,
+          "maxFrameMs": 19.900000000023283,
+          "over33ms": 0,
+          "drawCalls": 5,
+          "triangles": 4436,
+          "nominal60fps": true,
+          "hardwareRenderer": true
+        },
+        {
+          "profile": "mobile-4x",
+          "run": 3,
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "deviceScaleFactor": 2,
+          "canvasDpr": 1,
+          "cpuSlowdown": 4,
+          "renderer": "ANGLE (Intel, Mesa Intel(R) UHD Graphics (TGL GT2), OpenGL ES 3.2)",
+          "frames": 719,
+          "elapsedMs": 12017,
+          "meanFps": 59.9116740271644,
+          "medianFrameMs": 16.699999999953434,
+          "p95FrameMs": 17.400000000023283,
+          "maxFrameMs": 34.699999999953434,
+          "over33ms": 1,
+          "drawCalls": 5,
+          "triangles": 4436,
+          "nominal60fps": true,
+          "hardwareRenderer": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "benchmark-before-vector-reuse",
+      "date": "2026-09-15T13:40:32.694Z",
+      "url": "http://127.0.0.1:4175/porto/",
+      "browser": "153.0.8010.36",
+      "build": "Next.js production static export",
+      "method": "WebGL render callback intervals during a 12 s linear Lenis scroll, synchronized through GSAP ScrollTrigger; capture and video run separately.",
+      "caveat": "Emulated mobile viewport and 4x CPU on the disclosed host GPU; not a physical Android/iPhone or mobile GPU certification. Intervals measure render-loop delivery, not display presentation timestamps.",
+      "target": {
+        "fps": 60,
+        "nominalMeanFloor": 59,
+        "p95FrameCeilingMs": 18.5,
+        "slowFrameFractionCeiling": 0.01
+      },
+      "profiles": [
+        {
+          "profile": "desktop",
+          "run": 1,
+          "viewport": {
+            "width": 1440,
+            "height": 900
+          },
+          "deviceScaleFactor": 1,
+          "canvasDpr": 1,
+          "cpuSlowdown": 1,
+          "renderer": "ANGLE (Intel, Mesa Intel(R) UHD Graphics (TGL GT2), OpenGL ES 3.2)",
+          "frames": 719,
+          "elapsedMs": 12014.699999999953,
+          "meanFps": 60.00567508470921,
+          "medianFrameMs": 16.699999999953434,
+          "p95FrameMs": 17.299999999813735,
+          "maxFrameMs": 18.600000000093132,
+          "over33ms": 0,
+          "drawCalls": 5,
+          "triangles": 4436,
+          "nominal60fps": true,
+          "hardwareRenderer": true
+        },
+        {
+          "profile": "mobile-4x",
+          "run": 1,
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "deviceScaleFactor": 2,
+          "canvasDpr": 1,
+          "cpuSlowdown": 4,
+          "renderer": "ANGLE (Intel, Mesa Intel(R) UHD Graphics (TGL GT2), OpenGL ES 3.2)",
+          "frames": 720,
+          "elapsedMs": 12016,
+          "meanFps": 60.002500104171006,
+          "medianFrameMs": 16.699999999953434,
+          "p95FrameMs": 17.5,
+          "maxFrameMs": 18.899999999906868,
+          "over33ms": 0,
+          "drawCalls": 5,
+          "triangles": 4436,
+          "nominal60fps": true,
+          "hardwareRenderer": true
+        },
+        {
+          "profile": "mobile-4x",
+          "run": 2,
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "deviceScaleFactor": 2,
+          "canvasDpr": 1,
+          "cpuSlowdown": 4,
+          "renderer": "ANGLE (Intel, Mesa Intel(R) UHD Graphics (TGL GT2), OpenGL ES 3.2)",
+          "frames": 719,
+          "elapsedMs": 12014.59999999986,
+          "meanFps": 60.00968167326068,
+          "medianFrameMs": 16.699999999953434,
+          "p95FrameMs": 17.5,
+          "maxFrameMs": 19.300000000046566,
+          "over33ms": 0,
+          "drawCalls": 5,
+          "triangles": 4436,
+          "nominal60fps": true,
+          "hardwareRenderer": true
+        },
+        {
+          "profile": "mobile-4x",
+          "run": 3,
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "deviceScaleFactor": 2,
+          "canvasDpr": 1,
+          "cpuSlowdown": 4,
+          "renderer": "ANGLE (Intel, Mesa Intel(R) UHD Graphics (TGL GT2), OpenGL ES 3.2)",
+          "frames": 718,
+          "elapsedMs": 12017.5,
+          "meanFps": 59.92421839790325,
+          "medianFrameMs": 16.699999999953434,
+          "p95FrameMs": 17.4000000001397,
+          "maxFrameMs": 37.5999999998603,
+          "over33ms": 1,
+          "drawCalls": 5,
+          "triangles": 4436,
+          "nominal60fps": true,
+          "hardwareRenderer": true
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "trace": {
+    "sha256": "7df5c0e1c0bb5a344452ae3a13cc39aeee1428fde8cfd89a3b9a10a95328db98",
+    "bytes": 6266860,
+    "majorGc": [
+      {
+        "atMs": 2893.736,
+        "durationMs": 37.145,
+        "args": {
+          "type": "finalize incremental marking via task",
+          "usedHeapSizeAfter": 8016344,
+          "usedHeapSizeBefore": 10065104
+        }
+      }
+    ]
+  },
+  "checks": {
+    "date": "2026-09-15T13:47:04.545Z",
+    "url": "http://127.0.0.1:4175/porto/",
+    "checks": [
+      "frozen skills data and descriptions match Phase 0 exactly; all nine projects retained",
+      "13 actual camera stops, nine distinct projected project panels, reversible perspective, bounded geometry, desktop screenshots",
+      "all six Skills panels match frozen text; keyboard tabs, real crystal drag and reset",
+      "section navigation, project next/previous, and Skills-to-work links drive the camera",
+      "real wheel binding and idle render suspension",
+      "320/390/768/1440 layouts and safe viewport resizing",
+      "manual static mode, complete content, clean remount, runtime reduced-motion teardown",
+      "all mobile waypoint screenshots, six mobile domains, native touch travel and context-loss fallback",
+      "reduced-motion, no-JavaScript and no-WebGL all expose the complete static document",
+      "no uncaught runtime errors or failed asset requests"
+    ],
+    "errors": [],
+    "requests": [],
+    "waypoints": [
+      {
+        "id": "hero",
+        "progress": 0,
+        "position": [
+          0,
+          4,
+          18
+        ],
+        "box": {
+          "x": 160,
+          "y": 188.3984375,
+          "width": 1120,
+          "height": 523.203125
+        },
+        "calls": 5,
+        "triangles": 4436
+      },
+      {
+        "id": "about",
+        "progress": 0.08333333333333333,
+        "position": [
+          3.1934220592889977,
+          4.5149961339448,
+          -19.963560303773395
+        ],
+        "box": {
+          "x": 195,
+          "y": 226.109375,
+          "width": 1050,
+          "height": 447.78125
+        },
+        "calls": 5,
+        "triangles": 4436
+      },
+      {
+        "id": "p-nestfetch",
+        "progress": 0.16666666666666666,
+        "position": [
+          2.6070378481151817,
+          4.788480468463291,
+          -58.05227536953128
+        ],
+        "box": {
+          "x": 719.199951171875,
+          "y": 186.4765625,
+          "width": 520,
+          "height": 527.046875
+        },
+        "calls": 5,
+        "triangles": 4436
+      },
+      {
+        "id": "p-gamenest",
+        "progress": 0.25,
+        "position": [
+          -1.0606702062992226,
+          4.690714983356488,
+          -95.97846984244693
+        ],
+        "box": {
+          "x": 200.79998779296875,
+          "y": 186.4765625,
+          "width": 520,
+          "height": 527.046875
+        },
+        "calls": 5,
+        "triangles": 4436
+      },
+      {
+        "id": "p-spin",
+        "progress": 0.3333333333333333,
+        "position": [
+          -3.4778942377421727,
+          4.268023493159438,
+          -133.99741989832927
+        ],
+        "box": {
+          "x": 719.199951171875,
+          "y": 186.4765625,
+          "width": 520,
+          "height": 527.046875
+        },
+        "calls": 5,
+        "triangles": 4436
+      },
+      {
+        "id": "p-sonorus",
+        "progress": 0.4166666666666667,
+        "position": [
+          -1.7752465725624118,
+          3.7187193938218863,
+          -172.05147671244836
+        ],
+        "box": {
+          "x": 200.79998779296875,
+          "y": 186.4765625,
+          "width": 520,
+          "height": 527.046875
+        },
+        "calls": 5,
+        "triangles": 4436
+      },
+      {
+        "id": "p-sonic",
+        "progress": 0.5,
+        "position": [
+          2.0220353830985545,
+          3.3029819755703125,
+          -209.9634998484822
+        ],
+        "box": {
+          "x": 719.199951171875,
+          "y": 186.4765625,
+          "width": 520,
+          "height": 527.046875
+        },
+        "calls": 5,
+        "triangles": 4436
+      },
+      {
+        "id": "p-formqa",
+        "progress": 0.5833333333333334,
+        "position": [
+          3.432439629301277,
+          3.214120402157718,
+          -248.03259354963552
+        ],
+        "box": {
+          "x": 200.79998779296875,
+          "y": 186.4765625,
+          "width": 520,
+          "height": 527.046875
+        },
+        "calls": 5,
+        "triangles": 4436
+      },
+      {
+        "id": "p-sessionlab",
+        "progress": 0.6666666666666666,
+        "position": [
+          0.7770163495781954,
+          3.495384198440418,
+          -286.03777991540466
+        ],
+        "box": {
+          "x": 719.199951171875,
+          "y": 157.84375,
+          "width": 520,
+          "height": 584.3125
+        },
+        "calls": 5,
+        "triangles": 4436
+      },
+      {
+        "id": "p-portfolio",
+        "progress": 0.75,
+        "position": [
+          -2.794092956762643,
+          4.013036082309469,
+          -323.96939929831984
+        ],
+        "box": {
+          "x": 200.79998779296875,
+          "y": 168.0390625,
+          "width": 520,
+          "height": 563.921875
+        },
+        "calls": 5,
+        "triangles": 4436
+      },
+      {
+        "id": "p-aqila",
+        "progress": 0.8333333333333334,
+        "position": [
+          -3.061677380866277,
+          4.526193797414758,
+          -362.0591017758094
+        ],
+        "box": {
+          "x": 719.199951171875,
+          "y": 186.4765625,
+          "width": 520,
+          "height": 527.046875
+        },
+        "calls": 5,
+        "triangles": 4436
+      },
+      {
+        "id": "arsenal",
+        "progress": 0.9166666666666666,
+        "position": [
+          0.29336366026735655,
+          4.790559405067748,
+          -400.0119596057897
+        ],
+        "box": {
+          "x": 160,
+          "y": 155.5,
+          "width": 1120,
+          "height": 589
+        },
+        "calls": 9,
+        "triangles": 5404
+      },
+      {
+        "id": "contact",
+        "progress": 1,
+        "position": [
+          3.3029348430543646,
+          4.683679126470627,
+          -438
+        ],
+        "box": {
+          "x": 200,
+          "y": 165.21875,
+          "width": 1040,
+          "height": 569.5625
+        },
+        "calls": 5,
+        "triangles": 4436
+      }
+    ],
+    "a11y": [
+      {
+        "name": "desktop hero",
+        "violations": []
+      },
+      {
+        "name": "desktop p-nestfetch",
+        "violations": []
+      },
+      {
+        "name": "desktop arsenal",
+        "violations": []
+      },
+      {
+        "name": "desktop contact",
+        "violations": []
+      },
+      {
+        "name": "mobile Skills",
+        "violations": []
+      },
+      {
+        "name": "reduced fallback",
+        "violations": []
+      },
+      {
+        "name": "no-webgl fallback",
+        "violations": []
+      }
+    ],
+    "passed": true,
+    "browser": "153.0.8010.36"
+  },
+  "prototypeRegression": {
+    "date": "2026-09-15T13:47:27.864Z",
+    "url": "http://127.0.0.1:4175/porto/prototype/",
+    "checks": [
+      "continuous camera path, five stops, reversible travel, bounded geometry",
+      "real wheel input drives scroll position and camera progress",
+      "demand rendering stops when camera is idle",
+      "waypoint navigation and native keyboard scrolling",
+      "320–1440 px layout and automated WCAG A/AA checks",
+      "manual static view, cleanup, and clean 3D remount",
+      "changing OS motion preference tears down the 3D scene",
+      "reduced-motion first load has complete static content and no WebGL runtime",
+      "static export is readable without JavaScript",
+      "emulated native touch scrolling moves the camera without a scroll trap",
+      "live WebGL context loss releases the scene and exposes static content",
+      "WebGL failure falls back to complete static content",
+      "no uncaught runtime errors or failed requests"
+    ],
+    "errors": [],
+    "failedRequests": [],
+    "waypoints": [
+      {
+        "progress": 0,
+        "position": [
+          0,
+          3.3,
+          18
+        ],
+        "direction": [
+          0.000042449127823091006,
+          -0.02000660921918485,
+          -0.9997998468621719
+        ]
+      },
+      {
+        "progress": 0.25,
+        "position": [
+          -1.815718312913292,
+          3.135424708759007,
+          -14.335747473600787
+        ],
+        "direction": [
+          -0.10257148454366878,
+          0.01722470863775191,
+          -0.99457649277009
+        ]
+      },
+      {
+        "progress": 0.5,
+        "position": [
+          2.7972005468810592,
+          3.471742317306708,
+          -45.93310639274732
+        ],
+        "direction": [
+          0.13828212819931515,
+          -0.019494854138897698,
+          -0.9902009915581641
+        ]
+      },
+      {
+        "progress": 0.75,
+        "position": [
+          -1.4547110926075897,
+          3.490105379417823,
+          -77.67897091517075
+        ],
+        "direction": [
+          -0.14740603746217112,
+          0.030646973831666022,
+          -0.988601144605175
+        ]
+      },
+      {
+        "progress": 1,
+        "position": [
+          -2.220446049250313e-16,
+          4.6,
+          -110
+        ],
+        "direction": [
+          0.0933326483095845,
+          0.031095920899247925,
+          -0.9951492654184836
+        ]
+      }
+    ],
+    "axe": [],
+    "browser": "153.0.8010.36"
+  },
+  "files": [
+    {
+      "path": "app/page.tsx",
+      "sha256": "729c33e625903940e3be0928595e1f419490419d86a90d73ba6491115149cef1"
+    },
+    {
+      "path": "app/portfolio.css",
+      "sha256": "67153a7cd1ca907a32fcd8b6ecaaea3213d7a55aae603539661ca2f75d01b3c3"
+    },
+    {
+      "path": "app/layout.tsx",
+      "sha256": "d89bd4ef1035502174db85ee882d344121c045204330724324e0050cbbb8232e"
+    },
+    {
+      "path": "app/globals.css",
+      "sha256": "6b7c0207cfb6fc1da914ceb3d0c8b30fec67b6dfff27b12d6ea25c2cb81505ba"
+    },
+    {
+      "path": "components/portfolio/Portfolio.tsx",
+      "sha256": "d9805087bb6849ca2fad3030637cdc102920c2ad3cd4c0d53fb1f385809a537f"
+    },
+    {
+      "path": "components/portfolio/PortfolioWorld.tsx",
+      "sha256": "7a3aa7d7418eb6f98e5baa4b2763033179bf947d5861077b7c77296371174850"
+    },
+    {
+      "path": "components/portfolio/ProjectPanel.tsx",
+      "sha256": "0d23ee49356f6e2b0d4ed0b9f6308951153042a93f9e3ace7939146e57544cb3"
+    },
+    {
+      "path": "components/portfolio/Skills.tsx",
+      "sha256": "90af9b160b988a62665ef9d93351c2121e81e930ef8109f858693c96bce1f079"
+    },
+    {
+      "path": "components/prototype/CameraWorld.tsx",
+      "sha256": "6a96baf6f8f327d6cb7be565d1e3f532d526941952400ae36736f0bbc62dc011"
+    },
+    {
+      "path": "lib/camera-study.ts",
+      "sha256": "5a39bbde37a0c489f58fe9ea7d7584e14155adc73af287551056ed203ff223f9"
+    },
+    {
+      "path": "lib/portfolio.ts",
+      "sha256": "9a09dbd374eda0192a3ce1d9bef5a9845b469ae9ad1f339b923e9a449fbff506"
+    },
+    {
+      "path": "lib/portfolio-content.json",
+      "sha256": "ae4b6acca68ceebf803e44e40554043666151327219b46a1bd012dc1813782ae"
+    },
+    {
+      "path": "lib/sample-camera-curve.ts",
+      "sha256": "ab58f48990cbe57e7a19d43ef1f2c369c054162724cf3c10f49e2cfa8854587b"
+    },
+    {
+      "path": "tests/portfolio.mjs",
+      "sha256": "6ad862b44fe57e4b70f0933842bc23e49711d680111e2274a310f9c8c7a46c1e"
+    },
+    {
+      "path": "tests/camera-sampling.mjs",
+      "sha256": "a5ee0d42901a265301f074e0cc739927089600e52e93bb9db9bbc0878a96329f"
+    },
+    {
+      "path": "tests/camera-benchmark.mjs",
+      "sha256": "e6509a8d99aee3c5aaf7f3a9cdb891ced05fead5925dceeed3c2fda66d04d032"
+    },
+    {
+      "path": "tests/camera-browser.mjs",
+      "sha256": "c9783f351e015a59f48e48baced93116d7cd0a015f7bbae5fdd1d8cde75efecb"
+    },
+    {
+      "path": "tests/preserved-content.mjs",
+      "sha256": "cac77b0176c72208b9ce4d5716574052160b3fc10caf6d9a1de18ed00870d7cf"
+    },
+    {
+      "path": "package.json",
+      "sha256": "cab03b7cb9681667be818606aa9e888ac98d2e2a6d39d8b9df9ad66a6063f1e2"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "39c22a823615eb690b73e06dd60d4661c71d5fe4045f1903ff4cf69a38f369db"
+    },
+    {
+      "path": "next.config.ts",
+      "sha256": "438315fdd583d0a54fa0a290bce007545b1032dc097882016c0ab9cf00bb125c"
+    },
+    {
+      "path": "next-env.d.ts",
+      "sha256": "1862ac4bbbc5192d4bf562161df66ea547ed3e67173100656ab606ae9797db2b"
+    },
+    {
+      "path": "scripts/preview.mjs",
+      "sha256": "c95e3dec89231e28b8b4e854d12d29c42ca6a6888bed001c58b9b09633ccaeb3"
+    },
+    {
+      "path": "docs/audit/skills-verbatim.json",
+      "sha256": "681d072fca10beb1a344e73f93afbbf9f4ef3e28f56e89cfa96b6f9594c002ea"
+    }
+  ],
+  "screenshots": [
+    {
+      "name": "desktop-00-hero.png",
+      "bytes": 191020,
+      "sha256": "91bf4abb7a4f22e91b451a3729c35885e47d226ebd37b1aeabfff166a73a8c5f"
+    },
+    {
+      "name": "desktop-01-about.png",
+      "bytes": 190235,
+      "sha256": "687e029fea652a6ad7f4786dc935bab433756f6bffe8302dac28be22ad953892"
+    },
+    {
+      "name": "desktop-02-p-nestfetch.png",
+      "bytes": 70266,
+      "sha256": "1a2783d3f9ccf14ec0fe2cc23c09b7acb091adec9918801dd6a512dd1628d9a3"
+    },
+    {
+      "name": "desktop-03-p-gamenest.png",
+      "bytes": 77847,
+      "sha256": "fa903443b3fd71269f3614a5c51c98846ccc3760656f15b8c78cf761560d2eeb"
+    },
+    {
+      "name": "desktop-04-p-spin.png",
+      "bytes": 83446,
+      "sha256": "78b971eaadcb3ee9728f7730ff97f1430540e819e61377292037c94f006e58d1"
+    },
+    {
+      "name": "desktop-05-p-sonorus.png",
+      "bytes": 72097,
+      "sha256": "1b45db2aca2f37e8aafff068aab59dcd82a6a49877fa121d7db63981d12c2140"
+    },
+    {
+      "name": "desktop-06-p-sonic.png",
+      "bytes": 71443,
+      "sha256": "3d9784fa39448f1af1de0e76d2a53f56031e2a4a4ab2f6c85c29823849c9bcda"
+    },
+    {
+      "name": "desktop-07-p-formqa.png",
+      "bytes": 72118,
+      "sha256": "206bec0cad07486b978d46704ea7ad12f254bad126526dbc6c8ea1ae1a99b1ab"
+    },
+    {
+      "name": "desktop-08-p-sessionlab.png",
+      "bytes": 82525,
+      "sha256": "d46cb6f37eb0dc55d6fc6d87b87372008340d49d91dc98e4a73df16ae6378bc9"
+    },
+    {
+      "name": "desktop-09-p-portfolio.png",
+      "bytes": 77461,
+      "sha256": "c8380b25aa476bcb40b1b0c2739159d9d2ba86e3cd1d4f33cdb0f18037989061"
+    },
+    {
+      "name": "desktop-10-p-aqila.png",
+      "bytes": 63744,
+      "sha256": "21b0dbaf672a4cacddb64a848dfd782cbe856b0afe0074c69f6743adfb30c209"
+    },
+    {
+      "name": "desktop-11-arsenal.png",
+      "bytes": 104622,
+      "sha256": "024476a5987182b44df90c6a8eca7dd05d506af2450afb035ecab62d8d255e5b"
+    },
+    {
+      "name": "desktop-12-contact.png",
+      "bytes": 224312,
+      "sha256": "2ce00444ad41537076e615520a335ad0ceceab12d788b53257f195ef9cb4033f"
+    },
+    {
+      "name": "fallback-no-js.png",
+      "bytes": 412692,
+      "sha256": "4450736a5189f2cde7eab3a8773ef07d96e06db941192b000999e7f9b6e920ac"
+    },
+    {
+      "name": "fallback-no-webgl.png",
+      "bytes": 414052,
+      "sha256": "4a3c1a457d8214efe31d089a2f70b4be23eb5e5eba569862a13427c389658ef0"
+    },
+    {
+      "name": "fallback-reduced.png",
+      "bytes": 413105,
+      "sha256": "c96ab398571cb20978d9270728e6f246623ca4c8ce7a5e9655c5e5da1f55f8a7"
+    },
+    {
+      "name": "mobile-00-hero.png",
+      "bytes": 224283,
+      "sha256": "03dca0c6322fa97a5eaee0432cbf310491f5946eb5b9db4429da94ce6706ce53"
+    },
+    {
+      "name": "mobile-01-about.png",
+      "bytes": 231110,
+      "sha256": "835261e3f3437ae47cd5cf25ebbad8933fab6af9307154fff2407db2dd775f82"
+    },
+    {
+      "name": "mobile-02-p-nestfetch.png",
+      "bytes": 69342,
+      "sha256": "f99542224c0f53a51ed14e501011d96ce1169e5332f28bc483692bb72458e952"
+    },
+    {
+      "name": "mobile-03-p-gamenest.png",
+      "bytes": 78788,
+      "sha256": "580d33bbb061dbec5df71c3200115885a43a5f126365f72e9274575e82d5e64b"
+    },
+    {
+      "name": "mobile-04-p-spin.png",
+      "bytes": 89014,
+      "sha256": "2b44ea26091cc48a9b233018237849df26793ff947997d428a41d3685f492a1f"
+    },
+    {
+      "name": "mobile-05-p-sonorus.png",
+      "bytes": 74507,
+      "sha256": "ae9f096b556d4be21e050ec69070aa388967e0c633fd020f53dd18989d68efc0"
+    },
+    {
+      "name": "mobile-06-p-sonic.png",
+      "bytes": 76385,
+      "sha256": "e60c77c21cd222c281e6d3f4c8936031a690e1e23eeacf07d8ad86df5a5c0cd5"
+    },
+    {
+      "name": "mobile-07-p-formqa.png",
+      "bytes": 80183,
+      "sha256": "4ac599f55c83bb4a2c795b44b7f3de77b890a0a879217b21114a8cd601d3f3dc"
+    },
+    {
+      "name": "mobile-08-p-sessionlab.png",
+      "bytes": 85427,
+      "sha256": "63c1d729f49e9760fb6a25811ce81f1a13d410d1f09d2da36e3c1e2a606042de"
+    },
+    {
+      "name": "mobile-09-p-portfolio.png",
+      "bytes": 77043,
+      "sha256": "9dcb59018a78dcb39dc35292a79ab35d1a538c17f94be22f19966b7439802cd2"
+    },
+    {
+      "name": "mobile-10-p-aqila.png",
+      "bytes": 80303,
+      "sha256": "5974e0e123f965715aedb62ec0e9f477ddec9a313fff0e51dc791dbb7786706e"
+    },
+    {
+      "name": "mobile-11-arsenal.png",
+      "bytes": 130462,
+      "sha256": "451f4c277aa51b79fcaeb503922e318bde23d9da1938f30a734d1df3129d3363"
+    },
+    {
+      "name": "mobile-12-contact.png",
+      "bytes": 202755,
+      "sha256": "2862ab6cb81fff48e364b05e6b1b2d1ec9ac1f750316d442063022ddabe47532"
+    },
+    {
+      "name": "skills-ai.png",
+      "bytes": 107666,
+      "sha256": "6e08d3d627a36624d730f48370ca5de8f58e37b2971aac56c5e4f6d1f1a587df"
+    },
+    {
+      "name": "skills-auto.png",
+      "bytes": 108209,
+      "sha256": "7ee1293b82f6bc0150fe72da2bf2ebb53c6773563c5f325aa70aa435b8efcc36"
+    },
+    {
+      "name": "skills-eng.png",
+      "bytes": 110207,
+      "sha256": "08df914bc8f0e476bbf7696ce7f403aa97bbc0d52b33bcd7da8efa3fbccecba4"
+    },
+    {
+      "name": "skills-lang.png",
+      "bytes": 104622,
+      "sha256": "024476a5987182b44df90c6a8eca7dd05d506af2450afb035ecab62d8d255e5b"
+    },
+    {
+      "name": "skills-sys.png",
+      "bytes": 105603,
+      "sha256": "4aa1832bfed02cfcea327b1302a3e9fe21364a7556d5c49a326edf6373aa7f3a"
+    },
+    {
+      "name": "skills-web.png",
+      "bytes": 105527,
+      "sha256": "8a79aae3d12316dd6c929683950f7864bd2b278f392c6ea570b686f7a142bf58"
+    }
+  ],
+  "limitations": [
+    "One final 35.5 ms mobile interval remains; nominal-60 result is not locked 60 fps.",
+    "GC evidence is from a separate diagnostic run, not a trace of the final run.",
+    "No Lighthouse, physical mobile/Firefox QA, push, or deploy in Phase 2."
+  ]
+}
