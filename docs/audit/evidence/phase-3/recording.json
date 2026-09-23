@@ -1,0 +1,13 @@
+{
+  "file": "test-results/gate-3/camera-scroll.mp4",
+  "method": "Chrome DevTools screencast, JPEG frames with capture timestamps, resampled by system FFmpeg",
+  "viewport": {
+    "width": 1280,
+    "height": 800
+  },
+  "scrollDurationSeconds": 30,
+  "encodedFps": 30,
+  "capturedScreenFrames": 1831,
+  "encodedFrames": 943,
+  "note": "30 fps screen recording for visual review, not the separately measured 60 fps render benchmark."
+}

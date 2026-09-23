@@ -16,6 +16,7 @@ export type CameraWorldProps = {
   onFailure: () => void;
   onProgress: (progress: number) => void;
   path?: CatmullRomCurve3;
+  pointerParallax?: boolean;
   children?: ReactNode;
   onFrame?: (camera: Camera, width: number, height: number, progress: number) => void;
 };
@@ -117,7 +118,7 @@ function Architecture() {
   </>;
 }
 
-function CameraRig({ track, onReady, onFailure, onProgress, path = PATH, onFrame }: CameraWorldProps) {
+function CameraRig({ track, onReady, onFailure, onProgress, path = PATH, onFrame, pointerParallax = false }: CameraWorldProps) {
   const { camera, gl, advance, size } = useThree();
   const needsFrame = useRef(true);
   const progress = useRef(0);
@@ -126,7 +127,8 @@ function CameraRig({ track, onReady, onFailure, onProgress, path = PATH, onFrame
   const frameTimes = useRef<number[]>([]);
   const samples = useRef<CameraReading["samples"]>([]);
   const lastFrame = useRef(0);
-  const vectors = useMemo(() => ({ eye: new Vector3(), direction: new Vector3(), target: new Vector3(), before: new Vector3(), after: new Vector3() }), []);
+  const vectors = useMemo(() => ({ eye: new Vector3(), direction: new Vector3(), target: new Vector3(), before: new Vector3(), after: new Vector3(), right: new Vector3(), up: new Vector3(0, 1, 0) }), []);
+  const pointer = useRef({ x: 0, y: 0 });
 
   useEffect(() => { needsFrame.current = true; }, [size.width, size.height]);
 
@@ -134,6 +136,10 @@ function CameraRig({ track, onReady, onFailure, onProgress, path = PATH, onFrame
     const p = progress.current;
     sampleCameraCurve(path, p, vectors);
     camera.position.copy(vectors.eye);
+    if (pointerParallax) {
+      vectors.right.crossVectors(vectors.direction, vectors.up).normalize();
+      camera.position.addScaledVector(vectors.right, pointer.current.x).addScaledVector(vectors.up, pointer.current.y);
+    }
     vectors.target.copy(vectors.eye).addScaledVector(vectors.direction, 12);
     camera.lookAt(vectors.target);
     camera.updateMatrixWorld();
@@ -151,7 +157,8 @@ function CameraRig({ track, onReady, onFailure, onProgress, path = PATH, onFrame
     if (!track.current) return;
     gsap.registerPlugin(ScrollTrigger);
     const element = track.current;
-    const lenis = new Lenis({ autoRaf: false, smoothWheel: true, syncTouch: false, duration: 1.05 });
+    const host = element.closest<HTMLElement>("[data-scene-status]");
+    const lenis = new Lenis({ autoRaf: false, smoothWheel: true, syncTouch: false, duration: 1.05, allowNestedScroll: true });
     const update = (value: number) => {
       progress.current = value;
       onProgress(value);
@@ -168,6 +175,9 @@ function CameraRig({ track, onReady, onFailure, onProgress, path = PATH, onFrame
     // One frame clock: scroll, camera and WebGL render in the same GSAP tick.
     // Queuing a separate demand RAF can halve delivery to 30 fps.
     const tick = (seconds: number) => {
+      // R3F disposal can lag the parent commit. Never project/inert panels
+      // again once the parent has switched to the accessible static document.
+      if (host && !host.classList.contains("is-cinematic")) return;
       lenis.raf(seconds * 1000);
       if (needsFrame.current && !document.hidden) {
         needsFrame.current = false;
@@ -176,6 +186,25 @@ function CameraRig({ track, onReady, onFailure, onProgress, path = PATH, onFrame
     };
     gsap.ticker.add(tick);
     gsap.ticker.lagSmoothing(0);
+
+    // Reusable tweens only run while the pointer settles. Moving the actual
+    // camera produces depth-based parallax, with no persistent idle RAF.
+    const finePointer = matchMedia("(pointer: fine) and (min-width: 761px)");
+    const markDirty = () => { needsFrame.current = true; };
+    const xTo = pointerParallax ? gsap.quickTo(pointer.current, "x", { duration: .42, ease: "power3.out", onUpdate: markDirty }) : null;
+    const yTo = pointerParallax ? gsap.quickTo(pointer.current, "y", { duration: .42, ease: "power3.out", onUpdate: markDirty }) : null;
+    const movePointer = (event: PointerEvent) => {
+      if (!finePointer.matches || event.pointerType === "touch" || (event.target instanceof Element && event.target.closest("dialog"))) return;
+      xTo?.((event.clientX / innerWidth - .5) * .7);
+      yTo?.((.5 - event.clientY / innerHeight) * .4);
+    };
+    const resetPointer = () => { xTo?.(0); yTo?.(0); };
+    if (pointerParallax) {
+      window.addEventListener("pointermove", movePointer, { passive: true });
+      document.documentElement.addEventListener("pointerleave", resetPointer);
+      window.addEventListener("blur", resetPointer);
+      finePointer.addEventListener("change", resetPointer);
+    }
 
     const webgl = gl.getContext();
     const extension = webgl.getExtension("WEBGL_debug_renderer_info");
@@ -197,13 +226,13 @@ function CameraRig({ track, onReady, onFailure, onProgress, path = PATH, onFrame
     const debug: CameraDebug = {
       read,
       redraw: () => { needsFrame.current = true; },
-      travel: (value, seconds = 0) => new Promise<void>((resolve) => {
+      travel: (value, seconds = 0, easing = "linear") => new Promise<void>((resolve) => {
         const complete = () => { pending.delete(complete); resolve(); };
         pending.add(complete);
         lenis.scrollTo(trigger.start + (trigger.end - trigger.start) * Math.max(0, Math.min(1, value)), {
           immediate: seconds === 0,
           duration: seconds || 1,
-          easing: (t) => t,
+          easing: easing === "smooth" ? (t) => t * t * (3 - 2 * t) : (t) => t,
           force: true,
           onComplete: complete,
         });
@@ -217,13 +246,23 @@ function CameraRig({ track, onReady, onFailure, onProgress, path = PATH, onFrame
       if (document.hidden) gsap.ticker.remove(tick);
       else { gsap.ticker.add(tick); lenis.resize(); trigger.refresh(); needsFrame.current = true; }
     };
-    const lost = (event: Event) => { event.preventDefault(); onFailure(); };
+    const lost = (event: Event) => {
+      event.preventDefault();
+      gsap.ticker.remove(tick);
+      lenis.stop();
+      onFailure();
+    };
     document.addEventListener("visibilitychange", visibility);
     gl.domElement.addEventListener("webglcontextlost", lost, false);
     const refresh = requestAnimationFrame(() => { lenis.resize(); trigger.refresh(); onReady(); });
 
     return () => {
       cancelAnimationFrame(refresh);
+      xTo?.tween.kill(); yTo?.tween.kill();
+      window.removeEventListener("pointermove", movePointer);
+      document.documentElement.removeEventListener("pointerleave", resetPointer);
+      window.removeEventListener("blur", resetPointer);
+      finePointer.removeEventListener("change", resetPointer);
       capture.current = false;
       gsap.ticker.remove(tick);
       gsap.ticker.lagSmoothing(500, 33);
@@ -235,7 +274,7 @@ function CameraRig({ track, onReady, onFailure, onProgress, path = PATH, onFrame
       if (window.__MIDNIGHT_CAMERA__ === debug) delete window.__MIDNIGHT_CAMERA__;
       pending.forEach((finish) => finish());
     };
-  }, [track, camera, gl, advance, onReady, onFailure, onProgress, vectors]);
+  }, [track, camera, gl, advance, onReady, onFailure, onProgress, vectors, pointerParallax]);
 
   return null;
 }

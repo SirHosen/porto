@@ -1,0 +1,90 @@
+{
+  "date": "2026-09-23T01:43:55.040Z",
+  "url": "http://127.0.0.1:4175/porto/prototype/",
+  "checks": [
+    "continuous camera path, five stops, reversible travel, bounded geometry",
+    "real wheel input drives scroll position and camera progress",
+    "demand rendering stops when camera is idle",
+    "waypoint navigation and native keyboard scrolling",
+    "320–1440 px layout and automated WCAG A/AA checks",
+    "manual static view, cleanup, and clean 3D remount",
+    "changing OS motion preference tears down the 3D scene",
+    "reduced-motion first load has complete static content and no WebGL runtime",
+    "static export is readable without JavaScript",
+    "emulated native touch scrolling moves the camera without a scroll trap",
+    "live WebGL context loss releases the scene and exposes static content",
+    "WebGL failure falls back to complete static content",
+    "no uncaught runtime errors or failed requests"
+  ],
+  "errors": [],
+  "failedRequests": [],
+  "waypoints": [
+    {
+      "progress": 0,
+      "position": [
+        0,
+        3.3,
+        18
+      ],
+      "direction": [
+        0.000042449127823091006,
+        -0.02000660921918485,
+        -0.9997998468621719
+      ]
+    },
+    {
+      "progress": 0.25,
+      "position": [
+        -1.815718312913292,
+        3.135424708759007,
+        -14.335747473600787
+      ],
+      "direction": [
+        -0.10257148454366878,
+        0.01722470863775191,
+        -0.99457649277009
+      ]
+    },
+    {
+      "progress": 0.5,
+      "position": [
+        2.7972005468810592,
+        3.471742317306708,
+        -45.93310639274732
+      ],
+      "direction": [
+        0.13828212819931515,
+        -0.019494854138897698,
+        -0.9902009915581641
+      ]
+    },
+    {
+      "progress": 0.75,
+      "position": [
+        -1.4547110926075897,
+        3.490105379417823,
+        -77.67897091517075
+      ],
+      "direction": [
+        -0.14740603746217112,
+        0.030646973831666022,
+        -0.988601144605175
+      ]
+    },
+    {
+      "progress": 1,
+      "position": [
+        -2.220446049250313e-16,
+        4.6,
+        -110
+      ],
+      "direction": [
+        0.0933326483095845,
+        0.031095920899247925,
+        -0.9951492654184836
+      ]
+    }
+  ],
+  "axe": [],
+  "browser": "153.0.8010.52"
+}

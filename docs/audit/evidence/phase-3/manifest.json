@@ -1,0 +1,280 @@
+{
+  "phase": 3,
+  "status": "Awaiting explicit Gate 3 confirmation; no Phase 4, push or deploy",
+  "capturedAt": "2026-09-23T01:48:13.273Z",
+  "camera": "Continuous path on desktop and mobile; no discrete-scene fallback",
+  "hardware": {
+    "cpu": "Intel Core i3-1115G4, 2 cores / 4 threads",
+    "gpu": "Mesa Intel UHD TGL GT2",
+    "os": "Linux"
+  },
+  "sourceHashes": {
+    "app/layout.tsx": "72ed050053df354de7620853ebee58567d5cc56e1b552fd208e9df95bf2c3735",
+    "app/page.tsx": "52e42d4f591dd928676c4ef6e53c9784bdece280cf5ee1aeb5bb35231406dd31",
+    "app/globals.css": "6b7c0207cfb6fc1da914ceb3d0c8b30fec67b6dfff27b12d6ea25c2cb81505ba",
+    "app/portfolio.css": "3d93c71d8d41156fd3a8de761a13f54079590e3e448426d17d175e69eecd69cb",
+    "app/explorer.css": "06d41d1f5445d24303eebf2a12f90f779032283a1402a878eb3878ba10890d1d",
+    "app/spatial.css": "aefbe4ef820e457c72da7868f7b65d2a132482e43efc217fbb0a0206997777ba",
+    "components/portfolio/Portfolio.tsx": "5901bf5646b8146fd88c289996b8f9504a9cbbc0c69dab163052f8318a04b36a",
+    "components/portfolio/PortfolioWorld.tsx": "0bb92ddef19612c26d9be6cf12d568f8e666db3fa267ad9ff60d63afc725bc2d",
+    "components/portfolio/ProjectPanel.tsx": "4964cdfed77b2bb1dc35463292da60bb49e3d263d4d0219e01367a4c83e38b75",
+    "components/portfolio/ProjectArtwork.tsx": "d9d08862b4f5bb4e9db02a1f31a8d55d084de0c2c71ce543178522e21b537f3d",
+    "components/portfolio/SpatialObjects.tsx": "e1e0c7c2d50a02d942a6ba494418610b941c6163912826cabeebd237c2a24448",
+    "components/portfolio/Skills.tsx": "4a1ccd91e3246dbfbc97f2859a59e60fe9866f0d18da3c28e19d454387cdd2c3",
+    "components/portfolio/TechIcon.tsx": "88816f018ce9a4cfdb8d89af63ee29c535a87ccb68c608f20cab26d1146de6ac",
+    "components/portfolio/WorkExplorer.tsx": "57ecee9f6a4e17d00a0fd8596445d5c3911f52ee6ab9b24cc0b180f018e6b39e",
+    "components/prototype/CameraWorld.tsx": "b0d3b105bbca1adee87d060ecbfe5bbfc996d4cd3dfd1fc8c79ac5778a67f8e0",
+    "components/prototype/CameraStudy.tsx": "5da427c49d8aa329cb209b20ea00b68ccffa334fc193c33b7ee8887e8fb44255",
+    "lib/portfolio.ts": "9a7667ed52a16cf3c5f7c963bce335b904c91a1596002a695c152f95e54e4fe2",
+    "lib/portfolio-content.json": "ae4b6acca68ceebf803e44e40554043666151327219b46a1bd012dc1813782ae",
+    "lib/camera-study.ts": "60bbbb2bf5f52a239ed1b181723ec99e657f0b5a86a8fa06f58025466af4081d",
+    "lib/sample-camera-curve.ts": "ab58f48990cbe57e7a19d43ef1f2c369c054162724cf3c10f49e2cfa8854587b",
+    "lib/tech-logos.json": "c5d0357117ea5c7b7dbb3bbe0d46a25a5a8fbf5fe6a409518f99e02e4bb42997",
+    "package.json": "11cf77a2bdfe7440a1221fbd3c3f504dad8e75bab6d9ddbe556b753f71dc6bc3",
+    "package-lock.json": "39c22a823615eb690b73e06dd60d4661c71d5fe4045f1903ff4cf69a38f369db",
+    "next.config.ts": "438315fdd583d0a54fa0a290bce007545b1032dc097882016c0ab9cf00bb125c",
+    "public/tech/riverpod.svg": "305e670af5e55404329bcc9aadc9d5e279294d4602938c0882f34c641cc45658",
+    "public/tech/LICENSE-riverpod.txt": "318828383ee1202dd532368d86ad0bba448a722a5a083d57db916b72cf2c4df3",
+    "tests/portfolio.mjs": "a7d584d181671798e1d45a6289157ecc9141520e7a7fb72b11ad92509672811b",
+    "tests/work-explorer.mjs": "fd3638fe73da2572f950bd1dc43a5ef5b0babb1d206a06fb9225ad1065bb8504",
+    "tests/spatial-layout.mjs": "4a5f5911265f083f5fb4ef59407c36224a479ae7356d5167fdfc6188e7507c66",
+    "tests/camera-path.mjs": "d86f6e66252b47fbe090fabd39119f0bbeaacd196c00ca1ceed0e1caef9b802f",
+    "tests/camera-browser.mjs": "c9783f351e015a59f48e48baced93116d7cd0a015f7bbae5fdd1d8cde75efecb",
+    "tests/camera-benchmark.mjs": "e6509a8d99aee3c5aaf7f3a9cdb891ced05fead5925dceeed3c2fda66d04d032",
+    "tests/camera-record.mjs": "bb172aefd94a7bf98b18329e5ac07a438cfebb3d2e9243488eb05b6e15b77c1b",
+    "tests/preserved-content.mjs": "cac77b0176c72208b9ce4d5716574052160b3fc10caf6d9a1de18ed00870d7cf",
+    "tests/camera-sampling.mjs": "a5ee0d42901a265301f074e0cc739927089600e52e93bb9db9bbc0878a96329f"
+  },
+  "artifacts": {
+    "benchmark.json": {
+      "bytes": 112803,
+      "sha256": "337df6a3fa4e1814e6f1dfc4ac4a804e26edab7608d9cbfcd493bfac35d598d0"
+    },
+    "camera-scroll.mp4": {
+      "bytes": 8163587,
+      "sha256": "432ecf5d78bd8fb288d4b7955c5f8259e2e5677e94a1e54ab36856f0beb830fc"
+    },
+    "checks.json": {
+      "bytes": 6149,
+      "sha256": "f591f2c7048b11a802af54b6b95e7087d653aaae9bfc627c6a1b380a513f7bbc"
+    },
+    "desktop-00-hero.png": {
+      "bytes": 130238,
+      "sha256": "06c42193c1195efaafba1bfade745ef96fdf7e4c9e453f2cf269ad904e602754"
+    },
+    "desktop-01-about.png": {
+      "bytes": 150417,
+      "sha256": "88edcc7aa3e1820bc4fc8ed3d10f89429070b0c7866b80ae62195539fa51366f"
+    },
+    "desktop-02-p-nestfetch.png": {
+      "bytes": 152404,
+      "sha256": "7b4acad0d64baed5adc77aa777df0ab7951a91f221a95f5652f82ff14bdd7803"
+    },
+    "desktop-03-p-gamenest.png": {
+      "bytes": 140616,
+      "sha256": "7d2f10474c63fd3fdcb66a3d40c97cab6411fa01522724a6727b718a26c06c00"
+    },
+    "desktop-04-p-spin.png": {
+      "bytes": 130716,
+      "sha256": "8ece01f1a3a3ffdd3d7204fc1255ef631d31a170c4e852eed52b5d5704c4e713"
+    },
+    "desktop-05-p-sonorus.png": {
+      "bytes": 165490,
+      "sha256": "1f047e13154c122dce2939bf68f124dc3af6d7d68b9a682a665149908b99aff7"
+    },
+    "desktop-06-p-sonic.png": {
+      "bytes": 141623,
+      "sha256": "324cd82b4b763831f79aaba8d27c55d2b3089b38f0e281d0343bb23815f12017"
+    },
+    "desktop-07-p-formqa.png": {
+      "bytes": 137912,
+      "sha256": "2461edf5152bb297e3a59d1140e84340c18f8bf3658da987bfd8b6d2a617bb31"
+    },
+    "desktop-08-p-sessionlab.png": {
+      "bytes": 131133,
+      "sha256": "3b2c6e46328e237ea89895a691dbd5ce193d3f3596e372142bb8addbd6208972"
+    },
+    "desktop-09-p-portfolio.png": {
+      "bytes": 143237,
+      "sha256": "442b8a34742a4f69c04623496e0986b73c0d6e70e945f0a46ad815964b3115af"
+    },
+    "desktop-10-p-aqila.png": {
+      "bytes": 144625,
+      "sha256": "bf4fbd9dea773f738c82c74ccd8b755be9677e6f327461412ee049685abf5779"
+    },
+    "desktop-11-arsenal.png": {
+      "bytes": 88495,
+      "sha256": "8f25db5b8c94b654eb33d41adc99259bbdc4a494d8741789219b62f5b9cc8cba"
+    },
+    "desktop-12-contact.png": {
+      "bytes": 129820,
+      "sha256": "8ec6820e00cfc8257e173c79f74e3fd9777103d23a38b6828d4bae57234e4548"
+    },
+    "explorer-checks.json": {
+      "bytes": 1050,
+      "sha256": "85131baf214a44a2c44ca553a024eaee56cdc52ea512dedef92955dfa31eda32"
+    },
+    "fallback-no-js.png": {
+      "bytes": 606622,
+      "sha256": "0be91bd3b18c998f4f7c2476b67df824d039448784c2a0b4e896c1873154d30b"
+    },
+    "fallback-no-webgl.png": {
+      "bytes": 624289,
+      "sha256": "ec214372285aa5ce7b11f6442c61f7891cc3f4c04699497339abcbf46ad45041"
+    },
+    "fallback-reduced.png": {
+      "bytes": 622552,
+      "sha256": "06dde3bde17b6ec9c4dabdeb8e64b9ddae2b97b2f4a638f0a49c365b3beace48"
+    },
+    "mobile-00-hero.png": {
+      "bytes": 134384,
+      "sha256": "02665c2a97c7482101fa6f5f711c3b858feee7da37d75d46be4d55b7870ed927"
+    },
+    "mobile-01-about.png": {
+      "bytes": 120395,
+      "sha256": "99c9ebd2070a0a7d0c2fff4524070f8617a02a0a95f863485783a95f881b8786"
+    },
+    "mobile-02-p-nestfetch.png": {
+      "bytes": 139053,
+      "sha256": "186ee87d85d00b251c62f0d3d1d32be6d453bf66f8a001ae842275653a31507b"
+    },
+    "mobile-03-p-gamenest.png": {
+      "bytes": 134163,
+      "sha256": "941da02148258b093a48106cccc1a4975986acc891b61209d15364c4b451c393"
+    },
+    "mobile-04-p-spin.png": {
+      "bytes": 131580,
+      "sha256": "7f475713b5427ff8b1a4389801c4c65a1f46ff2046bd8556522fb35f75421ffe"
+    },
+    "mobile-05-p-sonorus.png": {
+      "bytes": 154676,
+      "sha256": "ec7871c7e2761849a8efdbcd333014e82ebaa97d30886cf59a216da9b9057327"
+    },
+    "mobile-06-p-sonic.png": {
+      "bytes": 140369,
+      "sha256": "edc1e759edec6b30f1b59b4ed58b4639ffa37ba5cde348e4f6c263a1e21ad523"
+    },
+    "mobile-07-p-formqa.png": {
+      "bytes": 139807,
+      "sha256": "0a03f190157834c379191da1cca6210b170380f36067bb5f66ad6c60a4b83d10"
+    },
+    "mobile-08-p-sessionlab.png": {
+      "bytes": 133671,
+      "sha256": "2ab76bd1398a1fa457e2834aa19b610472ae3d95efc663c97df52c55b384bebd"
+    },
+    "mobile-09-p-portfolio.png": {
+      "bytes": 149636,
+      "sha256": "fee1f5bc4536fffcda0bada269f4dfb46c8dc6d17e121399214bd3103a7805e7"
+    },
+    "mobile-10-p-aqila.png": {
+      "bytes": 138237,
+      "sha256": "556ad80c3d21ef2396761fb46c7a90b9ec505359205a1db938c4993316903543"
+    },
+    "mobile-11-arsenal.png": {
+      "bytes": 117175,
+      "sha256": "7e07d2208941d87f19b6207155c62c154eaa2a2dbd47afde83fbc6116f023687"
+    },
+    "mobile-12-contact.png": {
+      "bytes": 139286,
+      "sha256": "2d00fa7d0d6d782d0a9f012402cf1be3b36005b075e92e6b80c6d5965078fd10"
+    },
+    "mobile-inspector-reduced.png": {
+      "bytes": 126393,
+      "sha256": "61b67f3fc3f8bc43b5d33733c664e68a4812a63c39544834eba662455b98d87e"
+    },
+    "mobile-inspector.png": {
+      "bytes": 120539,
+      "sha256": "846bf1969934bdf7d8f639a3cac286943da7b03e6cb5e41b70a793222f61e022"
+    },
+    "project-index.png": {
+      "bytes": 77803,
+      "sha256": "b20f59412ab33eebb2f83928f5671c36c369e06969bea190bcba3b8b062ee08e"
+    },
+    "project-inspector.png": {
+      "bytes": 94643,
+      "sha256": "873122861c9dfa39e807bc7b6e7bd4c7eef5e06d62792f84a6e98cdba3331386"
+    },
+    "project-search.png": {
+      "bytes": 62636,
+      "sha256": "208737649ea8634e9af1539409175ac5ae79d1a708b4bfe94c861881ccacbb22"
+    },
+    "recording.json": {
+      "bytes": 435,
+      "sha256": "3602f49c8b299004d6feb956b00007f5b0b61f0a33851f7452824499a7b9ad63"
+    },
+    "responsive-arsenal.png": {
+      "bytes": 48418,
+      "sha256": "1dab8cd4bee957ecb4f5ea7b8bafc9c15d5111d0e321fcf2eb67a25d9b73a57f"
+    },
+    "responsive-contact.png": {
+      "bytes": 46952,
+      "sha256": "c7a7d7b49c5304161d93ae939fc3c2cb37c74aefad573d2be0760217711cf51c"
+    },
+    "responsive-hero.png": {
+      "bytes": 43634,
+      "sha256": "e8b0755953d52de2047a6f64d9fdf87cfaee4f078175aa48db5411e18dd55f58"
+    },
+    "responsive-p-nestfetch.png": {
+      "bytes": 51680,
+      "sha256": "258987a26aefa526f7329ebdc89edecfbd19de9bd037620dcab8339e30b96630"
+    },
+    "responsive-p-sessionlab.png": {
+      "bytes": 64085,
+      "sha256": "4105ead3d85c75109d708c02cfdb0d359d91ed3557a001b65c7d17afe595285b"
+    },
+    "short-about.png": {
+      "bytes": 29225,
+      "sha256": "09d385daeb667acc8c6c1819deb9377aab0e6fcf87580c177b2709484f1127d4"
+    },
+    "short-contact.png": {
+      "bytes": 29950,
+      "sha256": "fb08b77d2493a10ef742c7b6a641950eee6c22a7d75aa888d9f5da6cb7058798"
+    },
+    "short-hero.png": {
+      "bytes": 30308,
+      "sha256": "36091cee6a8d2e49870edaa79811ef98635d86c3b18afbfe3612b149be03cf77"
+    },
+    "short-project-scrolled.png": {
+      "bytes": 35251,
+      "sha256": "acf6728b80bf5f8b5698c72557b0514b8860dc542ac21854005cb354d9cf5068"
+    },
+    "skills-ai.png": {
+      "bytes": 85929,
+      "sha256": "58222389c0e356627aa6d7489eb5477d75644bc0315474612a3da67647daf6d0"
+    },
+    "skills-auto.png": {
+      "bytes": 89552,
+      "sha256": "a24b15c96896ca6808bcf8fa4c4b84dd1a0fda9ef45c081e80324c55f3ec4767"
+    },
+    "skills-eng.png": {
+      "bytes": 99536,
+      "sha256": "98986ea6b9d08817a5c7d17de210c222c12c36a2afcce99fc52afd70b9863323"
+    },
+    "skills-lang.png": {
+      "bytes": 88287,
+      "sha256": "e84a6c63458a945ac4093651d8ff751864a50161ccf58fb8fdf1a987bf402625"
+    },
+    "skills-sys.png": {
+      "bytes": 82148,
+      "sha256": "105fe172ce03fe9ccc18dbbabd1e3123c1856173879e1d440d757c993122da20"
+    },
+    "skills-web.png": {
+      "bytes": 89321,
+      "sha256": "cb29334b10bcecec9a2cead30418dd02092964089ba98962ee1983cc896082c4"
+    },
+    "spatial-layout.json": {
+      "bytes": 320,
+      "sha256": "b5fb28e8d9e41c5f887d3f5029bf1ede9030235a9f0844bdabf484ee933dc9b9"
+    },
+    "prototype-checks.json": {
+      "bytes": 2291,
+      "sha256": "d85d6a042a95e008d6b0177687a79c6142af523ab68c41ff5bdb20fa8553f239"
+    }
+  },
+  "notes": [
+    "Reports copied unmodified from production-preview tests.",
+    "The recording file field retains its original test-results capture path.",
+    "The 30 fps encoded video is distinct from render-callback benchmarks.",
+    "One 43.1 ms frame occurred in mobile run 3; not a locked-60 guarantee."
+  ]
+}

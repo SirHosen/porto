@@ -1,0 +1,32 @@
+{
+  "date": "2026-09-23T01:43:12.523Z",
+  "url": "http://127.0.0.1:4175/porto/",
+  "checks": [
+    "native modal autofocus, focus containment, scroll isolation, Escape and opener focus restoration",
+    "Ctrl K, actual source-status filtering, technology search, arrow keys and Enter-to-waypoint",
+    "empty results recovery, documented skill search, inspectable original blueprint and unique SVG definitions",
+    "all nine blueprint inspectors navigate back correctly; no illustrative metrics claimed as results; all SVG references resolve",
+    "touch search/inspection/waypoint navigation, native diagram pan, static mode and reduced-motion modal behavior"
+  ],
+  "errors": [],
+  "a11y": [
+    {
+      "name": "project index",
+      "violations": []
+    },
+    {
+      "name": "project inspector",
+      "violations": []
+    },
+    {
+      "name": "mobile project inspector",
+      "violations": []
+    },
+    {
+      "name": "reduced-motion project inspector",
+      "violations": []
+    }
+  ],
+  "passed": true,
+  "browser": "153.0.8010.52"
+}

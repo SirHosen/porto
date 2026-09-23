@@ -1,0 +1,276 @@
+{
+  "date": "2026-09-23T01:42:14.361Z",
+  "url": "http://127.0.0.1:4175/porto/",
+  "checks": [
+    "frozen skills data and descriptions match Phase 0 exactly; all nine projects retained",
+    "13 actual camera stops, nine distinct projected project panels, reversible perspective, bounded geometry, desktop screenshots",
+    "six verbatim Skills panels, keyboard tabs, all 45 skill-to-project mappings, clear filter, and direct waypoint travel; orbit removed",
+    "fine-pointer parallax moves the real camera at fixed scroll progress",
+    "all project technologies use accessible logo/glyph disclosures, Escape dismisses, and rejected branding/copy is absent",
+    "section navigation, project next/previous, and Skills-to-work links drive the camera",
+    "real wheel binding and idle render suspension",
+    "320/390/768/1440 layouts and safe viewport resizing",
+    "manual static mode, complete content, clean remount, runtime reduced-motion teardown",
+    "touch skill filtering, linked-project travel, and technology-name disclosure",
+    "all mobile waypoint screenshots, six mobile domains, native touch travel and context-loss fallback",
+    "reduced-motion, no-JavaScript and no-WebGL all expose the complete static document",
+    "no uncaught runtime errors or failed asset requests"
+  ],
+  "errors": [],
+  "requests": [],
+  "waypoints": [
+    {
+      "id": "hero",
+      "progress": 0,
+      "position": [
+        0,
+        4,
+        18
+      ],
+      "box": {
+        "x": 160,
+        "y": 190.53125,
+        "width": 1120,
+        "height": 518.9375
+      },
+      "calls": 4,
+      "triangles": 7662
+    },
+    {
+      "id": "about",
+      "progress": 0.08333333333333333,
+      "position": [
+        3.1934220592889977,
+        4.5149961339448,
+        -19.963560303773395
+      ],
+      "box": {
+        "x": 160,
+        "y": 152.0390625,
+        "width": 1120,
+        "height": 595.921875
+      },
+      "calls": 4,
+      "triangles": 7262
+    },
+    {
+      "id": "p-nestfetch",
+      "progress": 0.16666666666666666,
+      "position": [
+        2.6070378481151817,
+        4.788480468463291,
+        -58.05227536953128
+      ],
+      "box": {
+        "x": 160,
+        "y": 175,
+        "width": 1120,
+        "height": 550
+      },
+      "calls": 4,
+      "triangles": 5102
+    },
+    {
+      "id": "p-gamenest",
+      "progress": 0.25,
+      "position": [
+        -1.0606702062992226,
+        4.690714983356488,
+        -95.97846984244693
+      ],
+      "box": {
+        "x": 160,
+        "y": 175,
+        "width": 1120,
+        "height": 550
+      },
+      "calls": 4,
+      "triangles": 7370
+    },
+    {
+      "id": "p-spin",
+      "progress": 0.3333333333333333,
+      "position": [
+        -3.4778942377421727,
+        4.268023493159438,
+        -133.99741989832927
+      ],
+      "box": {
+        "x": 160,
+        "y": 175,
+        "width": 1120,
+        "height": 550
+      },
+      "calls": 4,
+      "triangles": 9394
+    },
+    {
+      "id": "p-sonorus",
+      "progress": 0.4166666666666667,
+      "position": [
+        -1.7752465725624118,
+        3.7187193938218863,
+        -172.05147671244836
+      ],
+      "box": {
+        "x": 160,
+        "y": 175,
+        "width": 1120,
+        "height": 550
+      },
+      "calls": 4,
+      "triangles": 8422
+    },
+    {
+      "id": "p-sonic",
+      "progress": 0.5,
+      "position": [
+        2.0220353830985545,
+        3.3029819755703125,
+        -209.9634998484822
+      ],
+      "box": {
+        "x": 160,
+        "y": 175,
+        "width": 1120,
+        "height": 550
+      },
+      "calls": 4,
+      "triangles": 6182
+    },
+    {
+      "id": "p-formqa",
+      "progress": 0.5833333333333334,
+      "position": [
+        3.432439629301277,
+        3.214120402157718,
+        -248.03259354963552
+      ],
+      "box": {
+        "x": 160,
+        "y": 175,
+        "width": 1120,
+        "height": 550
+      },
+      "calls": 4,
+      "triangles": 4454
+    },
+    {
+      "id": "p-sessionlab",
+      "progress": 0.6666666666666666,
+      "position": [
+        0.7770163495781954,
+        3.495384198440418,
+        -286.03777991540466
+      ],
+      "box": {
+        "x": 160,
+        "y": 175,
+        "width": 1120,
+        "height": 550
+      },
+      "calls": 4,
+      "triangles": 5534
+    },
+    {
+      "id": "p-portfolio",
+      "progress": 0.75,
+      "position": [
+        -2.794092956762643,
+        4.013036082309469,
+        -323.96939929831984
+      ],
+      "box": {
+        "x": 160,
+        "y": 175,
+        "width": 1120,
+        "height": 550
+      },
+      "calls": 4,
+      "triangles": 5750
+    },
+    {
+      "id": "p-aqila",
+      "progress": 0.8333333333333334,
+      "position": [
+        -3.061677380866277,
+        4.526193797414758,
+        -362.0591017758094
+      ],
+      "box": {
+        "x": 160,
+        "y": 175,
+        "width": 1120,
+        "height": 550
+      },
+      "calls": 3,
+      "triangles": 2726
+    },
+    {
+      "id": "arsenal",
+      "progress": 0.9166666666666666,
+      "position": [
+        0.29336366026735655,
+        4.790559405067748,
+        -400.0119596057897
+      ],
+      "box": {
+        "x": 150,
+        "y": 114.5625,
+        "width": 1140,
+        "height": 670.875
+      },
+      "calls": 3,
+      "triangles": 3342
+    },
+    {
+      "id": "contact",
+      "progress": 1,
+      "position": [
+        3.3029348430543646,
+        4.683679126470627,
+        -438
+      ],
+      "box": {
+        "x": 160,
+        "y": 100.625,
+        "width": 1120,
+        "height": 698.75
+      },
+      "calls": 3,
+      "triangles": 3342
+    }
+  ],
+  "a11y": [
+    {
+      "name": "desktop hero",
+      "violations": []
+    },
+    {
+      "name": "desktop p-nestfetch",
+      "violations": []
+    },
+    {
+      "name": "desktop arsenal",
+      "violations": []
+    },
+    {
+      "name": "desktop contact",
+      "violations": []
+    },
+    {
+      "name": "mobile Skills",
+      "violations": []
+    },
+    {
+      "name": "reduced fallback",
+      "violations": []
+    },
+    {
+      "name": "no-webgl fallback",
+      "violations": []
+    }
+  ],
+  "passed": true,
+  "browser": "153.0.8010.52"
+}

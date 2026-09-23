@@ -5,6 +5,7 @@ import content from "./portfolio-content.json";
 export const { PROFILE, CATS, SKILLS, DOMAIN_COPY } = content;
 export const PROJECTS = content.PROJECTS.map((project) => project.id === "p-portfolio" ? {
   ...project,
+  name: "This portfolio",
   tagline: "A manga-inspired portfolio built around a continuous, scroll-driven 3D camera.",
   stack: ["Next.js", "TypeScript", "React Three Fiber", "GSAP", "Tailwind"],
 } : project);
@@ -25,8 +26,8 @@ export const NAVIGATION = [
   { label: "Skills", index: 11 },
   { label: "Contact", index: 12 },
 ];
-export const CONNECTED_PROJECTS = CATS.map((category) => {
-  const ids = new Set(SKILLS.filter((skill) => skill[2] === category.id).map((skill) => skill[0]));
-  return PROJECTS.filter((project) => project.deps.some((id) => ids.has(id))).length;
-});
-export type CoreInput = { x: number; y: number; color: string; offsetX: number; offsetY: number; radius: number; visible: boolean };
+export function projectsForDomain(categoryId: string) {
+  const ids = new Set(SKILLS.filter((skill) => skill[2] === categoryId).map((skill) => skill[0]));
+  return PROJECTS.filter((project) => project.deps.some((id) => ids.has(id)));
+}
+export const CONNECTED_PROJECTS = CATS.map((category) => projectsForDomain(category.id).length);

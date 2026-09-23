@@ -4,7 +4,7 @@ import AxeBuilder from '@axe-core/playwright';
 import { launchBrowser, jump } from './camera-browser.mjs';
 
 const url = process.env.PORTFOLIO_URL ?? 'http://127.0.0.1:4175/porto/';
-const output = process.env.PORTFOLIO_OUTPUT ?? 'test-results/phase-2';
+const output = process.env.PORTFOLIO_OUTPUT ?? 'test-results/phase-3';
 const frozen = JSON.parse(readFileSync('docs/audit/skills-verbatim.json', 'utf8'));
 const content = JSON.parse(readFileSync('lib/portfolio-content.json', 'utf8'));
 const ids = ['hero', 'about', ...content.PROJECTS.map(p => p.id), 'arsenal', 'contact'];
@@ -22,6 +22,7 @@ const ready = async page => {
   await page.goto(url, { waitUntil: 'networkidle' });
   await page.waitForSelector('[data-scene-status="ready"]');
   await page.evaluate(() => document.fonts.ready);
+  await page.waitForTimeout(850);
 };
 const afterFrame = async page => page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
 const checkStatic = async page => {
@@ -88,15 +89,53 @@ try {
   await page.keyboard.press('End');
   assert.equal(await page.locator('#tab-cat-prac').getAttribute('aria-selected'), 'true');
   await page.keyboard.press('Home');
-  const core = await page.locator('.mp-core').boundingBox();
-  const orbitBefore = await page.screenshot({ clip: core });
-  await page.mouse.move(core.x + core.width * .5, core.y + core.height * .5);
-  await page.mouse.down(); await page.mouse.move(core.x + core.width * .7, core.y + core.height * .6, { steps: 8 }); await page.mouse.up();
-  await afterFrame(page);
-  assert.notDeepEqual(await page.screenshot({ clip: core }), orbitBefore, 'drag really rotates the 3D crystal');
-  await page.getByRole('button', { name: 'RESET ↺' }).click(); await afterFrame(page);
-  assert.deepEqual(await page.screenshot({ clip: core }), orbitBefore, 'reset restores the deterministic core pose');
-  pass('all six Skills panels match frozen text; keyboard tabs, real crystal drag and reset');
+  assert.equal(await page.locator('.mp-core, [data-orbit]').count(), 0);
+  for (const cat of frozen.CATS) {
+    await page.locator('#tab-' + cat.id).click();
+    const domain = page.locator('#domain-' + cat.id);
+    for (const skill of frozen.SKILLS.filter(s => s[2] === cat.id)) {
+      const button = domain.getByRole('button', { name: skill[1], exact: true });
+      await button.click();
+      assert.equal(await button.getAttribute('aria-pressed'), 'true');
+      const expected = content.PROJECTS.filter(project => project.deps.includes(skill[0])).map(project => '#' + project.id);
+      assert.deepEqual(await domain.locator('.mp-proof-list a').evaluateAll(links => links.map(a => a.getAttribute('href'))), expected, 'actual project deps for ' + skill[1]);
+      assert.equal(normalize(await domain.locator('.mp-domain-copy').innerText()), normalize(frozen.renderedDomains[frozen.CATS.indexOf(cat)].panelText));
+    }
+  }
+  await page.locator('#tab-cat-lang').click();
+  await page.locator('#domain-cat-lang').getByRole('button', { name: 'Python', exact: true }).click();
+  await page.locator('#domain-cat-lang .mp-proof-list a[href="#p-sonic"]').click();
+  await page.waitForFunction(() => Math.abs(window.__MIDNIGHT_CAMERA__.read().progress - 6 / 12) < .002);
+  await jump(page, 11 / 12);
+  await page.locator('#domain-cat-lang').getByRole('button', { name: 'Clear skill filter' }).click();
+  assert.equal(await page.locator('#domain-cat-lang .mp-proof-list a').count(), 9);
+  pass('six verbatim Skills panels, keyboard tabs, all 45 skill-to-project mappings, clear filter, and direct waypoint travel; orbit removed');
+
+  await page.mouse.move(100, 440); await page.waitForTimeout(750);
+  const pointerBefore = await page.evaluate(() => window.__MIDNIGHT_CAMERA__.read());
+  await page.mouse.move(1330, 440); await page.waitForTimeout(750);
+  const pointerAfter = await page.evaluate(() => window.__MIDNIGHT_CAMERA__.read());
+  assert.equal(pointerAfter.progress, pointerBefore.progress);
+  assert.ok(Math.abs(pointerAfter.position[0] - pointerBefore.position[0]) > .4, 'fine pointer changes the actual camera position, not a CSS parallax layer');
+  await page.mouse.move(720, 450); await page.waitForTimeout(750);
+  pass('fine-pointer parallax moves the real camera at fixed scroll progress');
+
+  for (let i = 0; i < content.PROJECTS.length; i++) {
+    await jump(page, (i + 2) / 12);
+    const names = i === 7 ? ['Next.js','TypeScript','React Three Fiber','GSAP','Tailwind'] : content.PROJECTS[i].stack;
+    const buttons = page.locator('[data-waypoint="' + ids[i + 2] + '"] .mp-tech button');
+    assert.deepEqual(await buttons.evaluateAll(nodes => nodes.map(n => n.getAttribute('aria-label'))), names);
+    assert.equal(await buttons.locator('svg, img').count(), names.length);
+    const first = buttons.first();
+    await first.focus();
+    assert.equal(await page.locator('#' + await first.getAttribute('aria-describedby')).isVisible(), true);
+    await page.keyboard.press('Escape');
+    assert.equal(await page.locator('#' + await first.getAttribute('aria-describedby')).isVisible(), false);
+  }
+  assert.equal(await page.locator('#p-portfolio-title').textContent(), 'This portfolio');
+  assert.ok(!/Midnight Panel|Linux at heart|DRAG TO ORBIT/i.test(await page.locator('main').innerText()));
+  await jump(page, 11 / 12);
+  pass('all project technologies use accessible logo/glyph disclosures, Escape dismisses, and rejected branding/copy is absent');
 
   await page.getByRole('link', { name: '9 connected projects', exact: true }).click();
   await page.waitForFunction(() => Math.abs(window.__MIDNIGHT_CAMERA__.read().progress - 2 / 12) < .002);
@@ -149,12 +188,19 @@ try {
     await mobilePage.screenshot({path:output+'/mobile-'+String(i).padStart(2,'0')+'-'+ids[i]+'.png'});
   }
   await jump(mobilePage,11/12);
-  assert.equal(await mobilePage.locator('.mp-core-bottom > span').textContent(),'SELECT A DOMAIN · SCROLL TO CONTINUE');
+  assert.equal(await mobilePage.locator('.mp-core, [data-orbit]').count(), 0);
   for(let i=0;i<6;i++) {
     await mobilePage.locator('#tab-'+frozen.CATS[i].id).click();
     assert.equal(normalize(await mobilePage.locator('#domain-'+frozen.CATS[i].id+' .mp-domain-copy').innerText()),normalize(frozen.renderedDomains[i].panelText));
   }
   await axe(mobilePage,'mobile Skills');
+  await mobilePage.locator('#tab-cat-web').tap();
+  await mobilePage.locator('#domain-cat-web').getByRole('button',{name:'Flutter',exact:true}).tap();
+  await mobilePage.locator('#domain-cat-web .mp-proof-list a[href="#p-aqila"]').tap();
+  await mobilePage.waitForFunction(()=>Math.abs(window.__MIDNIGHT_CAMERA__.read().progress-10/12)<.002);
+  await mobilePage.locator('[data-waypoint="p-aqila"] .mp-tech button').first().tap();
+  assert.equal(await mobilePage.locator('#p-aqila-tech-0').isVisible(),true);
+  pass('touch skill filtering, linked-project travel, and technology-name disclosure');
   await jump(mobilePage,0);
   const cdp = await mobile.newCDPSession(mobilePage);
   await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:190,y:650}]});

@@ -38,7 +38,9 @@ try {
   cdp.on('Page.screencastFrame', frame);
   await cdp.send('Page.startScreencast', { format: 'jpeg', quality: 90, maxWidth: 1280, maxHeight: 800, everyNthFrame: 1 });
   await page.waitForTimeout(700);
-  await page.evaluate(() => window.__MIDNIGHT_CAMERA__.travel(1, 16));
+  const seconds = Number(process.env.PORTFOLIO_RECORD_SECONDS ?? 16);
+  if (!Number.isFinite(seconds) || seconds < 5 || seconds > 120) throw new Error('Invalid recording duration');
+  await page.evaluate(seconds => window.__MIDNIGHT_CAMERA__.travel(1, seconds), seconds);
   await page.waitForTimeout(700);
   await cdp.send('Page.stopScreencast');
   cdp.off('Page.screencastFrame', frame);
@@ -48,7 +50,7 @@ try {
   await finished;
   writeFileSync(output + '/recording.json', JSON.stringify({
     file: target, method: 'Chrome DevTools screencast, JPEG frames with capture timestamps, resampled by system FFmpeg',
-    viewport: { width: 1280, height: 800 }, encodedFps: 30, capturedScreenFrames: captured, encodedFrames: written,
+    viewport: { width: 1280, height: 800 }, scrollDurationSeconds: seconds, encodedFps: 30, capturedScreenFrames: captured, encodedFrames: written,
     note: '30 fps screen recording for visual review, not the separately measured 60 fps render benchmark.',
   }, null, 2) + '\n');
   await context.close();

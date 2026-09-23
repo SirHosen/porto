@@ -1,0 +1,11 @@
+{
+  "date": "2026-09-23T01:43:30.957Z",
+  "url": "http://127.0.0.1:4175/porto/",
+  "checks": [
+    "320×568 hero, about and contact fit without clipped actions",
+    "short-screen detail scroll, fixed project controls, and next-waypoint navigation"
+  ],
+  "errors": [],
+  "passed": true,
+  "browser": "153.0.8010.52"
+}

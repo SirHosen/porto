@@ -84,9 +84,9 @@ export function CameraStudy() {
     <main className={"camera-study " + (animate ? "is-cinematic" : "is-static")} data-scene-status={status}>
       <a className="skip-link" href="#frame-arrival">Skip to the study</a>
       <header className="study-header flex items-center justify-between">
-        <a className="study-brand" href={(process.env.NEXT_PUBLIC_BASE_PATH ?? "/porto") + "/"} aria-label="Midnight Panel study index">
+        <a className="study-brand" href={(process.env.NEXT_PUBLIC_BASE_PATH ?? "/porto") + "/"} aria-label="Hosea study index">
           <span className="brand-mark" aria-hidden="true">H<span>.</span></span>
-          <span>Midnight Panel<small>Camera study / 01</small></span>
+          <span>Hosea<small>Camera study / 01</small></span>
         </a>
         <div className="study-controls flex items-center">
           <button type="button" className="quiet-button diagnostics-toggle" aria-expanded={diagnostics} aria-controls="camera-diagnostics" onClick={() => setDiagnostics(!diagnostics)}>Diagnostics</button>

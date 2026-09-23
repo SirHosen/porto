@@ -23,9 +23,18 @@ const mono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Midnight Panel — Camera study",
-  description: "An isolated, scroll-driven 3D camera prototype. Phase 1 of Midnight Panel.",
-  robots: { index: false, follow: false },
+  title: "Hosea — Software, Automation & Applied AI",
+  description: "Portfolio of Hosea — Python engineer and full-stack developer building resilient systems, automation pipelines, and applied AI on Linux.",
+  authors: [{ name: "Hosea", url: "https://github.com/SirHosen" }],
+  openGraph: {
+    title: "Hosea — Software, Automation & Applied AI",
+    description: "Software, automation, and applied AI. A cinematic journey through Hosea's engineering work.",
+    type: "website",
+    locale: "en_US",
+  },
+  icons: {
+    icon: (process.env.NEXT_PUBLIC_BASE_PATH ?? "/porto") + "/icon.svg",
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

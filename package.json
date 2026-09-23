@@ -15,6 +15,8 @@
     "test:content": "node tests/preserved-content.mjs",
     "test:prototype": "node tests/camera-path.mjs",
     "test:portfolio": "node tests/portfolio.mjs",
+    "test:explorer": "node tests/work-explorer.mjs",
+    "test:spatial": "node tests/spatial-layout.mjs",
     "test:camera-sampling": "node tests/camera-sampling.mjs",
     "test:camera-benchmark": "node tests/camera-benchmark.mjs",
     "test:camera-record": "node tests/camera-record.mjs"
