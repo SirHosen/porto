@@ -10,11 +10,11 @@ export function ProjectArtwork({ index, instance = "plate" }: { index: number; i
         <defs>
           {/* Subtle millimeter blueprint grid */}
           <pattern id={id + "-grid"} width="20" height="20" patternUnits="userSpaceOnUse">
-            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#252a28" strokeWidth="0.75" opacity="0.6" />
-            <circle cx="20" cy="20" r="0.8" fill="#353b39" />
+            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1a2333" strokeWidth="0.75" opacity="0.8" />
+            <circle cx="20" cy="20" r="0.8" fill="#2d3d59" />
           </pattern>
           <pattern id={id + "-dots"} width="10" height="10" patternUnits="userSpaceOnUse">
-            <circle cx="1.5" cy="1.5" r="0.75" fill="#444b48" opacity="0.4" />
+            <circle cx="1.5" cy="1.5" r="0.75" fill="#3b4d6e" opacity="0.5" />
           </pattern>
 
           {/* Gradients */}
@@ -37,12 +37,12 @@ export function ProjectArtwork({ index, instance = "plate" }: { index: number; i
         </defs>
 
         {/* Base dark canvas */}
-        <rect width="560" height="210" fill="#141716" />
+        <rect width="560" height="210" fill="#090b10" />
         <rect width="560" height="210" fill={"url(#" + id + "-grid)"} />
 
         {/* Outer technical border & corner registration marks */}
-        <rect x="12" y="12" width="536" height="186" fill="none" stroke="#2c322f" strokeWidth="1" />
-        <path d="M 8 18 H 16 M 12 14 V 22 M 544 18 H 552 M 548 14 V 22 M 8 192 H 16 M 12 188 V 196 M 544 192 H 552 M 548 188 V 196" stroke="#5a635f" strokeWidth="1" />
+        <rect x="12" y="12" width="536" height="186" fill="none" stroke="#1e293b" strokeWidth="1" />
+        <path d="M 8 18 H 16 M 12 14 V 22 M 544 18 H 552 M 548 14 V 22 M 8 192 H 16 M 12 188 V 196 M 544 192 H 552 M 548 188 V 196" stroke="#00f0ff" strokeWidth="1" opacity="0.6" />
 
         {/* Interactive hover container */}
         <g className="mp-art-object">

@@ -1,0 +1,92 @@
+import { chromium } from 'playwright';
+import { mkdirSync } from 'node:fs';
+mkdirSync('test-results', { recursive: true });
+const baseURL=process.env.PORTFOLIO_URL || 'http://127.0.0.1:4173/';
+import assert from 'node:assert/strict';
+
+const browser=await chromium.launch({...(process.env.PORTFOLIO_CHROME_PATH ? {executablePath:process.env.PORTFOLIO_CHROME_PATH} : {}),headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+const errors=[];
+const context=await browser.newContext({viewport:{width:1440,height:1000},deviceScaleFactor:1});
+const page=await context.newPage();
+page.on('pageerror',e=>errors.push(e.message));
+page.on('response',r=>{if(r.status()>=400)errors.push(`${r.status()} ${r.url()}`);});
+await page.goto(baseURL,{waitUntil:'networkidle'});
+await page.evaluate(()=>Promise.all(document.getAnimations().filter(a=>a.effect?.getTiming().iterations!==Infinity).map(a=>a.finished.catch(()=>{}))));
+await page.screenshot({path:'test-results/desktop-hero.png'});
+assert.equal(await page.locator('.project-card').count(),3);
+assert.equal(await page.locator('.archive-row').count(),6);
+assert.equal(await page.locator('.domain-tab').count(),6);
+assert.equal(await page.locator('#core-fallback').isVisible(),false);
+assert.equal(await page.locator('#sound-toggle').getAttribute('aria-pressed'),'false');
+await page.getByRole('button',{name:'Pause animations',exact:true}).click();
+assert.equal(await page.locator('html').getAttribute('class'),'motion-paused');
+await page.locator('#work').scrollIntoViewIfNeeded();
+await page.screenshot({path:'test-results/desktop-work.png'});
+await page.getByRole('button',{name:'Explore Aqila Atelier',exact:true}).click();
+assert.equal(await page.locator('#project-dialog').isVisible(),true);
+assert.match(await page.locator('#dialog-title').innerText(),/Aqila/);
+assert.equal(await page.getByRole('link',{name:'View source'}).getAttribute('href'),'https://github.com/SirHosen/butik_aqila');
+await page.screenshot({path:'test-results/project-dialog.png'});
+await page.keyboard.press('Escape');
+assert.equal(await page.locator('#project-dialog').isVisible(),false);
+assert.equal(await page.evaluate(()=>document.activeElement.getAttribute('aria-label')),'Explore Aqila Atelier');
+await page.getByRole('button',{name:'Labs',exact:true}).click();
+assert.equal(await page.locator('.archive-row').count(),3);
+await page.getByRole('button',{name:'Products',exact:true}).click();
+assert.equal(await page.locator('.archive-row').count(),3);
+await page.getByRole('button',{name:'All work',exact:true}).click();
+for(const id of ['p-spin','p-sessionlab','p-nestfetch','p-gamenest']){
+  await page.locator(`[data-project="${id}"]`).first().click();
+  assert.equal(await page.getByRole('link',{name:'View source'}).count(),0);
+  await page.keyboard.press('Escape');
+}
+await page.locator('#arsenal').scrollIntoViewIfNeeded();
+await page.getByRole('tab',{name:/Web & Mobile/}).click();
+assert.match(await page.locator('#domain-panel').innerText(),/Flutter/);
+await page.keyboard.press('End');
+assert.equal(await page.locator('#tab-cat-prac').getAttribute('aria-selected'),'true');
+await page.keyboard.press('Home');
+assert.equal(await page.locator('#tab-cat-lang').getAttribute('aria-selected'),'true');
+await page.screenshot({path:'test-results/desktop-arsenal.png'});
+const canvas=page.locator('#core-canvas'),box=await canvas.boundingBox();
+await page.mouse.move(box.x+box.width/2,box.y+box.height/2);
+await page.mouse.down();await page.mouse.move(box.x+box.width/2+130,box.y+box.height/2+50,{steps:8});await page.mouse.up();
+await page.screenshot({path:'test-results/desktop-core-drag.png'});
+await page.locator('#about').scrollIntoViewIfNeeded();
+await page.screenshot({path:'test-results/desktop-about.png'});
+await page.screenshot({path:'test-results/desktop-full.png',fullPage:true});
+for(const width of [1440,1024,768,390,360,320]){
+  await page.setViewportSize({width,height:844});
+  await page.evaluate(()=>scrollTo(0,0));
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,`horizontal overflow at ${width}`);
+  if(width===390){await page.screenshot({path:'test-results/mobile-hero.png'});await page.screenshot({path:'test-results/mobile-full.png',fullPage:true});}
+}
+await page.getByRole('button',{name:'Open navigation',exact:true}).click();
+assert.equal(await page.locator('#mobile-menu').isVisible(),true);
+await page.locator('#mobile-menu a[href="#work"]').click();
+assert.equal(await page.locator('#mobile-menu').isVisible(),false);
+await context.close();
+
+const reduced=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce'});
+const reducedPage=await reduced.newPage();
+reducedPage.on('pageerror',e=>errors.push(e.message));
+await reducedPage.goto(baseURL,{waitUntil:'networkidle'});
+assert.match(await reducedPage.locator('html').getAttribute('class'),/motion-paused/);
+assert.equal(await reducedPage.locator('#sound-toggle').getAttribute('aria-pressed'),'false');
+await reducedPage.getByRole('tab',{name:/Systems & Network/}).click();
+assert.match(await reducedPage.locator('#domain-panel').innerText(),/Linux/);
+await reduced.close();
+
+const fallback=await browser.newContext();
+await fallback.addInitScript(()=>{const original=HTMLCanvasElement.prototype.getContext;HTMLCanvasElement.prototype.getContext=function(type,...args){return type==='webgl'?null:original.call(this,type,...args);};});
+const fallbackPage=await fallback.newPage();
+fallbackPage.on('pageerror',e=>errors.push(e.message));
+await fallbackPage.goto(baseURL,{waitUntil:'networkidle'});
+assert.equal(await fallbackPage.locator('#core-fallback').isVisible(),true);
+assert.equal(await fallbackPage.locator('.archive-row').count(),6);
+await fallbackPage.getByRole('tab',{name:/Web & Mobile/}).click();
+assert.match(await fallbackPage.locator('#domain-panel').innerText(),/Flutter/);
+await fallback.close();
+assert.deepEqual(errors,[]);
+await browser.close();
+console.log('PASS: 9 projects, filters, dialogs, link states, focus restoration, keyboard tabs, WebGL, orbit drag, six viewport widths, mobile navigation, reduced motion, no-WebGL fallback, no runtime errors or failed requests.');

@@ -3,7 +3,7 @@
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { PerspectiveCamera } from "@react-three/drei";
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode, type RefObject } from "react";
-import { CatmullRomCurve3, Color, InstancedMesh, NoToneMapping, Object3D, Vector3, type Camera } from "three";
+import { ACESFilmicToneMapping, CatmullRomCurve3, Color, InstancedMesh, Object3D, Vector3, type Camera } from "three";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
@@ -158,7 +158,14 @@ function CameraRig({ track, onReady, onFailure, onProgress, path = PATH, onFrame
     gsap.registerPlugin(ScrollTrigger);
     const element = track.current;
     const host = element.closest<HTMLElement>("[data-scene-status]");
-    const lenis = new Lenis({ autoRaf: false, smoothWheel: true, syncTouch: false, duration: 1.05, allowNestedScroll: true });
+    const lenis = new Lenis({
+      autoRaf: false,
+      smoothWheel: true,
+      syncTouch: false,
+      duration: 1.15,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      allowNestedScroll: true,
+    });
     const update = (value: number) => {
       progress.current = value;
       onProgress(value);
@@ -173,10 +180,7 @@ function CameraRig({ track, onReady, onFailure, onProgress, path = PATH, onFrame
     });
     lenis.on("scroll", ScrollTrigger.update);
     // One frame clock: scroll, camera and WebGL render in the same GSAP tick.
-    // Queuing a separate demand RAF can halve delivery to 30 fps.
     const tick = (seconds: number) => {
-      // R3F disposal can lag the parent commit. Never project/inert panels
-      // again once the parent has switched to the accessible static document.
       if (host && !host.classList.contains("is-cinematic")) return;
       lenis.raf(seconds * 1000);
       if (needsFrame.current && !document.hidden) {
@@ -187,16 +191,14 @@ function CameraRig({ track, onReady, onFailure, onProgress, path = PATH, onFrame
     gsap.ticker.add(tick);
     gsap.ticker.lagSmoothing(0);
 
-    // Reusable tweens only run while the pointer settles. Moving the actual
-    // camera produces depth-based parallax, with no persistent idle RAF.
     const finePointer = matchMedia("(pointer: fine) and (min-width: 761px)");
     const markDirty = () => { needsFrame.current = true; };
-    const xTo = pointerParallax ? gsap.quickTo(pointer.current, "x", { duration: .42, ease: "power3.out", onUpdate: markDirty }) : null;
-    const yTo = pointerParallax ? gsap.quickTo(pointer.current, "y", { duration: .42, ease: "power3.out", onUpdate: markDirty }) : null;
+    const xTo = pointerParallax ? gsap.quickTo(pointer.current, "x", { duration: .55, ease: "power2.out", onUpdate: markDirty }) : null;
+    const yTo = pointerParallax ? gsap.quickTo(pointer.current, "y", { duration: .55, ease: "power2.out", onUpdate: markDirty }) : null;
     const movePointer = (event: PointerEvent) => {
       if (!finePointer.matches || event.pointerType === "touch" || (event.target instanceof Element && event.target.closest("dialog"))) return;
-      xTo?.((event.clientX / innerWidth - .5) * .7);
-      yTo?.((.5 - event.clientY / innerHeight) * .4);
+      xTo?.((event.clientX / innerWidth - .5) * .85);
+      yTo?.((.5 - event.clientY / innerHeight) * .55);
     };
     const resetPointer = () => { xTo?.(0); yTo?.(0); };
     if (pointerParallax) {
@@ -296,8 +298,14 @@ export default function CameraWorld(props: CameraWorldProps) {
   return (
     <Canvas
       frameloop="never"
-      dpr={1}
-      gl={{ antialias: true, alpha: false, powerPreference: "high-performance", toneMapping: NoToneMapping }}
+      dpr={[1, 2]}
+      gl={{
+        antialias: true,
+        alpha: false,
+        powerPreference: "high-performance",
+        toneMapping: ACESFilmicToneMapping,
+        toneMappingExposure: 1.15,
+      }}
       fallback={<span>3D is unavailable. Use the static study.</span>}
       style={{ pointerEvents: "none" }}
     >

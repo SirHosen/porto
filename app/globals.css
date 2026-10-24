@@ -2,23 +2,25 @@
 @import "lenis/dist/lenis.css";
 
 @theme inline {
-  --color-ink: #101010;
-  --color-paper: #eeeade;
+  --color-ink: #06070a;
+  --color-paper: #f8fafc;
   --color-vermilion: #f24b3e;
+  --color-cyan: #00f0ff;
   --font-sans: var(--font-body);
 }
 
 :root {
   color-scheme: dark;
-  --ink: #101010;
-  --paper: #eeeade;
+  --ink: #06070a;
+  --paper: #f8fafc;
   --red: #f24b3e;
-  --muted: #aba9a1;
-  --rule: #353532;
+  --cyan: #00f0ff;
+  --muted: #94a3b8;
+  --rule: rgba(255, 255, 255, 0.12);
 }
 * { box-sizing: border-box; }
-html { background: var(--ink); }
-body { margin: 0; color: var(--paper); background: var(--ink); font-family: var(--font-body), sans-serif; font-size: 16px; }
+html { background: var(--ink); overflow-x: clip; }
+body { margin: 0; color: var(--paper); background: var(--ink); font-family: var(--font-body), sans-serif; font-size: 16px; overflow-x: clip; }
 button, a { -webkit-tap-highlight-color: transparent; }
 a { color: inherit; }
 button { font: inherit; cursor: pointer; }

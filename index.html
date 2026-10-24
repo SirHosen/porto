@@ -1,190 +1,59 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>HOSEA // System</title>
-    <meta
-      name="description"
-      content="HOSEA &mdash; Python engineer, full-stack developer, automation &amp; applied-AI. An interactive dependency-graph portfolio."
-    />
-    <meta name="theme-color" content="#05070a" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./assets/css/system.css" />
-  </head>
-  <body>
-    <div id="boot" class="boot">
-      <div class="boot__inner">
-        <div class="boot__brand">0xAA &middot; SYSTEM BOOT</div>
-        <div id="boot-log" class="boot__log"></div>
-      </div>
-    </div>
-
-    <!-- Fixed stage: WebGL background + graph live here, behind all content -->
-    <div class="stage" aria-hidden="true">
-      <canvas id="bg-canvas" class="bg-canvas"></canvas>
-      <canvas id="graph-canvas" class="graph-canvas"></canvas>
-      <div class="stage__vignette"></div>
-    </div>
-
-    <div class="grid-overlay" aria-hidden="true"></div>
-    <div class="grain" aria-hidden="true"></div>
-    <div class="letterbox letterbox--top" aria-hidden="true"></div>
-    <div class="letterbox letterbox--bottom" aria-hidden="true"></div>
-    <div id="scroll-prog" class="scroll-prog" aria-hidden="true"></div>
-    <div id="cursor" class="cursor" aria-hidden="true"></div>
-
-    <div class="hud hud--tl" aria-hidden="true">
-      <span class="hud__key">NODE</span> hosea <span class="hud__dim">/ pid 4182</span>
-    </div>
-    <div class="hud hud--tr" aria-hidden="true">
-      <span id="hud-clock">00:00:00Z</span> <span id="hud-uptime" class="hud__dim">UP 00:00:00</span>
-    </div>
-    <div class="hud hud--bl" aria-hidden="true">module://chronod &middot; stable</div>
-
-    <nav class="nav">
-      <a href="#top" class="nav__logo" data-sfx>&#9672; <b id="hero-handle">hosea.dev</b></a>
-      <div class="nav__links">
-        <a href="#map" class="nav__link">Map</a>
-        <a href="#work" class="nav__link">Work</a>
-        <a href="#stack" class="nav__link">Stack</a>
-        <a href="#signal" class="nav__link">Signal</a>
-      </div>
-      <button id="sound-toggle" class="sound" aria-pressed="false">
-        <i class="sound__bars"><b></b><b></b><b></b><b></b></i><span>SOUND OFF</span>
-      </button>
-    </nav>
-
-    <main id="top">
-      <!-- HERO: name centered, graph blurred + moving behind it -->
-      <section id="hero" class="hero">
-        <div id="hero-copy" class="hero__copy">
-          <div class="hero__topline">
-            <div class="hero__tag"><span class="status-dot"></span> AVAILABLE FOR SELECT PROJECTS</div>
-            <div class="hero__loc">IDN / UTC+7</div>
-          </div>
-          <h1 id="hero-name" class="glitch" data-text="HOSEA">HOSEA</h1>
-          <div class="hero__lower">
-            <div>
-              <div id="hero-roles" class="hero__roles"></div>
-              <ul id="caps" class="caps"></ul>
-            </div>
-            <p id="hero-pitch" class="hero__pitch"></p>
-          </div>
-          <div class="kinetic-rail" aria-hidden="true">
-            <div class="kinetic-rail__track">
-              <span>ENGINEER</span><i>◆</i><span>AUTOMATE</span><i>◆</i><span>SHIP</span><i>◆</i><span>QUESTION</span><i>◆</i>
-              <span>ENGINEER</span><i>◆</i><span>AUTOMATE</span><i>◆</i><span>SHIP</span><i>◆</i><span>QUESTION</span><i>◆</i>
-            </div>
-          </div>
-        </div>
-        <div class="hero__telemetry hero__telemetry--a" aria-hidden="true">LATENCY&nbsp;&nbsp;12MS<br>STATUS&nbsp;&nbsp;&nbsp;NOMINAL</div>
-        <div class="hero__telemetry hero__telemetry--b" aria-hidden="true">FRAME / 0001<br>VECTOR / 0.84</div>
-        <a href="#map" class="scroll-hint" data-sfx><span>Explore system</span><i aria-hidden="true">↓</i></a>
-      </section>
-
-      <section id="sequence" class="sequence" aria-label="Engineering disciplines">
-        <div class="sequence__sticky">
-          <div class="sequence__top">
-            <span id="sequence-index">01 / 04</span>
-            <span>SCROLL-DRIVEN SYSTEM TRACE</span>
-          </div>
-          <div class="sequence__visual" aria-hidden="true">
-            <div class="core-orbit core-orbit--a"></div>
-            <div class="core-orbit core-orbit--b"></div>
-            <div class="core-orbit core-orbit--c"></div>
-            <div class="core-pulse"><span>H</span></div>
-            <div class="code-rain" id="code-rain"></div>
-          </div>
-          <div class="sequence__copy">
-            <article class="sequence__chapter is-active" data-scene="0">
-              <span>01 — ARCHITECT</span>
-              <h2>Systems with<br><em>structure.</em></h2>
-              <p>Architecture before abstraction. Clear boundaries, boring reliability, and software built to survive real use.</p>
-            </article>
-            <article class="sequence__chapter" data-scene="1">
-              <span>02 — AUTOMATE</span>
-              <h2>Repetition becomes<br><em>machinery.</em></h2>
-              <p>Scrapers, schedulers, browser flows, and data pipelines engineered as observable systems—not fragile scripts.</p>
-            </article>
-            <article class="sequence__chapter" data-scene="2">
-              <span>03 — INTELLIGENCE</span>
-              <h2>Models grounded in<br><em>evidence.</em></h2>
-              <p>Applied AI, computer vision, and statistical validation shaped around measurable outcomes instead of hype.</p>
-            </article>
-            <article class="sequence__chapter" data-scene="3">
-              <span>04 — SHIP</span>
-              <h2>From terminal to<br><em>production.</em></h2>
-              <p>Interfaces, APIs, infrastructure, and tests converging into useful products people can trust.</p>
-            </article>
-          </div>
-          <div class="sequence__rail" aria-hidden="true"><i id="sequence-rail"></i></div>
-        </div>
-      </section>
-
-      <!-- MAP: the graph zooms in and becomes interactive here -->
-      <section id="map" class="map">
-        <div class="map__sticky">
-          <!-- transparent interaction layer: forwards drag / wheel / pinch to the graph -->
-          <div id="map-hit" class="map__hit" aria-hidden="true"></div>
-          <div id="map-panel" class="map__panel">
-            <div class="map__head">
-              <span class="map__idx">01</span>
-              <h2>Capability<br><em>Atlas</em></h2>
-              <p>An explorable model of how my tools, disciplines, and shipped work connect. Drag to orbit &middot; scroll to zoom &middot; click a domain to isolate.</p>
-            </div>
-            <div class="graph__readout">
-              <span id="readout-dot" class="readout__dot"></span>
-              <div>
-                <div id="readout-label" class="readout__label">&mdash;</div>
-                <div id="readout-meta" class="readout__meta">hover a node to inspect</div>
-              </div>
-            </div>
-            <div id="legend" class="legend"></div>
-            <div id="graph-controls" class="graph__controls">
-              <button type="button" class="gbtn" data-zoom="in" aria-label="Zoom in">+</button>
-              <button type="button" class="gbtn" data-zoom="out" aria-label="Zoom out">&minus;</button>
-              <button type="button" class="gbtn gbtn--reset" data-zoom="reset">RESET VIEW</button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="work" class="block">
-        <div class="block__head" data-reveal>
-          <span class="block__idx">02 / WORK</span><h2>Selected <em>systems</em></h2>
-          <span class="block__note">hover a card to trace it on the map</span>
-        </div>
-        <div id="work-grid" class="work-grid"></div>
-      </section>
-
-      <section id="stack" class="block">
-        <div class="block__head" data-reveal>
-          <span class="block__idx">03 / INDEX</span><h2>Technical <em>range</em></h2>
-          <span class="block__note">6 domains &middot; 42 skills</span>
-        </div>
-        <div id="stats" class="stats"></div>
-      </section>
-
-      <section id="signal" class="block signal">
-        <div class="block__head" data-reveal>
-          <span class="block__idx">04 / CONTACT</span><h2>Start a <em>signal</em></h2>
-        </div>
-        <p class="signal__lead" data-reveal>Have an ambitious system in mind? I&rsquo;m interested in precise problems, useful software, and ideas worth engineering properly.</p>
-        <div id="signal-links" class="signal__links" data-reveal></div>
-      </section>
-    </main>
-
-    <footer class="foot">
-      <span>&copy; <b id="foot-year">2026</b> <b id="foot-handle">hosea.dev</b></span>
-      <span class="foot__dim">zero-dependency system &middot; WebGL + canvas + web audio</span>
-    </footer>
-
-    <script type="module" src="./assets/js/app.js"></script>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hosea — Midnight Panel / Developer Portfolio</title>
+  <meta name="description" content="Hosea's world of software, automation, and applied AI. A Linux-native developer building useful systems, with an imagination shaped by anime and manga.">
+  <meta name="theme-color" content="#101010">
+  <meta property="og:title" content="Hosea — Midnight Panel">
+  <meta property="og:description" content="Software. Systems. A little otherworldly. Explore the work of a Linux-native developer.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="./assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="./assets/fonts/bebas-neue.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="./assets/images/midnight-city.webp" as="image" fetchpriority="high">
+  <link rel="stylesheet" href="./assets/css/midnight.css">
+</head>
+<body>
+  <a class="skip-link" href="#work">Skip to projects</a>
+  <div class="reading-progress" aria-hidden="true"><i></i></div>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Hosea home"><span class="brand-mark" aria-hidden="true">H<span>·</span></span><span>HOSEA<span class="brand-edition">INDEPENDENT DEVELOPER</span></span></a>
+    <nav class="desktop-nav" aria-label="Main navigation"><a href="#work">01 / Work</a><a href="#arsenal">02 / Arsenal</a><a href="#about">03 / About</a></nav>
+    <div class="header-actions"><button id="motion-toggle" class="utility-button" type="button" aria-pressed="false" aria-label="Pause animations"><span class="motion-icon" aria-hidden="true">Ⅱ</span><span class="utility-label">Motion</span></button><a class="contact-link" href="#contact">Let's talk <span aria-hidden="true">↗</span></a><button id="menu-toggle" class="menu-toggle utility-button" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation">☰</button></div>
+  </header>
+  <nav id="mobile-menu" class="mobile-menu" aria-label="Mobile navigation" hidden><a href="#work">01 / Selected work</a><a href="#arsenal">02 / The arsenal</a><a href="#about">03 / Behind the panels</a><a href="#contact">04 / Contact</a></nav>
+  <main>
+    <section id="top" class="hero" aria-labelledby="hero-title">
+      <div class="hero-scene" aria-hidden="true"><img class="hero-art" src="./assets/images/midnight-city.webp" alt="" width="1672" height="941" fetchpriority="high"><div class="hero-shade"></div><canvas id="embers"></canvas></div>
+      <div class="hero-topline mono"><span><i class="status-dot"></i> A DEVELOPER'S PERSONAL UNIVERSE</span><span>VOL. 01 <b> / </b> EST. IN INDONESIA</span></div>
+      <div class="hero-copy"><p class="eyebrow"><span class="red-line"></span> CODE IS MY CRAFT. CURIOSITY IS MY ENGINE.</p><h1 id="hero-title">BUILDING<br>BEYOND <span class="outline-word">THE</span><br><span class="hero-last">ORDINARY<span class="title-dot">.</span></span></h1><div class="hero-intro"><span class="intro-index mono">[ H / 01 ]</span><p>I'm <strong>Hosea.</strong> I turn complex ideas into useful software.<br class="desktop-break"> Python, full-stack, automation & applied AI.<br class="desktop-break"> Linux at heart. A different world in mind.</p></div><a class="button button-red" href="#work">Explore my work <span aria-hidden="true">↗</span></a></div>
+      <div class="hero-side-note mono" aria-hidden="true">深夜 / MIDNIGHT PANEL — AN OPEN-ENDED STORY</div>
+      <div class="hero-bottom mono"><a href="#work"><span class="scroll-glyph" aria-hidden="true">↓</span> SCROLL TO TURN THE PAGE</a><span class="scene-caption">SCENE 001 <span>THE CITY NEVER STOPS BUILDING.</span></span><button id="sound-toggle" type="button" aria-pressed="false"><span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span id="sound-label">SOUND OFF</span></button></div>
+    </section>
+    <div class="marquee" role="img" aria-label="Python engineer, full-stack developer, automation, applied AI, Linux native"><div aria-hidden="true"><span>PYTHON ENGINEER</span><i>✳</i><span>FULL-STACK DEVELOPER</span><i>✳</i><span>AUTOMATION & AI</span><i>✳</i><span>LINUX NATIVE</span><i>✳</i><span>PYTHON ENGINEER</span><i>✳</i><span>FULL-STACK DEVELOPER</span><i>✳</i><span>AUTOMATION & AI</span><i>✳</i><span>LINUX NATIVE</span><i>✳</i></div></div>
+    <section id="work" class="work section-paper" aria-labelledby="work-title">
+      <div class="section-heading"><div><p class="eyebrow">CHAPTER 01 <span>/</span> SELECTED WORK</p><h2 id="work-title">IDEAS INTO<br><span class="serif-word">existence.</span></h2></div><div class="section-aside"><span class="edition-stamp" aria-hidden="true">実験<br><small>EXPERIMENT / BUILD / REPEAT</small></span><p>Products, experiments, and the systems<br>that connect them. Every build, a new chapter.</p></div></div>
+      <div id="featured-projects" class="featured-projects"></div>
+      <div class="archive-header"><h3>THE EXTENDED UNIVERSE<span class="archive-count mono" id="archive-count"></span></h3><div class="project-filters" role="group" aria-label="Filter archived projects"><button type="button" data-filter="all" aria-pressed="true">All work</button><button type="button" data-filter="product" aria-pressed="false">Products</button><button type="button" data-filter="lab" aria-pressed="false">Labs</button></div></div>
+      <div id="project-archive" class="project-archive"></div><p id="filter-status" class="sr-only" aria-live="polite"></p>
+      <p class="archive-note mono">↳ SOME REPOSITORIES ARE NO LONGER PUBLIC. THE WORK REMAINS PART OF THE STORY.</p>
+      <noscript><p>This portfolio uses JavaScript to display its project collection. You can also <a href="https://github.com/SirHosen">explore Hosea's public projects on GitHub</a>.</p></noscript>
+    </section>
+    <section id="arsenal" class="arsenal" aria-labelledby="arsenal-title">
+      <div class="section-heading"><div><p class="eyebrow">CHAPTER 02 <span>/</span> THE ARSENAL</p><h2 id="arsenal-title">MANY TOOLS.<br>ONE <span class="outline-word">MIND.</span></h2></div><p class="section-aside">Different disciplines. Connected thinking.<br>Select a domain to explore the tools behind the work.</p></div>
+      <div class="arsenal-layout"><div class="artifact-stage"><div class="artifact-corners" aria-hidden="true"></div><div class="artifact-top mono"><span><i class="status-dot"></i> CAPABILITY CORE</span><span id="core-code">LANG / 01</span></div><div class="artifact-watermark" aria-hidden="true">創造</div><canvas id="core-canvas" aria-label="Rotating three-dimensional crystal surrounded by orbital rings"></canvas><div id="core-fallback" class="core-fallback" hidden aria-hidden="true">✳</div><div class="artifact-bottom mono"><span id="core-hint">DRAG TO ORBIT · SCROLL TO CONTINUE</span><button id="reset-core" type="button">RESET ↺</button></div></div><div class="domain-browser"><div id="domain-tabs" role="tablist" aria-label="Skill domains" aria-orientation="vertical"></div><div id="domain-panel" role="tabpanel" tabindex="0"></div></div></div>
+      <div class="arsenal-foot mono"><span>NO SKILL BARS. JUST TOOLS I BUILD WITH.</span><span id="skill-count"></span></div>
+    </section>
+    <section id="about" class="about section-paper" aria-labelledby="about-title">
+      <div class="section-heading"><div><p class="eyebrow">CHAPTER 03 <span>/</span> BEHIND THE PANELS</p><h2 id="about-title">A HUMAN.<br><span class="serif-word">Not just a stack.</span></h2></div><p class="section-aside">A terminal for the practical.<br>An imagination for everything else.</p></div>
+      <div class="manga-grid"><article class="manga-panel terminal-panel"><span class="panel-number mono">01 / HOME BASE</span><div class="terminal"><div class="terminal-bar"><i></i><i></i><i></i><span>hosea@linux: ~</span></div><p><span class="terminal-prompt">❯</span> whoami</p><strong>LINUX<br>NATIVE<span>_</span></strong><p class="terminal-output">shell → editor → build → repeat<br>my machine. my workflow.</p><p><span class="terminal-prompt">❯</span> <span class="terminal-caret">▌</span></p></div><div class="panel-copy"><h3>At home in the terminal.</h3><p>Linux is my everyday environment. Shell workflows, Git, networking, and a system I can understand and make my own.</p></div></article><article class="manga-panel imagination-panel"><span class="panel-number mono">02 / INNER WORLD</span><div class="manga-art" aria-hidden="true"><span class="manga-orbit"></span><b>想<br>像</b><span class="manga-spark">✳</span><span class="manga-caption mono">IMAGINATION HAS NO CEILING.</span></div><div class="panel-copy"><h3>Raised on other worlds.</h3><p>Anime and comics feed the visual side of my brain. The atmosphere, the frames, the sense that something unexpected is one page away.</p></div></article><article class="manga-panel philosophy-panel"><span class="panel-number mono">03 / BUILD PHILOSOPHY</span><div class="philosophy-art"><span class="mono">THE LOOP</span><p>GET CURIOUS.<br>GO DEEP.<br><em>MAKE IT WORK.</em><br>MAKE IT BETTER.</p><span class="loop-arrow" aria-hidden="true">↲</span></div><div class="panel-copy"><h3>Curiosity, with follow-through.</h3><p>From browser automation to data experiments and useful products. I like tracing a problem through the whole system.</p></div></article></div>
+      <div class="about-facts mono"><span><i class="status-dot"></i> BASED IN INDONESIA / UTC+7</span><span>MIKROTIK / MTCNA</span><span>ALWAYS LEARNING. ALWAYS BUILDING.</span></div>
+    </section>
+    <section id="contact" class="contact" aria-labelledby="contact-title"><div class="contact-backdrop" aria-hidden="true"></div><p class="eyebrow">CHAPTER 04 <span>/</span> THE NEXT CHAPTER</p><h2 id="contact-title">LET'S BUILD<br>SOMETHING <span class="serif-word">worth it.</span></h2><div class="contact-bottom"><p>A useful product. A strange experiment.<br>A problem that won't leave your head.<br>That sounds like a good place to start.</p><a class="button button-red" href="https://github.com/SirHosen" target="_blank" rel="noopener noreferrer">Find me on GitHub <span aria-hidden="true">↗</span></a><span class="contact-kanji" aria-hidden="true">続く</span></div></section>
+  </main>
+  <footer class="site-footer mono"><a href="#top" class="footer-brand">HOSEA<span> / MIDNIGHT PANEL</span></a><span>© <span id="year">2026</span> · BUILT WITH CURIOSITY.</span><a href="#top">BACK TO THE TOP ↑</a></footer>
+  <dialog id="project-dialog" aria-labelledby="dialog-title"><button id="close-dialog" type="button" aria-label="Close project details">×</button><div id="dialog-content"></div></dialog>
+  <script type="module" src="./assets/js/midnight.js"></script>
+</body>
 </html>
